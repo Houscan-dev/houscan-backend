@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # 생성한 앱
     'users',
+    'profiles',
 
     # 설치한 라이브러리
     'rest_framework',
@@ -68,7 +69,7 @@ from datetime import timedelta
 
 #JWT 설정
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,

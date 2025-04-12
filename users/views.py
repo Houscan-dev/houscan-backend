@@ -7,7 +7,6 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from .serializers import *
-from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 SECRET_KEY = settings.SECRET_KEY
 
