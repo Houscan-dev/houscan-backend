@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['ec2-13-209-7-122.ap-northeast-2.compute.amazonaws.com',
-                 'houscan.shop']
+                 '.houscan.shop']
 
 
 # Application definition
