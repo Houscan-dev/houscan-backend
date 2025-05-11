@@ -87,7 +87,7 @@ class DeleteAPIView(APIView):
     def delete(self, request):
         user = request.user
         user.delete()
-        return Response({"message": "회원 탈퇴가 완료되었습니다."}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "회원 탈퇴가 완료되었습니다."}, status=status.HTTP_200_OK)
 
 
 class MyAPIView(APIView):
