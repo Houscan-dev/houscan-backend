@@ -41,11 +41,17 @@ class SignupAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class AuthAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
+
+    def get_permissions(self):
+        if self.request.method == "POST":
+            # 로그인 시에는 누구나 접근 가능
+            return [AllowAny()]
+        # 그 외(GET, DELETE)에는 인증된 사용자만
+        return [IsAuthenticated()]
+    
     # 유저 정보 확인
     def get(self, request):
-        if not request.user or not request.user.is_authenticated:
-            return Response({"detail": "인증되지 않은 사용자입니다."}, status=status.HTTP_401_UNAUTHORIZED)
         serializer = SignupSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
