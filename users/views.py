@@ -1,4 +1,5 @@
 import jwt
+from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -18,27 +19,30 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = SignupSerializer
 
 class SignupAPIView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            
-            # jwt 토큰 접근
             token = TokenObtainPairSerializer.get_token(user)
             refresh_token = str(token)
             access_token = str(token.access_token)
             return Response(
                 {
                     "user": serializer.data,
-                    "message": "register successs",
+                    "message": "회원가입이 성공적으로 완료되었습니다.",
                     "token": {
                         "access": access_token,
                         "refresh": refresh_token,
                     },
-                },
-                status=status.HTTP_200_OK,
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                }, status=status.HTTP_201_CREATED)
+        
+        first_field = next(iter(serializer.errors))
+        first_error = serializer.errors[first_field][0]
+        # raise ValidationError로 던지면 custom_exception_handler가 message 키로 통일
+        raise ValidationError(first_error)
+        
     
 class AuthAPIView(APIView):
     permission_classes = []
@@ -62,26 +66,24 @@ class AuthAPIView(APIView):
             username=request.data.get("email"), 
             password=request.data.get("password")
         )
-        # 이미 회원가입 된 유저일 때
-        if user is not None:
-            serializer = SignupSerializer(user)
-            # jwt 토큰 접근
-            token = TokenObtainPairSerializer.get_token(user)
-            refresh_token = str(token)
-            access_token = str(token.access_token)
+        # 회원가입 안된 유저일 때
+        if not user:
+            raise ValidationError("이메일 또는 비밀번호가 일치하지 않습니다.")
 
-            return Response(
-                {
-                    "user": serializer.data,
-                    "message": "로그인 성공!",
-                    "token": {
-                        "access": access_token,
-                        "refresh": refresh_token,
-                    },
+        serializer = SignupSerializer(user)
+        token = TokenObtainPairSerializer.get_token(user)
+        refresh_token = str(token)
+        access_token = str(token.access_token)
+        return Response(
+            {
+                "user": serializer.data,
+                "message": "로그인 성공!",
+                "token": {
+                    "access": access_token,
+                    "refresh": refresh_token,
                 },
-                status=status.HTTP_200_OK,
-            )
-        return Response({"message": "이메일 또는 비밀번호가 일치하지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
+            }, status=status.HTTP_200_OK
+        )
     
     #로그아웃
     def delete(self, request):
@@ -102,15 +104,16 @@ class MyAPIView(APIView):
     def get(self, request):
         user = request.user
         serializer = MySerializer(user)
-        return Response(serializer.data)
+        return Response(serializer.dat, status=status.HTTP_200_OK)
 
     def patch(self, request):
-        print("PATCH 요청 도착")
         serializer = MySerializer(request.user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        first_key = next(iter(serializer.errors))
+        first_err = serializer.errors[first_key][0]
+        raise ValidationError(first_err)
     
 class PwChangeAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -122,4 +125,7 @@ class PwChangeAPIView(APIView):
             user.set_password(serializer.validated_data['new_password'])
             user.save()
             return Response({"message": "비밀번호가 성공적으로 변경되었습니다."}, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        first_key = next(iter(serializer.errors))
+        first_err = serializer.errors[first_key][0]
+        raise ValidationError(first_err)

@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
         return superuser
 
 class User(AbstractBaseUser, PermissionsMixin):
-    nickname = models.CharField(max_length=30, blank=False, null=False, unique=True)
+    nickname = models.CharField(max_length=30, blank=False, null=False)
     email = models.EmailField(max_length=100, blank=False, null=False, unique=True)
     password = models.CharField(max_length=100)
 
