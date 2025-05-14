@@ -64,3 +64,16 @@ class PwChangeSerializer(serializers.Serializer):
         if not user.check_password(value):
             raise serializers.ValidationError("현재 비밀번호가 일치하지 않습니다.")
         return value
+    def validate(self, data):
+        pwd = data.get('new_password')
+
+        if len(pwd) < 8:
+            raise serializers.ValidationError({"password": "비밀번호는 8자리 이상이어야 합니다."})
+        if not re.search(r"[A-Za-z]", pwd):
+            raise serializers.ValidationError({"password": "영문자가 포함되어야 합니다."})
+        if not re.search(r"\d", pwd):
+            raise serializers.ValidationError({"password": "숫자가 포함되어야 합니다."})
+        if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", pwd):
+            raise serializers.ValidationError({"password": "특수문자가 포함되어야 합니다."})
+
+        return data
