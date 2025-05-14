@@ -1,7 +1,6 @@
 from rest_framework.views import exception_handler
 
 def custom_exception_handler(exc, context):
-    # 1) DRF 기본 핸들러로 response 객체 생성
     response = exception_handler(exc, context)
 
     if response is not None:

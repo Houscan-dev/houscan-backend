@@ -1,5 +1,6 @@
 import jwt
 from rest_framework.exceptions import ValidationError
+from rest_framework.renderers import JSONRenderer   
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -19,6 +20,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = SignupSerializer
 
 class SignupAPIView(APIView):
+    renderer_classes = [JSONRenderer]
     permission_classes = [AllowAny]
 
     def post(self, request):
@@ -45,6 +47,7 @@ class SignupAPIView(APIView):
         
     
 class AuthAPIView(APIView):
+    renderer_classes = [JSONRenderer]
     permission_classes = []
 
     def get_permissions(self):
@@ -99,6 +102,7 @@ class DeleteAPIView(APIView):
 
 
 class MyAPIView(APIView):
+    renderer_classes = [JSONRenderer]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -116,6 +120,7 @@ class MyAPIView(APIView):
         raise ValidationError(first_err)
     
 class PwChangeAPIView(APIView):
+    renderer_classes = [JSONRenderer]
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
