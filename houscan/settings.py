@@ -68,7 +68,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:3000','http://localhost:3000']  # 허용할 frontend 도메인
+CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:3000','http://localhost:3000', 'https://houscan.vercel.app']  # 허용할 frontend 도메인
 CORS_ALLOW_CREDENTIALS = True
 
 from datetime import timedelta
