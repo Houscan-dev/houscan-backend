@@ -108,7 +108,7 @@ class MyAPIView(APIView):
     def get(self, request):
         user = request.user
         serializer = MySerializer(user)
-        return Response(serializer.dat, status=status.HTTP_200_OK)
+        return Response(serializer.date, status=status.HTTP_200_OK)
 
     def patch(self, request):
         serializer = MySerializer(request.user, data=request.data, partial=True)
