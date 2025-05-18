@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from pathlib import Path
 from dotenv import load_dotenv
-
+from celery.schedules import crontab
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['ec2-13-209-7-122.ap-northeast-2.compute.amazonaws.com',
-                 '.houscan.shop']
+                 '.houscan.shop','127.0.0.1']
 
 
 # Application definition
@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:3000','http://localhost:3000', 'https://houscan.vercel.app']  # 허용할 frontend 도메인
+CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:3000','http://localhost:3000', 'https://houscan.vercel.app', 'https://www.houscan.kr']  # 허용할 frontend 도메인
 CORS_ALLOW_CREDENTIALS = True
 
 from datetime import timedelta
@@ -192,3 +192,12 @@ LOGIN_URL = '/login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+ANNOUNCEMENTS_JSON_ROOT = BASE_DIR / 'data'
+CELERY_BEAT_SCHEDULE = {
+    'every-minute-update': {
+        'task': 'announcements.tasks.update_announcements_status_from_json',
+        'schedule': 24 * 3600.0,
+    },
+}
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
