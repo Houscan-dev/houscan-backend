@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Announcement(models.Model):
+class Ann_List(models.Model):
     file_name     = models.CharField(max_length=255, unique=True)
     posted_date   = models.DateField()
     status        = models.CharField(
