@@ -2,6 +2,6 @@ from django.urls import path
 from .views import AnnouncementListAPIView, AnnouncementDetailAPIView
 
 urlpatterns = [
-    path('', AnnouncementListAPIView.as_view(), name='ann-list'),
-    path('<path:file_name>/', AnnouncementDetailAPIView.as_view(), name='ann-detail'),
+    path('', AnnouncementListAPIView.as_view(), name='announcement-list'),
+    path('<int:pk>/', AnnouncementDetailAPIView.as_view(), name='announcement-detail'),
 ]
