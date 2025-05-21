@@ -131,10 +131,6 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-import pymysql
-
-pymysql.install_as_MySQLdb()
-
 import my_settings
 DATABASES = my_settings.DATABASES
 
