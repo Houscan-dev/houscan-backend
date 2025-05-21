@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-from pathlib import Path
 from dotenv import load_dotenv
 from celery.schedules import crontab
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -191,6 +190,7 @@ LOGIN_URL = '/login/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ANNOUNCEMENTS_JSON_ROOT = BASE_DIR / 'data'

@@ -6,3 +6,5 @@ class AnnListSerializer(serializers.ModelSerializer):
         model = Announcement
         fields = ['id', 'file_name', 'posted_date', 'status', 'updated_at']
  
+#class AnnDetailSerializer(serializers.ModelSerializer):
+#    pass

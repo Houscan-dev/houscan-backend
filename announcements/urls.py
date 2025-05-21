@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AnnouncementListAPIView
+from .views import AnnouncementListAPIView #,AnnouncementDetailAPIView
 
 urlpatterns = [
     path('', AnnouncementListAPIView.as_view(), name='announcement-list'),
