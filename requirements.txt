@@ -61,3 +61,4 @@ vine==5.1.0
 virtualenv==20.26.3
 wcwidth==0.2.13
 zipp==3.18.1
+pymysql>=1.0.3

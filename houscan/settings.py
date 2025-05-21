@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
+import pymysql
+pymysql.install_as_MySQLdb()
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -21,15 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 load_dotenv(BASE_DIR / '.env')
+os.environ["DB_USER"] = "django_user"
+print("✅ DB_USER:", os.getenv("DB_USER"))
+print("✅ DB_HOST:", os.getenv("DB_HOST"))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',   
-        'NAME': os.getenv('DB_NAME', 'HOUSCAN'),               
+        'NAME': os.getenv('DB_NAME', 'houscan'),               
         'USER': os.getenv('DB_USER', 'django_user'),                   
         'PASSWORD': os.getenv('DB_PASSWORD',''),    
-        'HOST': os.getenv('DB_HOST', '127.0.0.1'),        
+        'HOST': os.getenv('DB_HOST', ''),        
         'PORT': os.getenv('DB_PORT', '3306')
     }
 }
