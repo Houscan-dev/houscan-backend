@@ -193,7 +193,7 @@ ANNOUNCEMENTS_JSON_ROOT = BASE_DIR / 'data'
 CELERY_BEAT_SCHEDULE = {
     'every-minute-update': {
         'task': 'announcements.tasks.update_announcements_status_from_json',
-        'schedule': 24 * 3600.0,
+        'schedule': 60.0,
     },
 }
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
