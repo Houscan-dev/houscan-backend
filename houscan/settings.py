@@ -20,9 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-
-load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.getenv('SECRET_KEY')
+
+DATABASES = {
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',   
+        'NAME': os.getenv('DB_NAME', 'HOUSCAN'),               
+        'USER': os.getenv('DB_USER', 'django_user'),                   
+        'PASSWORD': os.getenv('DB_PASSWORD',''),    
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),        
+        'PORT': os.getenv('DB_PORT', '3306')
+    }
+}
 
 DEBUG = True
 
@@ -131,8 +140,6 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-import my_settings
-DATABASES = my_settings.DATABASES
 
 AUTHENTICATION_BACKENDS = [
     'users.backends.EmailBackend',
