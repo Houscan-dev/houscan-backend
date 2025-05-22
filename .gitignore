@@ -7,5 +7,6 @@ __pycache__/
 *.py[cod]
 
 # Django migrations (원하시는 앱의 migrations 디렉터리만 제외할 수도 있음)
-**/migrations/*.py[cod]
+**/migrations/*.pyc
+**/migrations/*.pyo
 **/migrations/__pycache__/
