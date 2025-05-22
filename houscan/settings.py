@@ -203,12 +203,16 @@ LOGIN_URL = '/login/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+from celery.schedules import crontab
+
+CELERY_TIMEZONE = 'Asia/Seoul'
+CELERY_ENABLE_UTC = False
 
 ANNOUNCEMENTS_JSON_ROOT = BASE_DIR / 'data'
 CELERY_BEAT_SCHEDULE = {
-    'every-minute-update': {
+    'daily-midnight-update': {
         'task': 'announcements.tasks.update_announcements_status_from_json',
-        'schedule': 60.0,
+        'schedule': crontab(hour=0, minute=0),
     },
 }
 CELERY_BROKER_URL = 'redis://localhost:6379/0'

@@ -1,6 +1,6 @@
 from django.db import models
 
-
+# 리스트
 class Announcement(models.Model):
     file_name     = models.CharField(max_length=255, unique=True)
     posted_date   = models.DateField()
