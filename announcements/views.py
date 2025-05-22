@@ -21,18 +21,27 @@ class JSONFileMixin(APIView):
     def load_for(self, subfolder: str):
         folder = Path(settings.ANNOUNCEMENTS_JSON_ROOT) / subfolder
         if not folder.exists():
-            return {"error": f"Folder not found: {folder}"}
+            return None
 
+        # "*_{subfolder}.json" 패턴 파일 중 첫 번째를 찾는다
         matches = list(folder.glob(f"*_{subfolder}.json"))
         if not matches:
-            return {"error": f"No files matching '*_{subfolder}.json' in {folder}"}
+            return None
 
         fp = matches[0]
         try:
-            return json.loads(fp.read_text(encoding='utf-8'))
-        except Exception as e:
-            return {"error": f"Failed to parse JSON in {fp.name}: {str(e)}"}
+            raw = json.loads(fp.read_text(encoding='utf-8'))
+        except Exception:
+            return None
 
+        # 만약 raw가 {"residence_period": "..."} 처럼
+        # subfolder 키 하나만 가지고 있으면, 그 값을 바로 리턴
+        if isinstance(raw, dict) and len(raw) == 1 and subfolder in raw:
+            return raw[subfolder]
+        
+        return raw
+
+    
 class AnnouncementDetailAPIView(JSONFileMixin):
     permission_classes = [AllowAny]
 
@@ -47,4 +56,8 @@ class AnnouncementDetailAPIView(JSONFileMixin):
             "residence_period": self.load_for("residence_period"),
             "precautions":      self.load_for("precautions"),
             "housing_info":     self.load_for("housing_info"),
+            "ai_precaution": (
+                "본 정보는 AI를 활용하여 요약되었으며, 정확성이 보장되지 않을 수 있으므로 "
+                "참고용으로만 사용하시기 바랍니다. 더 자세한 정보는 아래의 첨부파일을 참고하세요."
+            ),
         })
