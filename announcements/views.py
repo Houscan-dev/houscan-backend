@@ -11,42 +11,60 @@ from .models import Announcement, AnnouncementDocument
 
 class AnnouncementListAPIView(generics.ListAPIView):
     permission_classes=[AllowAny]
+    def load_schedule(self, announcement):
+        try:
+            doc = announcement.documents.get(doc_type="schedule")
+            with open(doc.data_file.path, encoding='utf-8') as fp:
+                return json.load(fp)
+        except (AnnouncementDocument.DoesNotExist, json.JSONDecodeError, OSError):
+            return {}
+    
     def get(self, request):
         qs = Announcement.objects.order_by('-posted_date')
-        data = [
-            {
-                "id": ann.id,
-                "title": ann.title,
-                "posted_date": ann.posted_date,
-                "status": ann.status,
-            }
-            for ann in qs
-        ]
-        return Response(data)
+        result = []
+        for ann in qs:
+            schedule_json = self.load_schedule(ann)
+            # JSON에서 announcement_date를 꺼내되, 없으면 모델의 posted_date로 대체
+            posted = schedule_json.get("announcement_date")
+            if not posted:
+                # DateField를 문자열로 바꿔 줄 때는 isoformat() 권장
+                posted = ann.posted_date.isoformat()
+            result.append({
+                "id":          ann.id,
+                "title":       ann.title,
+                "posted_date": posted,
+                "status":      ann.status,
+            })
+
+        return Response(result)
     
 class AnnouncementDetailAPIView(APIView):
     permission_classes=[AllowAny]
     def load_for(self, announcement, doc_type):
         try:
             doc = announcement.documents.get(doc_type=doc_type)
-        except AnnouncementDocument.DoesNotExist:
+            with open(doc.data_file.path, encoding='utf-8') as fp:
+                data = json.load(fp)
+        except (AnnouncementDocument.DoesNotExist, OSError, json.JSONDecodeError):
             return None
-        with open(doc.data_file.path, encoding='utf-8') as fp:
-            return json.load(fp)
+        
         data.pop('announcement_id', None)
 
-        if (isinstance(data, dict)and len(data) == 1 and doc_type in data):
+        if isinstance(data, dict) and doc_type in data:
             return data[doc_type]
 
         return data
-
     
     def get(self, request, id):
         ann = get_object_or_404(Announcement, id=id)
+        schedule_json = self.load_for(ann, "schedule") or {}
+        posted = schedule_json.get("announcement_date")
+        if not posted:
+            posted = ann.posted_date.isoformat()
         return Response({
             "id":               ann.id,
             "title":            ann.title,
-            "posted_date":      ann.posted_date,
+            "posted_date":      posted,
             "status":           ann.status,
             "schedule":         self.load_for(ann, "schedule"),
             "criteria":         self.load_for(ann, "criteria"),
