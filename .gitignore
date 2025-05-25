@@ -1,7 +1,6 @@
 .env
 db.sqlite3
 data/
-media/
 # byte-compiled / cache files
 __pycache__/
 
