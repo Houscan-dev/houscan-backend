@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'announcements',
 
     # 설치한 라이브러리
+    'django_celery_beat',
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
@@ -205,14 +206,8 @@ from celery.schedules import crontab
 
 CELERY_TIMEZONE = 'Asia/Seoul'
 CELERY_ENABLE_UTC = False
-
-ANNOUNCEMENTS_JSON_ROOT = BASE_DIR / 'data'
-CELERY_BEAT_SCHEDULE = {
-    'daily-midnight-update': {
-        'task': 'announcements.tasks.update_announcements_status_from_json',
-        'schedule': crontab(hour=0, minute=0),
-    },
-}
-CELERY_BROKER_URL = 'redis://localhost:6379/0' 
 MEDIA_URL  = "/media/" 
 MEDIA_ROOT = BASE_DIR / "media" 
+ANNOUNCEMENTS_JSON_ROOT = MEDIA_ROOT / 'announcements'
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_BROKER_URL = 'redis://localhost:6379/0' 
