@@ -2,7 +2,6 @@ import os, json, logging
 from datetime import date, datetime
 from celery import shared_task
 from django.conf import settings
-from .models import Announcement, AnnouncementDocument
 from django.utils import timezone
 
 logger = logging.getLogger(__name__)
@@ -14,8 +13,8 @@ def parse_ymd(s: str) -> date:
     return datetime.strptime(s.replace('-', '.'), '%Y.%m.%d').date()
 
 @shared_task
-@shared_task
 def update_announcements_status_from_json():
+    from announcements.models import Announcement, AnnouncementDocument
     logger.info("▶▶▶ Task START: update_announcements_status_from_json")
     today = timezone.localdate()
     sched_dir = settings.MEDIA_ROOT / 'announcements' / 'schedule'
