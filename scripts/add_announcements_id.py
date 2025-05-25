@@ -1,4 +1,17 @@
 # 프로젝트 루트/scripts/add_announcement_id.py
+import os
+import sys
+import django
+from pathlib import Path
+
+# 프로젝트 루트 경로 등록
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR))
+
+# Django 설정 로드
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'houscan.settings')
+django.setup()
+
 import os, json, re
 from django.conf import settings
 from announcements.models import Announcement
@@ -7,7 +20,7 @@ from announcements.models import Announcement
 def run():
     print("▶️ 시작: JSON 파일에 announcement_id를 추가합니다")
 
-    DATA_ROOT = os.path.join(settings.BASE_DIR, 'data')
+    DATA_ROOT = os.path.join(settings.BASE_DIR, 'media', 'announcements')
     DOC_TYPES = [ t for t, _ in Announcement._meta.get_field('documents').related_model.ANNOUNCE_TYPES ]
 
     for doc_type in DOC_TYPES:
@@ -38,3 +51,6 @@ def run():
             print(f"  ✅ [{doc_type}] {fname} → announcement_id={ann.id}")
 
     print("✅ add_announcement_id 완료!")
+
+if __name__ == "__main__":
+    run()

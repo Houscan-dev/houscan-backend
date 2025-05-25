@@ -25,19 +25,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 load_dotenv(BASE_DIR / '.env')
-os.environ["DB_USER"] = "django_user"
-print("✅ DB_USER:", os.getenv("DB_USER"))
-print("✅ DB_HOST:", os.getenv("DB_HOST"))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',   
-        'NAME': os.getenv('DB_NAME', 'houscan'),               
-        'USER': os.getenv('DB_USER', 'django_user'),                   
-        'PASSWORD': os.getenv('DB_PASSWORD',''),    
-        'HOST': os.getenv('DB_HOST', ''),        
-        'PORT': os.getenv('DB_PORT', '3306')
+        'NAME': 'houscan_db',               
+        'USER': 'root',                   
+        'PASSWORD': 'khj100494!',    
+        'HOST': 'localhost',        
+        'PORT': '3306'
     }
 }
 

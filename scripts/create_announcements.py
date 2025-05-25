@@ -1,5 +1,18 @@
 # scripts/create_announcements.py
 import os
+import sys
+import django
+from pathlib import Path
+
+# 프로젝트 루트 경로 등록
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR))
+
+# Django 설정 로드
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'houscan.settings')
+django.setup()
+
+import os
 from django.conf import settings
 from announcements.models import Announcement, AnnouncementDocument
 import re
@@ -10,7 +23,7 @@ def run():
        '*_<doc_type>.json' 파일들을 스캔해,
        base 이름(‘1_행복주택’ 같은)으로 Announcement를 생성합니다.
     """
-    DATA_ROOT = os.path.join(settings.BASE_DIR, 'data')
+    DATA_ROOT = os.path.join(settings.BASE_DIR, 'media', 'announcements')
     # AnnouncementDocument.ANNOUNCE_TYPES 에 있는 doc_type 들만 사용
     doc_types = [t for t, _ in AnnouncementDocument.ANNOUNCE_TYPES]
     bases = set()
@@ -30,10 +43,11 @@ def run():
         ann, created = Announcement.objects.get_or_create(
             title=base,
             defaults={
-                # TODO: 실제 posted_date, status 로 바꿔주시면 좋습니다
                 'posted_date': '2025-01-01',
                 'status': 'upcoming',
             }
         )
         print(f"  {'✅ 생성' if created else '🔄 존재'}: {ann.id} · {base}")
     print("✅ 모든 Announcement 준비 완료!")
+if __name__ == "__main__":
+    run()

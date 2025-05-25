@@ -1,4 +1,16 @@
 # 프로젝트 루트/scripts/load_announcements.py
+import os
+import sys
+import django
+from pathlib import Path
+
+# 프로젝트 루트 경로 등록
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR))
+
+# Django 설정 로드
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'houscan.settings')
+django.setup()
 
 import os, json
 from django.conf import settings
@@ -6,7 +18,7 @@ from announcements.models import Announcement, AnnouncementDocument
 
 def run():
     print("▶️ 시작: 모든 문서(media)로 복사 및 DB 등록")
-    data_root = os.path.join(settings.BASE_DIR, 'data')
+    data_root = os.path.join(settings.BASE_DIR, 'media', 'announcements')
     DOC_TYPES = [ t for t, _ in AnnouncementDocument.ANNOUNCE_TYPES ]
 
     for doc_type in DOC_TYPES:
@@ -46,3 +58,5 @@ def run():
             print(f"  ✅ [{doc_type}] {fname} → announcement={ann_id}")
 
     print("✅ load_announcements 완료!")
+if __name__ == "__main__":
+    run()
