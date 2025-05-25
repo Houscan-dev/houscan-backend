@@ -14,10 +14,11 @@ def parse_ymd(s: str) -> date:
     return datetime.strptime(s.replace('-', '.'), '%Y.%m.%d').date()
 
 @shared_task
+@shared_task
 def update_announcements_status_from_json():
     logger.info("▶▶▶ Task START: update_announcements_status_from_json")
     today = timezone.localdate()
-    sched_dir = settings.MEDIA_ROOT / 'announcements' /'schedule'
+    sched_dir = settings.MEDIA_ROOT / 'announcements' / 'schedule'
 
     for fname in os.listdir(sched_dir):
         if not fname.endswith('.json'):
@@ -29,13 +30,20 @@ def update_announcements_status_from_json():
                 data = json.load(f)
             ann_id = data.get("announcement_id")
             period = data.get("online_application_period", {})
-            start = parse_ymd(period.get("start"))
-            end   = parse_ymd(period.get("end"))
-            if not ann_id or not start or not end:
+            start_raw = period.get("start")
+            end_raw = period.get("end")
+
+            # 로그로 파악
+            logger.info(f"📄 파일: {fname} → id: {ann_id}, start: {start_raw}, end: {end_raw}")
+
+            if not ann_id or not start_raw or not end_raw:
                 logger.warning(f"⚠️ 필수 정보 없음 → {fname}")
                 continue
+
+            start = parse_ymd(start_raw)
+            end = parse_ymd(end_raw)
         except Exception as e:
-            logger.error(f"  → JSON 파싱 실패 {fname}: {e}")
+            logger.error(f"❌ JSON 파싱 실패 {fname}: {e}")
             continue
 
         if today < start:
@@ -45,9 +53,16 @@ def update_announcements_status_from_json():
         else:
             status = 'closed'
 
-        ann = Announcement.objects.get(id=ann_id)
+        try:
+            ann = Announcement.objects.get(id=ann_id)
+        except Announcement.DoesNotExist:
+            logger.warning(f"❌ Announcement(id={ann_id}) 없음 → {fname}")
+            continue
+
+        # 상태 저장
         ann.posted_date = start
         ann.status = status
         ann.save()
+        logger.info(f"✅ 상태 업데이트: {ann_id} → {status}, posted_date: {start}")
 
     logger.info("▶▶▶ Task END")
