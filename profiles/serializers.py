@@ -25,9 +25,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # PUT - 모든 필드 필수 (PATCH는 부분 수정 허용)
         request = self.context.get('request')
-        if request and request.method == 'PUT':
+        if request and request.method == 'POST':
             for field in self.fields:
                 if field not in self.Meta.read_only_fields + ['age']:
                     self.fields[field].required = True

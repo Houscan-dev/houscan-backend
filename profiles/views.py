@@ -1,30 +1,22 @@
 from rest_framework import generics, permissions
 from .models import Profile
 from .serializers import ProfileSerializer
+from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import ValidationError
 
-class ProfileView(generics.RetrieveUpdateAPIView):
+class ProfileCreateView(generics.CreateAPIView):
     # 로그인한 유저의 개인정보 조회 및 수정 
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_serializer_context(self):
-        return {"request": self.request}
-    
+    def perform_create(self, serializer):
+        if Profile.objects.filter(user=self.request.user).exists():
+            raise ValidationError("이미 개인정보가 등록되어 있습니다.")
+        serializer.save(user=self.request.user)
+
+class ProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
     def get_object(self):
-        profile, _ = Profile.objects.get_or_create(user=self.request.user,
-        defaults={ 
-            "birth_date": "000000",  # 기본값
-            "gender": "F",
-            "university": False,
-            "graduate": False,
-            "employed": False,
-            "job_seeker": False,
-            "welfare_receipient": False,
-            "parents_own_house": False,
-            "disability_in_family": False,
-            "subscription_account": 0,
-            "total_assets": 0,
-            "car_value": 0,
-            "income_range": "100% 이하"
-        })
-        return profile
+        return get_object_or_404(Profile, user=self.request.user)
