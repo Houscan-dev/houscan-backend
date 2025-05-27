@@ -8,4 +8,8 @@ class AnnouncementAdmin(admin.ModelAdmin):
     search_fields = ('title',)
 
 admin.site.register(AnnouncementDocument)
-admin.site.register(HousingInfo)
+@admin.register(HousingInfo)
+class HousingInfoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'house_type', 'announcement')  # ✅ id 칼럼 표시
+    list_filter = ('announcement',)
+    search_fields = ('name',)

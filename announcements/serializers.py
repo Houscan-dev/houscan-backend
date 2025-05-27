@@ -10,7 +10,7 @@ class HousingInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = HousingInfo
         fields = [
-            'external_id',  # 공고 내 주택 ID
+            'id',  # 공고 내 주택 ID
             'name',
             'address',
             'total_households',

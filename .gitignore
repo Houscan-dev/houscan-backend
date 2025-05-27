@@ -1,6 +1,5 @@
 .env
 db.sqlite3
-data/
 # byte-compiled / cache files
 __pycache__/
 
@@ -8,6 +7,5 @@ __pycache__/
 **/migrations/*.pyc
 **/migrations/*.pyo
 **/migrations/__pycache__/
-venv/
 .venv/
 venv/
