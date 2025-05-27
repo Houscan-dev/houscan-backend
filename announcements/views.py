@@ -2,7 +2,7 @@ from rest_framework import generics
 from django.shortcuts import get_object_or_404
 import json, os
 from rest_framework.response import Response
-from django.conf import settings
+from rest_framework import status
 from pathlib import Path
 from rest_framework.permissions import AllowAny
 from .models import Announcement
@@ -83,3 +83,10 @@ class AnnouncementDetailAPIView(APIView):
                 "참고용으로만 사용하시기 바랍니다. 더 자세한 정보는 아래의 첨부파일을 참고하세요."
             ),
         })
+    
+class AnnouncementPDFNameAPIView(APIView):
+    permission_classes=[AllowAny]
+    def get(self, request, id):
+        announcement = get_object_or_404(Announcement, id=id)
+        pdf_name = announcement.pdf_name
+        return Response({"pdf_name": pdf_name}, status=status.HTTP_200_OK)
