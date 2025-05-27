@@ -8,7 +8,8 @@
       "type": null,
       "house_type": "26㎡",
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 1
     },
     {
       "name": "위시희망",
@@ -18,7 +19,8 @@
       "type": null,
       "house_type": "31㎡",
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 2
     },
     {
       "name": "지오빌",
@@ -28,7 +30,8 @@
       "type": null,
       "house_type": "40㎡",
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 3
     },
     {
       "name": "다움파크빌",
@@ -38,7 +41,8 @@
       "type": null,
       "house_type": "19㎡",
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 4
     },
     {
       "name": "논현로5길15-20",
@@ -48,7 +52,8 @@
       "type": null,
       "house_type": "27㎡",
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 5
     },
     {
       "name": "논현로7길36",
@@ -58,7 +63,8 @@
       "type": null,
       "house_type": "30㎡",
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 6
     }
   ],
   "announcement_id": 1

@@ -8,7 +8,8 @@
       "type": null,
       "house_type": "60.00㎡",
       "elevator": true,
-      "parking": "수 지상5층 (엘리베이터 있음)"
+      "parking": "수 지상5층 (엘리베이터 있음)",
+      "id": 1
     }
   ],
   "announcement_id": 26

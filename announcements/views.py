@@ -8,6 +8,8 @@ from rest_framework.permissions import AllowAny
 from .models import Announcement
 from rest_framework.views import APIView
 from .models import Announcement, AnnouncementDocument
+from .models import HousingInfo
+from .serializers import HousingInfoSerializer
 
 class AnnouncementListAPIView(generics.ListAPIView):
     permission_classes=[AllowAny]
@@ -69,7 +71,10 @@ class AnnouncementDetailAPIView(APIView):
             "pdf_name":         ann.pdf_name,
             "schedule":         self.load_for(ann, "schedule"),
             "criteria":         self.load_for(ann, "criteria"),
-            "housing_info":     self.load_for(ann, "housing_info"),
+            "housing_info": HousingInfoSerializer(
+            HousingInfo.objects.filter(announcement=ann),
+            many=True
+            ).data,
             "precautions":      self.load_for(ann, "precautions"),
             "priority_score":   self.load_for(ann, "priority_score"),
             "residence_period": self.load_for(ann, "residence_period"),

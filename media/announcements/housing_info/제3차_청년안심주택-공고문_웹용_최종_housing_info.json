@@ -8,7 +8,8 @@
       "type": "신혼부부",
       "house_type": "B",
       "elevator": false,
-      "parking": "31,560"
+      "parking": "31,560",
+      "id": 1
     },
     {
       "name": "청년",
@@ -18,7 +19,8 @@
       "type": "청년",
       "house_type": "A",
       "elevator": false,
-      "parking": "52,600"
+      "parking": "52,600",
+      "id": 2
     },
     {
       "name": null,
@@ -28,7 +30,8 @@
       "type": "청년",
       "house_type": "B",
       "elevator": true,
-      "parking": "57,800"
+      "parking": "57,800",
+      "id": 3
     },
     {
       "name": null,
@@ -38,7 +41,8 @@
       "type": null,
       "house_type": "A B B",
       "elevator": true,
-      "parking": null
+      "parking": null,
+      "id": 4
     }
   ],
   "announcement_id": 31

@@ -8,7 +8,8 @@
       "type": "매입 임대",
       "house_type": null,
       "elevator": null,
-      "parking": null
+      "parking": null,
+      "id": 1
     }
   ],
   "announcement_id": 21

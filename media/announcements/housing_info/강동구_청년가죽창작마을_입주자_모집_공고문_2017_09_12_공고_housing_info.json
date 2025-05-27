@@ -8,7 +8,8 @@
       "type": null,
       "house_type": "23~29",
       "elevator": false,
-      "parking": "1 호 (54 \\u33a1 /1 층 ) 8 대"
+      "parking": "1 호 (54 \\u33a1 /1 층 ) 8 대",
+      "id": 1
     }
   ],
   "announcement_id": 28

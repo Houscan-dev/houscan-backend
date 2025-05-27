@@ -8,7 +8,8 @@
       "type": "도시형생활주택 (분리형원룸)",
       "house_type": "35A 40A",
       "elevator": false,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 1
     },
     {
       "name": "희망",
@@ -18,7 +19,8 @@
       "type": "도시형생활주택 (개방형원룸)",
       "house_type": "27B",
       "elevator": true,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 2
     },
     {
       "name": "명칭없음",
@@ -28,7 +30,8 @@
       "type": "도시형생활주택 (개방형원룸)",
       "house_type": "26B",
       "elevator": true,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 3
     },
     {
       "name": "라벨메종4",
@@ -38,7 +41,8 @@
       "type": "도시형생활주택 (개방형원룸)",
       "house_type": "26B",
       "elevator": true,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 4
     },
     {
       "name": "K-House응암",
@@ -48,7 +52,8 @@
       "type": "도시형생활주택 (개방형원룸)",
       "house_type": "28B",
       "elevator": true,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 5
     },
     {
       "name": "대상주택",
@@ -58,7 +63,8 @@
       "type": "도시형생활주택 (개방형원룸)",
       "house_type": "29B",
       "elevator": true,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 6
     },
     {
       "name": "명칭없음",
@@ -68,7 +74,8 @@
       "type": "도시형생활주택 (개방형원룸)",
       "house_type": "27B",
       "elevator": true,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 7
     },
     {
       "name": "T&K신림Ⅳ",
@@ -78,7 +85,8 @@
       "type": "도시형생활주택 (분리형원룸)",
       "house_type": "34A",
       "elevator": true,
-      "parking": "자주식 (지상)"
+      "parking": "자주식 (지상)",
+      "id": 8
     }
   ],
   "announcement_id": 7

@@ -8,7 +8,8 @@
       "type": null,
       "house_type": null,
       "elevator": false,
-      "parking": "주차장 (8 면)"
+      "parking": "주차장 (8 면)",
+      "id": 1
     }
   ],
   "announcement_id": 29

@@ -8,7 +8,8 @@
       "type": "도시형생활주택",
       "house_type": "분리형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 1
     },
     {
       "name": "도원휴먼빌 33A",
@@ -18,7 +19,8 @@
       "type": "도시형생활주택",
       "house_type": "분리형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 2
     },
     {
       "name": "더이룸하우스",
@@ -28,7 +30,8 @@
       "type": "도시형생활주택",
       "house_type": null,
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 3
     },
     {
       "name": "더이룸하우스",
@@ -38,7 +41,8 @@
       "type": "분리형원룸",
       "house_type": null,
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 4
     },
     {
       "name": "더이룸하우스",
@@ -48,7 +52,8 @@
       "type": "도시형생활주택",
       "house_type": null,
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 5
     }
   ],
   "announcement_id": 4

@@ -33,3 +33,22 @@ class AnnouncementDocument(models.Model):
 
     def __str__(self):
         return f"{self.announcement_id} – {self.doc_type}"
+    
+
+class HousingInfo(models.Model):
+    announcement = models.ForeignKey(Announcement, related_name='housing_info_list', on_delete=models.CASCADE)
+    external_id = models.IntegerField()  # JSON 내부 id (1, 2, ...)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
+    total_households = models.CharField(max_length=100, null=True, blank=True)
+    supply_households = models.CharField(max_length=100, null=True, blank=True)
+    type = models.CharField(max_length=100, null=True, blank=True)
+    house_type = models.CharField(max_length=100, null=True, blank=True)
+    elevator = models.CharField(max_length=100, null=True, blank=True)
+    parking = models.TextField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('announcement', 'external_id')
+
+    def __str__(self):
+        return f"{self.name} – {self.house_type}"

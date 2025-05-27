@@ -8,7 +8,8 @@
       "type": "청년",
       "house_type": "B",
       "elevator": true,
-      "parking": "68,533"
+      "parking": "68,533",
+      "id": 1
     },
     {
       "name": "천호역한강리슈빌 강동구천호동458-3",
@@ -18,7 +19,8 @@
       "type": "청년",
       "house_type": "A",
       "elevator": true,
-      "parking": "34,990"
+      "parking": "34,990",
+      "id": 2
     },
     {
       "name": "엘크루발산 강서구등촌동671-1",
@@ -28,7 +30,8 @@
       "type": "청년",
       "house_type": "A",
       "elevator": true,
-      "parking": "55,100"
+      "parking": "55,100",
+      "id": 3
     },
     {
       "name": "와이엔타워 노원구공릉동617-3",
@@ -38,7 +41,8 @@
       "type": "청년",
       "house_type": "A",
       "elevator": true,
-      "parking": "27,930"
+      "parking": "27,930",
+      "id": 4
     },
     {
       "name": "제이스타상봉 중랑구상봉동109-34",
@@ -48,7 +52,8 @@
       "type": "청년",
       "house_type": "A",
       "elevator": true,
-      "parking": "49,760"
+      "parking": "49,760",
+      "id": 5
     }
   ],
   "announcement_id": 15

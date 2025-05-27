@@ -8,7 +8,8 @@
       "type": "매입임대",
       "house_type": "30.17㎡",
       "elevator": false,
-      "parking": "주차장 정보 미제공"
+      "parking": "주차장 정보 미제공",
+      "id": 1
     },
     {
       "name": "선릉역마에스트로",
@@ -18,7 +19,8 @@
       "type": "매입임대",
       "house_type": "22A㎡",
       "elevator": false,
-      "parking": "주차장 정보 미제공"
+      "parking": "주차장 정보 미제공",
+      "id": 2
     },
     {
       "name": "문정역마에스트로",
@@ -28,7 +30,8 @@
       "type": "매입임대",
       "house_type": "34㎡",
       "elevator": false,
-      "parking": "주차장 정보 미제공"
+      "parking": "주차장 정보 미제공",
+      "id": 3
     },
     {
       "name": "선정릉역모아엘가퍼스트홈",
@@ -38,7 +41,8 @@
       "type": "매입임대",
       "house_type": "14㎡",
       "elevator": false,
-      "parking": "주차장 정보 미제공"
+      "parking": "주차장 정보 미제공",
+      "id": 4
     },
     {
       "name": "힐데스하임",
@@ -48,7 +52,8 @@
       "type": null,
       "house_type": "14㎡",
       "elevator": false,
-      "parking": "주차장 정보 미제공"
+      "parking": "주차장 정보 미제공",
+      "id": 5
     }
   ],
   "announcement_id": 22

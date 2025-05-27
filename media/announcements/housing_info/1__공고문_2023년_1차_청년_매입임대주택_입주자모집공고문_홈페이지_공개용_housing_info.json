@@ -8,7 +8,8 @@
       "type": "도시형생활주택",
       "house_type": "개방형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 1
     },
     {
       "name": "T&K반포",
@@ -18,7 +19,8 @@
       "type": "도시형생활주택",
       "house_type": "개방형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 2
     },
     {
       "name": "T&K반포",
@@ -28,7 +30,8 @@
       "type": "도시형생활주택",
       "house_type": "분리형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 3
     },
     {
       "name": "Oaktreevil DR2",
@@ -38,7 +41,8 @@
       "type": "도시형생활주택",
       "house_type": "분리형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 4
     },
     {
       "name": "Oaktreevil DR2",
@@ -48,7 +52,8 @@
       "type": "도시형생활주택",
       "house_type": "2룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 5
     },
     {
       "name": "민하우스2",
@@ -58,7 +63,8 @@
       "type": "도시형생활주택",
       "house_type": "개방형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 6
     },
     {
       "name": "민하우스2",
@@ -68,7 +74,8 @@
       "type": "도시형생활주택",
       "house_type": "분리형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 7
     },
     {
       "name": "리츠하우스2",
@@ -78,7 +85,8 @@
       "type": "도시형생활주택",
       "house_type": "개방형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 8
     },
     {
       "name": "리츠하우스2",
@@ -88,7 +96,8 @@
       "type": "도시형생활주택",
       "house_type": "개방형원룸",
       "elevator": true,
-      "parking": "자주식(지상)"
+      "parking": "자주식(지상)",
+      "id": 9
     }
   ],
   "announcement_id": 5

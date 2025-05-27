@@ -8,7 +8,8 @@
       "type": "다가구 단독거주형",
       "house_type": null,
       "elevator": null,
-      "parking": null
+      "parking": null,
+      "id": 1
     }
   ],
   "announcement_id": 20

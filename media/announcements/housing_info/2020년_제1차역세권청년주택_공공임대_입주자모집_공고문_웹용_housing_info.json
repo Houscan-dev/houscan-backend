@@ -8,7 +8,8 @@
       "type": null,
       "house_type": "32A",
       "elevator": false,
-      "parking": "자주식:282대 (장애인주차대수:9대)"
+      "parking": "자주식:282대 (장애인주차대수:9대)",
+      "id": 1
     },
     {
       "name": "어바니엘위드더스타일",
@@ -18,7 +19,8 @@
       "type": null,
       "house_type": "35A",
       "elevator": false,
-      "parking": "자주식:282대 (장애인주차대수:9대)"
+      "parking": "자주식:282대 (장애인주차대수:9대)",
+      "id": 2
     },
     {
       "name": "서교동효성해링턴타워",
@@ -28,7 +30,8 @@
       "type": null,
       "house_type": "37B (셰어형)",
       "elevator": false,
-      "parking": "자주식:282대 (장애인주차대수:9대)"
+      "parking": "자주식:282대 (장애인주차대수:9대)",
+      "id": 3
     }
   ],
   "announcement_id": 11

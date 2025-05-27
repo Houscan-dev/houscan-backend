@@ -8,7 +8,8 @@
       "type": null,
       "house_type": null,
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 1
     },
     {
       "name": "휴먼에코빌4차B동",
@@ -18,7 +19,8 @@
       "type": null,
       "house_type": null,
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 2
     },
     {
       "name": "삼화에코빌2차B동",
@@ -28,7 +30,8 @@
       "type": null,
       "house_type": null,
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 3
     },
     {
       "name": "더존에이스빌나동",
@@ -38,7 +41,8 @@
       "type": null,
       "house_type": null,
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 4
     }
   ],
   "announcement_id": 19

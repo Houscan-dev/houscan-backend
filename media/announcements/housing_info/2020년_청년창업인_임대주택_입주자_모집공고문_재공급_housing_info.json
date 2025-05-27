@@ -8,7 +8,8 @@
       "type": null,
       "house_type": null,
       "elevator": false,
-      "parking": null
+      "parking": null,
+      "id": 1
     }
   ],
   "announcement_id": 13

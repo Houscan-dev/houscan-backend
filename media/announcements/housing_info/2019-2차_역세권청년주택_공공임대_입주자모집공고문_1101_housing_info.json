@@ -8,7 +8,8 @@
       "type": "매입임대",
       "house_type": "14",
       "elevator": true,
-      "parking": "개별 난방"
+      "parking": "개별 난방",
+      "id": 1
     },
     {
       "name": "서교동효성 해링턴타워",
@@ -18,7 +19,8 @@
       "type": "매입임대",
       "house_type": "17",
       "elevator": true,
-      "parking": "개별 난방"
+      "parking": "개별 난방",
+      "id": 2
     }
   ],
   "announcement_id": 10
