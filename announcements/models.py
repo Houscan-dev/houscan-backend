@@ -10,7 +10,7 @@ class Announcement(models.Model):
                  ('closed','모집마감')]
     )
     updated_at    = models.DateTimeField(auto_now=True)
-
+    pdf_name = models.CharField(max_length=255, null=True, blank=True)
     def __str__(self):
         return f"{self.title} ({self.status})"
     

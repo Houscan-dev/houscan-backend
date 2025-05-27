@@ -4,5 +4,5 @@ from .models import Announcement
 class AnnListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
-        fields = ['id', 'title', 'posted_date', 'status', 'updated_at']
+        fields = ['id', 'title', 'posted_date', 'status', 'updated_at','pdf_name']
  

@@ -66,6 +66,7 @@ class AnnouncementDetailAPIView(APIView):
             "title":            ann.title,
             "posted_date":      posted,
             "status":           ann.status,
+            "pdf_name":         ann.pdf_name,
             "schedule":         self.load_for(ann, "schedule"),
             "criteria":         self.load_for(ann, "criteria"),
             "housing_info":     self.load_for(ann, "housing_info"),

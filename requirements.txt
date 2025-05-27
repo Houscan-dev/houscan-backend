@@ -10,13 +10,17 @@ click-didyoumean==0.3.1
 click-plugins==1.1.1
 click-repl==0.3.0
 contourpy==1.2.0
+cron-descriptor==1.4.5
 cycler==0.12.1
 distlib==0.3.8
 dj-rest-auth==7.0.1
 Django==4.2.20
 django-allauth==65.7.0
+django-celery-beat==2.8.1
 django-cors-headers==4.7.0
 django-environ==0.11.2
+django-extensions==4.1
+django-timezone-field==7.1
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 dotenv==0.9.9
@@ -42,7 +46,9 @@ pipenv==2024.0.1
 platformdirs==4.2.2
 prompt_toolkit==3.0.51
 PyJWT==2.9.0
+PyMySQL==1.1.1
 pyparsing==3.1.2
+python-crontab==3.2.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
 pytz==2024.1
@@ -61,4 +67,3 @@ vine==5.1.0
 virtualenv==20.26.3
 wcwidth==0.2.13
 zipp==3.18.1
-pymysql>=1.0.3
