@@ -33,11 +33,12 @@ def load_housing_info_to_db():
         except Announcement.DoesNotExist:
             print(f"❌ Announcement ID {announcement_id} 없음 → 건너뜀")
             continue
-
+    
+        count = 0
         for h in housing_list:
             ext_id = h.get("id")
             # 중복 방지 (재실행 대비)
-            if HousingInfo.objects.filter(announcement=ann).exists():
+            if HousingInfo.objects.filter(announcement=ann, name=h.get("name")).exists():
                 continue
 
             HousingInfo.objects.create(
@@ -52,8 +53,8 @@ def load_housing_info_to_db():
                 elevator=h.get("elevator"),
                 parking=h.get("parking"),
             )
-
-        print(f"✅ {fname} → {len(housing_list)}개 항목 삽입 완료")
+            count += 1
+        print(f"✅ {fname} → {count}개 항목 삽입 완료")
 
 if __name__ == "__main__":
     load_housing_info_to_db()
