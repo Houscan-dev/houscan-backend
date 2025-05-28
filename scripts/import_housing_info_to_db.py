@@ -38,7 +38,7 @@ def load_housing_info_to_db():
         for h in housing_list:
             ext_id = h.get("id")
             # 중복 방지 (재실행 대비)
-            if HousingInfo.objects.filter(announcement=ann, name=h.get("name")).exists():
+            if HousingInfo.objects.filter(announcement=ann, id=ext_id).exists():
                 continue
 
             HousingInfo.objects.create(
