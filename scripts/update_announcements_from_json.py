@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import django
+import unicodedata
 
 # Django 환경 설정
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,12 +26,15 @@ def update_announcements_from_json(json_path):
             pdf_name  = entry.get("pdf", "").strip()
 
             ann = Announcement.objects.get(id=ann_id)
+            print(f"Comparing: DB='{ann.title.strip()}', JSON='{old_title}'")
+            db_title_norm = unicodedata.normalize('NFC', ann.title.strip())
+            old_title_norm = unicodedata.normalize('NFC', old_title)
 
-            if ann.title.strip() == old_title:
+            if db_title_norm == old_title_norm:
                 ann.title = new_title
                 updated += 1
             else:
-                print(f"⚠️  ID {ann_id} - 제목 불일치: 현재='{ann.title}', 기대='{old_title}'")
+                print(f"⚠️  ID {ann_id} - 제목 불일치: 현재='{db_title_norm}', 기대='{old_title_norm}'")
                 skipped += 1
 
             ann.pdf_name = pdf_name

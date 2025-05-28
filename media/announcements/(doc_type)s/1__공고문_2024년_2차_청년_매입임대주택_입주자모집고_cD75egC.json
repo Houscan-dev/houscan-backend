@@ -1,0 +1,161 @@
+{
+  "housing_info": [
+    {
+      "name": "*스타힐스",
+      "address": "독산로23길19, 시흥동840-34외1필지",
+      "district": "도봉구",
+      "total_households": "15호",
+      "supply_households": "1호",
+      "type": "다세대주택",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 26
+    },
+    {
+      "name": "*휴먼에코빌1차",
+      "address": "도당로13라길129, 방학동645-39외1필지",
+      "district": "도봉구",
+      "total_households": "14호",
+      "supply_households": "1호",
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": false,
+      "parking": "자주식 (지상)",
+      "id": 27
+    },
+    {
+      "name": "*명칭없음",
+      "address": "시루봉로12길10-15, 방학동313-7",
+      "district": "도봉구",
+      "total_households": "18호",
+      "supply_households": "2호",
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 28
+    },
+    {
+      "name": "더존에이스빌가동",
+      "address": "천호대로89길51, 장안동445-3",
+      "district": "동대문구",
+      "total_households": "10호",
+      "supply_households": "1호",
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": false,
+      "parking": "자주식 (지상)",
+      "id": 29
+    },
+    {
+      "name": "제기홈",
+      "address": "경동시장로9가길21, 제기동846-23외1필지",
+      "district": "동대문구",
+      "total_households": "17호",
+      "supply_households": "2호",
+      "type": "도시형생활주택",
+      "house_type": null,
+      "elevator": false,
+      "parking": "자주식 (지상)",
+      "id": 30
+    },
+    {
+      "name": "*YJ빌라",
+      "address": "응암로142-18, 북가좌동455-2",
+      "district": "서대문구",
+      "total_households": "27호",
+      "supply_households": "2호",
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 31
+    },
+    {
+      "name": "*D&Dhouse",
+      "address": "연희로168, 연희동79-30",
+      "district": "서대문구",
+      "total_households": "16호",
+      "supply_households": "1호",
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 32
+    },
+    {
+      "name": "서초파크타운A동",
+      "address": "반포대로5길64, 서초동1478-9",
+      "district": "서초구",
+      "total_households": "19호",
+      "supply_households": "3호",
+      "type": "도시형생활주택",
+      "house_type": null,
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 33
+    },
+    {
+      "name": "서초파크타운B동",
+      "address": "반포대로5길62, 서초동1478-16",
+      "district": "서초구",
+      "total_households": "15호",
+      "supply_households": "2호",
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 34
+    },
+    {
+      "name": "백년빌",
+      "address": "논현로5길15-20, 양재동400-6",
+      "district": "서초구",
+      "total_households": "16호",
+      "supply_households": "1호",
+      "type": "도시형생활주택",
+      "house_type": null,
+      "elevator": false,
+      "parking": "자주식 (지상)",
+      "id": 35
+    },
+    {
+      "name": "*T&K반포",
+      "address": "주흥9길8-13, 반포동716-5",
+      "district": "서초구",
+      "total_households": "12호",
+      "supply_households": "3호",
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 36
+    },
+    {
+      "name": "*와이하우스",
+      "address": "자동차시장3길93, 용답동238-5",
+      "district": "성동구",
+      "total_households": "349호",
+      "supply_households": "30호",
+      "type": "오피스텔",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식 (지하) 기계식 (지하)",
+      "id": 37
+    },
+    {
+      "name": "*정목빌",
+      "address": "장월로28길49, 장위동77-58외2필지",
+      "district": "성북구",
+      "total_households": "19호",
+      "supply_households": "1호",
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식 (지상)",
+      "id": 38
+    }
+  ],
+  "announcement_id": 7
+}

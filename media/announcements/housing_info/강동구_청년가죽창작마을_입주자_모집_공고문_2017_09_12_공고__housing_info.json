@@ -1,0 +1,17 @@
+{
+  "housing_info": [
+    {
+      "name": "상암로 27 길 28-7",
+      "address": "상암로 27 길 28-7",
+      "district": "강동구",
+      "total_households": "16호",
+      "supply_households": "16호",
+      "type": "공동체주택",
+      "house_type": "23~29㎡",
+      "elevator": null,
+      "parking": "8대",
+      "id": 212
+    }
+  ],
+  "announcement_id": 27
+}

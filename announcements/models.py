@@ -39,6 +39,7 @@ class HousingInfo(models.Model):
     announcement = models.ForeignKey(Announcement, related_name='housing_info_list', on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
+    district = models.CharField(max_length=100, null=True, blank=True)
     total_households = models.CharField(max_length=100, null=True, blank=True)
     supply_households = models.CharField(max_length=100, null=True, blank=True)
     type = models.CharField(max_length=100, null=True, blank=True)

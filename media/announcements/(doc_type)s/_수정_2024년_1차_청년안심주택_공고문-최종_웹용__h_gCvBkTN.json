@@ -1,0 +1,113 @@
+{
+  "housing_info": [
+    {
+      "name": "천호역효성해링턴타워",
+      "address": "강동구 성내동 609",
+      "district": "강동구",
+      "total_households": "33호",
+      "supply_households": "33호",
+      "type": null,
+      "house_type": "99.48㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 78
+    },
+    {
+      "name": "천호역한강리슈빌",
+      "address": "강동구 천호동 458-3",
+      "district": "강동구",
+      "total_households": "14호",
+      "supply_households": "14호",
+      "type": null,
+      "house_type": "26.25㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 79
+    },
+    {
+      "name": "청계로벤하임",
+      "address": "종로구 숭인동 240-1",
+      "district": "종로구",
+      "total_households": "35호",
+      "supply_households": "35호",
+      "type": null,
+      "house_type": "64.47㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 80
+    },
+    {
+      "name": "청계로벤하임",
+      "address": "종로구 숭인동 240-1",
+      "district": "종로구",
+      "total_households": "39호",
+      "supply_households": "39호",
+      "type": null,
+      "house_type": "72.29㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 81
+    },
+    {
+      "name": "최강타워",
+      "address": "관악구 신림동 1745",
+      "district": "관악구",
+      "total_households": "17호",
+      "supply_households": "17호",
+      "type": null,
+      "house_type": "41.87㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 82
+    },
+    {
+      "name": "칼튼테라스",
+      "address": "중랑구 묵동 176-39",
+      "district": "중랑구",
+      "total_households": "16호",
+      "supply_households": "16호",
+      "type": null,
+      "house_type": "46.29㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 83
+    },
+    {
+      "name": "코네스트",
+      "address": "서초구 서초동 1365-8",
+      "district": "서초구",
+      "total_households": "17호",
+      "supply_households": "17호",
+      "type": null,
+      "house_type": "42.60㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 84
+    },
+    {
+      "name": "호반베르디움스테이원",
+      "address": "은평구 대조동 241",
+      "district": "은평구",
+      "total_households": "24호",
+      "supply_households": "24호",
+      "type": null,
+      "house_type": "58.28㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 85
+    },
+    {
+      "name": "홍대크리원",
+      "address": "마포구 상수동 355-2",
+      "district": "마포구",
+      "total_households": "16호",
+      "supply_households": "1호",
+      "type": null,
+      "house_type": "27.55㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 86
+    }
+  ],
+  "announcement_id": 21
+}

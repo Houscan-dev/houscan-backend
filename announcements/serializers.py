@@ -13,6 +13,7 @@ class HousingInfoSerializer(serializers.ModelSerializer):
             'id',  # 공고 내 주택 ID
             'name',
             'address',
+            'district',
             'total_households',
             'supply_households',
             'type',

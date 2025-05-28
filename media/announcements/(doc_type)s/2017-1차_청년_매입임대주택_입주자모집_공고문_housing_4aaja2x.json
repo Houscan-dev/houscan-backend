@@ -1,0 +1,17 @@
+{
+  "housing_info": [
+    {
+      "name": "서울특별시 성북구 하월곡동 21-2",
+      "address": "서울특별시 성북구 하월곡동 21-2",
+      "district": "성북구",
+      "total_households": "74호",
+      "supply_households": "74호",
+      "type": "도시형 생활주택(단지형 다세대)",
+      "house_type": "29A, 29B",
+      "elevator": false,
+      "parking": null,
+      "id": 1
+    }
+  ],
+  "announcement_id": 8
+}

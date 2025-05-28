@@ -1,0 +1,17 @@
+{
+  "housing_info": [
+    {
+      "name": "서영스윗홈",
+      "address": "서울특별시 구로구 남부순환로105나길 24(가리봉동134-22)",
+      "district": "구로구",
+      "total_households": null,
+      "supply_households": "1호",
+      "type": "2룸",
+      "house_type": "48.89㎡",
+      "elevator": false,
+      "parking": "지상 1층",
+      "id": 1
+    }
+  ],
+  "announcement_id": 20
+}

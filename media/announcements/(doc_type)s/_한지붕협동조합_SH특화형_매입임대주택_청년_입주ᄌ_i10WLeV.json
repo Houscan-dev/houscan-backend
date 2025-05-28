@@ -1,0 +1,17 @@
+{
+  "housing_info": [
+    {
+      "name": "스마트웰",
+      "address": "서울특별시 금천구 독산로72길 64",
+      "district": "금천구",
+      "total_households": null,
+      "supply_households": "1호",
+      "type": "청년 1인 단독거주",
+      "house_type": "29.33㎡",
+      "elevator": false,
+      "parking": null,
+      "id": 1
+    }
+  ],
+  "announcement_id": 24
+}
