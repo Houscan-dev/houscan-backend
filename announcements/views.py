@@ -90,3 +90,13 @@ class AnnouncementPDFNameAPIView(APIView):
         announcement = get_object_or_404(Announcement, id=id)
         pdf_name = announcement.pdf_name
         return Response({"pdf_name": pdf_name}, status=status.HTTP_200_OK)
+    
+class AnnouncementHouseAPIView(APIView):
+    permission_classes=[AllowAny]
+    def get(self, request, house_id):
+        house = get_object_or_404(HousingInfo, id=house_id)
+        serializer = HousingInfoSerializer(house)
+        
+        return Response({
+            "housing_info": serializer.data,
+        }, status=status.HTTP_200_OK)

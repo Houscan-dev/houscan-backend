@@ -27,3 +27,9 @@ class AnnouncementDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
         fields = '__all__'
+
+class HousingInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HousingInfo
+        fields = '__all__'
+        
