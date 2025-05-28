@@ -52,7 +52,7 @@ class LoginSerializer(serializers.Serializer):
 class MySerializer(serializers.ModelSerializer): #정보확인
     class Meta:
         model = User
-        fields = ['nickname', 'email']
+        fields = ['id','nickname', 'email']
         read_only_fields = ['email'] #아이디변경불가
 
 class PwChangeSerializer(serializers.Serializer):
