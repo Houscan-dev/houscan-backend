@@ -1,0 +1,29 @@
+{
+  "housing_info": [
+    {
+      "name": "세대융합형 복합시설내 청년창업인 주택",
+      "address": null,
+      "district": null,
+      "total_households": null,
+      "supply_households": "10호",
+      "type": "임대주택",
+      "house_type": "15㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 302
+    },
+    {
+      "name": "세대융합형 복합시설내 청년음악인 주택",
+      "address": null,
+      "district": null,
+      "total_households": null,
+      "supply_households": "13호",
+      "type": "임대주택",
+      "house_type": "15㎡",
+      "elevator": null,
+      "parking": null,
+      "id": 303
+    }
+  ],
+  "announcement_id": 12
+}
