@@ -89,7 +89,10 @@ class AnnouncementPDFNameAPIView(APIView):
     def get(self, request, id):
         announcement = get_object_or_404(Announcement, id=id)
         pdf_name = announcement.pdf_name
-        return Response({"pdf_name": pdf_name}, status=status.HTTP_200_OK)
+        title = announcement.title
+        return Response({"pdf_name": pdf_name,
+                        "title":title}, 
+                        status=status.HTTP_200_OK)
     
 class AnnouncementHouseAPIView(APIView):
     permission_classes=[AllowAny]
