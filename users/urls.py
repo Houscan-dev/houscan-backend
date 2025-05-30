@@ -8,7 +8,6 @@ router = routers.DefaultRouter()
 router.register('list', UserViewSet) # 유저리스트 (테스트용)
 
 urlpatterns = [
-    path("token/refresh/", TokenRefreshView.as_view(), name='token_refresh'),
     # 토큰 재발급
     path("signup/",SignupAPIView.as_view()),
     path("auth/", AuthAPIView.as_view()),

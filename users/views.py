@@ -12,12 +12,13 @@ from .serializers import *
 from django.conf import settings
 SECRET_KEY = settings.SECRET_KEY
 
-# jwt 토근 인증 확인용 뷰셋
+
 # Header - Authorization : Bearer <발급받은토큰>
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = SignupSerializer
+
 
 class SignupAPIView(APIView):
     renderer_classes = [JSONRenderer]
