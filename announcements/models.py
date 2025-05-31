@@ -42,7 +42,7 @@ class HousingInfo(models.Model):
     district = models.CharField(max_length=100, null=True, blank=True)
     total_households = models.CharField(max_length=100, null=True, blank=True)
     supply_households = models.CharField(max_length=100, null=True, blank=True)
-    type = models.CharField(max_length=100, null=True, blank=True)
+    type = models.TextField(null=True, blank=True)
     house_type = models.CharField(max_length=100, null=True, blank=True)
     elevator = models.CharField(max_length=100, null=True, blank=True)
     parking = models.TextField(null=True, blank=True)

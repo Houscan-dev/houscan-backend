@@ -18,6 +18,8 @@ from announcements.models import Announcement, AnnouncementDocument
 
 def run():
     print("▶️ 시작: 모든 문서(media)로 복사 및 DB 등록")
+    print("✅ 타입들 확인:", [t for t, _ in AnnouncementDocument.ANNOUNCE_TYPES])
+
     data_root = os.path.join(settings.BASE_DIR, 'media', 'announcements')
     DOC_TYPES = [ t for t, _ in AnnouncementDocument.ANNOUNCE_TYPES ]
 

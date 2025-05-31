@@ -55,6 +55,7 @@ def load_housing_info_to_db():
             )
             count += 1
         print(f"✅ {fname} → {count}개 항목 삽입 완료")
+        print(type(h.get("type")), h.get("type"))
 
 if __name__ == "__main__":
     load_housing_info_to_db()
