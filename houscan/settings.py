@@ -211,3 +211,4 @@ MEDIA_ROOT = BASE_DIR / "media"
 ANNOUNCEMENTS_JSON_ROOT = MEDIA_ROOT / 'announcements'
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_BROKER_URL = 'redis://localhost:6379/0' 
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
