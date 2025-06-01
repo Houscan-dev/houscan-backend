@@ -1,4 +1,39 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.conf import settings
+import os
+import re
+from django.utils.text import slugify
+
+def get_upload_path(instance, filename):
+    """파일 업로드 경로를 생성하는 함수"""
+    # 파일 확장자 추출
+    ext = os.path.splitext(filename)[1]
+    
+    # 공고 제목에서 안전한 파일명 생성
+    # 1. 한글, 영문, 숫자만 남기고 제거
+    safe_title = re.sub(r'[^\w\s가-힣]', '', instance.announcement.title)
+    # 2. 공백을 언더스코어로 변경
+    safe_title = safe_title.replace(' ', '_')
+    # 3. 파일명 길이 제한 (100자)
+    safe_title = safe_title[:100]
+    
+    # 문서 타입을 영문으로 변환
+    doc_type_map = {
+        'schedule': 'schedule',
+        'criteria': 'criteria',
+        'housing_info': 'housing_info',
+        'precautions': 'precautions',
+        'priority_score': 'priority_score',
+        'residence_period': 'residence_period'
+    }
+    doc_type = doc_type_map.get(instance.doc_type, instance.doc_type)
+    
+    # 새 파일명 생성 (공고ID_안전한제목_문서타입.확장자)
+    new_filename = f"{instance.announcement.id}_{safe_title}_{doc_type}{ext}"
+    
+    # 경로 생성
+    return os.path.join('announcements', doc_type, new_filename)
 
 class Announcement(models.Model):
     title       = models.CharField(max_length=255)
@@ -25,7 +60,7 @@ class AnnouncementDocument(models.Model):
     ]
     announcement = models.ForeignKey(Announcement, related_name='documents', on_delete=models.CASCADE)
     doc_type     = models.CharField(max_length=20, choices=ANNOUNCE_TYPES)
-    data_file    = models.FileField(upload_to='announcements/%(doc_type)s/')
+    data_file    = models.FileField(upload_to=get_upload_path)
     uploaded_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -49,3 +84,21 @@ class HousingInfo(models.Model):
 
     def __str__(self):
         return f"{self.name} – {self.house_type}"
+
+class HousingEligibilityAnalysis(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='eligibility_analyses')
+    announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='eligibility_analyses')
+    is_eligible = models.BooleanField(default=False)
+    priority = models.CharField(max_length=50)
+    analyzed_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('user', 'announcement')
+        indexes = [
+            models.Index(fields=['user', 'announcement']),
+            models.Index(fields=['is_eligible']),
+            models.Index(fields=['priority']),
+        ]
+
+    def __str__(self):
+        return f"{self.user.email} - {self.announcement.title} ({self.priority})"

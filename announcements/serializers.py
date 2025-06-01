@@ -34,3 +34,8 @@ class HousingInfoSerializer(serializers.ModelSerializer):
         model = HousingInfo
         fields = '__all__'
         
+class HousingAnalysisResponseSerializer(serializers.Serializer):
+    success = serializers.BooleanField()
+    data = serializers.DictField()
+    total_analyzed = serializers.IntegerField()
+    criteria_file = serializers.CharField()

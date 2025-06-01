@@ -17,7 +17,8 @@ class Profile(models.Model):
     total_assets = models.BigIntegerField()
     car_value = models.BigIntegerField()
     income_range = models.CharField(max_length=20, choices=[('100% 이하', '100% 이하'),('50% 이하', '50% 이하')])
-
+    is_eligible = models.BooleanField(null=True, blank=True)
+    priority_info = models.JSONField(null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
     @property
