@@ -9,45 +9,10 @@ from django.core.cache import cache
 @receiver(post_save, sender=Profile)
 def analyze_eligibility(sender, instance, created, **kwargs):
     """
-    프로필이 생성되거나 수정될 때 모든 공고에 대해 자격 분석을 실행
+    프로필이 생성되거나 수정될 때 Celery 비동기 자격 분석을 실행
     """
-    # 모든 공고 가져오기
-    announcements = Announcement.objects.all()
-    
-    for announcement in announcements:
-        try:
-            # criteria 파일 가져오기
-            criteria_doc = announcement.documents.get(doc_type="criteria")
-            criteria_file = criteria_doc.data_file.path
-            
-            if os.path.exists(criteria_file):
-                # 자격 분석 실행
-                results = analyze_user_eligibility(criteria_file, user_ids=[str(instance.user.id)])
-                user_result = results.get(f'user_{instance.user.id}')
-                
-                if user_result:
-                    # 기존 분석 결과가 있으면 업데이트, 없으면 생성
-                    analysis = HousingEligibilityAnalysis.objects.update_or_create(
-                        user=instance.user,
-                        announcement=announcement,
-                        defaults={
-                            'is_eligible': user_result['is_eligible'],
-                            'priority': user_result['priority'],
-                            'reasons': user_result.get('reasons', [])
-                        }
-                    )[0]  # update_or_create는 (object, created) 튜플을 반환
-
-                    # 가장 최근 분석 결과로 프로필의 기본 자격 정보 업데이트
-                    if analysis.is_eligible:
-                        instance.is_eligible = True
-                        instance.priority_info = {
-                            'priority': analysis.priority,
-                            'reasons': analysis.reasons
-                        }
-                        instance.save(update_fields=['is_eligible', 'priority_info'])
-        except Exception as e:
-            print(f"자격 분석 중 오류 발생 (공고 ID: {announcement.id}): {str(e)}")
-            continue
+    from .tasks import analyze_user_eligibility_task
+    analyze_user_eligibility_task.delay(str(instance.user.id))
 
 @receiver(post_save, sender=Profile)
 def clear_eligibility_cache(sender, instance, created, **kwargs):

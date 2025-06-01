@@ -57,7 +57,7 @@ INSTALLED_APPS = [
 
     # 생성한 앱
     'users',
-    'profiles',
+    'profiles.apps.ProfilesConfig',
     'announcements',
 
     # 설치한 라이브러리
@@ -212,6 +212,11 @@ ANNOUNCEMENTS_JSON_ROOT = MEDIA_ROOT / 'announcements'
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_BROKER_URL = 'redis://localhost:6379/0' 
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_TRACK_STARTED = True  # (선택) task 시작/진행상태 추적
+CELERY_TASK_TIME_LIMIT = 600  
 
 # Cache settings
 CACHES = {

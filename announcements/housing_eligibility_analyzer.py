@@ -277,8 +277,17 @@ def analyze_user_eligibility(user_id: str) -> Dict[int, Dict[str, Any]]:
 
             # 자격 판단
             print(f"공고 ID {announcement.id}: 자격 판단 시작")
-            eligibility_result = check_eligibility_with_llm(user_case, criteria_data[announcement.id], {})
-            
+            try:
+                eligibility_result = check_eligibility_with_llm(user_case, criteria_data[announcement.id], {})
+            except Exception as e:
+                print(f"공고 ID {announcement.id}: check_eligibility_with_llm 호출 중 OpenAI API 에러: {str(e)}")
+                results[announcement.id] = {
+                    "is_eligible": False,
+                    "priority": "처리 오류",
+                    "reasons": [f"OpenAI API 호출 오류: {str(e)}"]
+                }
+                continue
+
             if not eligibility_result.get("is_eligible", False):
                 print(f"공고 ID {announcement.id}: 자격 미달")
                 results[announcement.id] = {
@@ -287,18 +296,27 @@ def analyze_user_eligibility(user_id: str) -> Dict[int, Dict[str, Any]]:
                     "reasons": eligibility_result.get("reasons", ["자격 요건을 충족하지 못함"])
                 }
                 continue
-            
+
             # 우선순위 판단
             print(f"공고 ID {announcement.id}: 우선순위 판단 시작")
-            priority_result = check_priority_with_llm(user_case, priority_data[announcement.id])
-            
+            try:
+                priority_result = check_priority_with_llm(user_case, priority_data[announcement.id])
+            except Exception as e:
+                print(f"공고 ID {announcement.id}: check_priority_with_llm 호출 중 OpenAI API 에러: {str(e)}")
+                results[announcement.id] = {
+                    "is_eligible": True,
+                    "priority": "처리 오류",
+                    "reasons": [f"OpenAI API 호출 오류: {str(e)}"]
+                }
+                continue
+
             results[announcement.id] = {
                 "is_eligible": True,
                 "priority": priority_result.get("priority", ""),
                 "reasons": ["자격 요건을 모두 충족함"]
             }
             print(f"공고 ID {announcement.id}: 분석 완료")
-            
+
         except Exception as e:
             print(f"공고 ID {announcement.id}: 분석 중 오류 발생: {str(e)}")
             results[announcement.id] = {
