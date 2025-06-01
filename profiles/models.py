@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from datetime import datetime, date
+from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -31,6 +32,6 @@ class Profile(models.Model):
             return None
 
     def __str__(self):
-        return f"{self.email}의 개인정보"
+        return f"{self.user.email}'s profile"
 
 

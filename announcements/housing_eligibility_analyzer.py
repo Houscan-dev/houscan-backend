@@ -6,9 +6,10 @@ import os
 from dotenv import load_dotenv
 from django.conf import settings
 from users.models import User
-from profiles.models import Profile
-from .models import AnnouncementDocument
+from .models import AnnouncementDocument, Announcement
 from django.db import models
+import time
+from openai import RateLimitError
 
 # .env 파일 로드 및 OpenAI 클라이언트 초기화
 load_dotenv()
@@ -20,6 +21,8 @@ def get_user_data_from_db(user_ids: Optional[List[str]] = None) -> Dict[str, Dic
     Django ORM을 사용하여 사용자 데이터를 조회하여 반환
     user_ids: 특정 사용자들만 조회하고 싶을 때 사용 (None이면 모든 사용자)
     """
+    from profiles.models import Profile  # 여기서 import
+    
     try:
         print(f"조회할 사용자 ID: {user_ids}")  # 디버깅 로그
         if user_ids:
@@ -69,19 +72,17 @@ def get_priority_score_path(criteria_file: str) -> str:
         
         # AnnouncementDocument에서 해당 공고의 priority_score 문서 찾기
         try:
-            # criteria 파일 이름에서 공고 ID 추출
-            # 예: 1__공고문_2023년_2차_청년_매입임대주택_입주자모집공고문_홈페이지_공개용_수정__criteria.json
-            # -> 1
-            announcement_id = int(base_name.split('__')[0])
+            # criteria 문서 찾기
+            criteria_doc = AnnouncementDocument.objects.get(data_file__endswith=base_name)
             
             # 해당 공고의 priority_score 문서 찾기
             priority_doc = AnnouncementDocument.objects.get(
-                announcement_id=announcement_id,
+                announcement_id=criteria_doc.announcement_id,
                 doc_type='priority_score'
             )
             return priority_doc.data_file.path
             
-        except (ValueError, AnnouncementDocument.DoesNotExist) as e:
+        except AnnouncementDocument.DoesNotExist as e:
             raise FileNotFoundError(f"우선순위 점수 파일을 찾을 수 없습니다: {str(e)}")
         
     except Exception as e:
@@ -136,19 +137,26 @@ def check_priority_with_llm(user_data: Dict[str, Any], priority_data: Dict) -> d
     "priority": "판단된 우선순위"
 }}
 """
-    priority_response = client.chat.completions.create(
-        model="gpt-4-turbo",
-        messages=[
-            {"role": "system", "content": "당신은 주택 신청 우선순위를 판단하는 전문가입니다. 주어진 우선순위 기준에 따라 정확하게 판단해주세요."},
-            {"role": "user", "content": priority_prompt}
-        ],
-        temperature=0
-    )
     try:
-        priority_result = json.loads(priority_response.choices[0].message.content)
-        return priority_result
-    except (json.JSONDecodeError, KeyError):
-        return {"priority": "우선순위 판단 오류"}
+        response = client.chat.completions.create(
+            model="gpt-4-turbo-preview",
+            messages=[
+                {"role": "system", "content": "당신은 주택 신청 우선순위를 판단하는 전문가입니다. 주어진 우선순위 기준에 따라 정확하게 판단해주세요."},
+                {"role": "user", "content": priority_prompt}
+            ],
+            response_format={"type": "json_object"}
+        )
+        return json.loads(response.choices[0].message.content)
+    except Exception as e:
+        if "insufficient_quota" in str(e):
+            return {
+                "priority": "처리 오류",
+                "reasons": ["OpenAI API 할당량이 초과되었습니다. 잠시 후 다시 시도해주세요."]
+            }
+        return {
+            "priority": "처리 오류",
+            "reasons": [f"처리 중 오류 발생: {str(e)}"]
+        }
 
 # 3. 신청자격 판단 (우선순위 결과를 참고정보로 활용)
 def check_eligibility_with_llm(user_data: Dict[str, Any], criteria_str: str, priority_result: dict) -> dict:
@@ -181,19 +189,98 @@ def check_eligibility_with_llm(user_data: Dict[str, Any], criteria_str: str, pri
     ]
 }}
 """
-    eligibility_response = client.chat.completions.create(
-        model="gpt-4-turbo",
-        messages=[
-            {"role": "system", "content": "당신은 주택 신청 자격을 판단하는 전문가입니다. 주어진 공고문의 기준에 따라 정확하게 판단해주세요."},
-            {"role": "user", "content": eligibility_prompt}
-        ],
-        temperature=0
-    )
     try:
-        eligibility_result = json.loads(eligibility_response.choices[0].message.content)
-        return eligibility_result
-    except (json.JSONDecodeError, KeyError):
-        return {"is_eligible": False, "reasons": ["자격 판단 중 오류가 발생했습니다."]}
+        response = client.chat.completions.create(
+            model="gpt-4-turbo-preview",
+            messages=[
+                {"role": "system", "content": "당신은 주택 신청 자격을 판단하는 전문가입니다. 주어진 공고문의 기준에 따라 정확하게 판단해주세요."},
+                {"role": "user", "content": eligibility_prompt}
+            ],
+            response_format={"type": "json_object"}
+        )
+        return json.loads(response.choices[0].message.content)
+    except Exception as e:
+        if "insufficient_quota" in str(e):
+            return {
+                "is_eligible": False,
+                "reasons": ["OpenAI API 할당량이 초과되었습니다. 잠시 후 다시 시도해주세요."]
+            }
+        return {
+            "is_eligible": False,
+            "reasons": [f"처리 중 오류 발생: {str(e)}"]
+        }
+
+def process_multiple_announcements(announcements: List[Announcement], user_id: str) -> Dict[int, Dict[str, Any]]:
+    """
+    여러 공고에 대해 한 번에 자격 분석을 수행
+    """
+    results = {}
+    
+    # 사용자 데이터를 한 번만 조회
+    user_data = get_user_data_from_db([user_id])
+    if not user_data:
+        return results
+
+    user_case = user_data.get(f'user_{user_id}')
+    if not user_case:
+        return results
+
+    # 모든 공고의 criteria와 priority_score를 한 번에 로드
+    criteria_data = {}
+    priority_data = {}
+    
+    for announcement in announcements:
+        try:
+            criteria_doc = announcement.documents.get(doc_type="criteria")
+            if not os.path.exists(criteria_doc.data_file.path):
+                continue
+                
+            with open(criteria_doc.data_file.path, 'r', encoding='utf-8') as f:
+                criteria_data[announcement.id] = json.load(f).get('content', '')
+            
+            priority_score_file = get_priority_score_path(criteria_doc.data_file.path)
+            with open(priority_score_file, 'r', encoding='utf-8') as f:
+                priority_data[announcement.id] = json.load(f)
+                
+        except Exception as e:
+            print(f"파일 로드 중 오류 발생 (공고 ID: {announcement.id}): {str(e)}")
+            continue
+
+    # 각 공고에 대해 분석 수행
+    for announcement in announcements:
+        try:
+            if announcement.id not in criteria_data or announcement.id not in priority_data:
+                continue
+
+            # 자격 판단
+            eligibility_result = check_eligibility_with_llm(user_case, criteria_data[announcement.id], {})
+            
+            if not eligibility_result.get("is_eligible", False):
+                results[announcement.id] = {
+                    "is_eligible": False,
+                    "priority": "해당없음",
+                    "reasons": eligibility_result.get("reasons", ["자격 요건을 충족하지 못함"])
+                }
+                continue
+            
+            # 우선순위 판단
+            priority_result = check_priority_with_llm(user_case, priority_data[announcement.id])
+            
+            results[announcement.id] = {
+                "is_eligible": True,
+                "priority": priority_result.get("priority", ""),
+                "reasons": ["자격 요건을 모두 충족함"]
+            }
+            
+        except Exception as e:
+            print(f"분석 중 오류 발생 (공고 ID: {announcement.id}): {str(e)}")
+            results[announcement.id] = {
+                "is_eligible": False,
+                "priority": "처리 오류",
+                "reasons": [f"처리 중 오류 발생: {str(e)}"]
+            }
+    
+    return results
 
 # 1~4. 전체 흐름을 담당하는 메인 함수 (MySQL 연동 버전)
 def process_users_eligibility(criteria_file: str, user_ids: Optional[List[str]] = None) -> Dict[str, Dict[str, Any]]:
@@ -204,10 +291,6 @@ def process_users_eligibility(criteria_file: str, user_ids: Optional[List[str]] 
     3. priority_criteria를 활용해서 우선순위 먼저 판단
     4. 3번 단계에서 얻은 우선순위 정보를 신청가능여부 판단 프롬프트에 다시 활용해서, 신청자격 해당됨/해당안됨 여부 판단
     5. 신청자격, 우선순위를 최종적으로 종합해서 json으로 출력
-
-    criteria_file: 신청자격 기준이 담긴 json 파일 경로를 입력하세요. 예시: 'media/announcements/criteria/공고명_criteria.json'
-    user_ids: 분석할 특정 사용자 ID 리스트 (None이면 모든 사용자 분석)
-    (priority_score 파일은 criteria_file 경로를 기반으로 자동으로 찾습니다: media/announcements/priority_score/공고명_priority_score.json)
     """
     # 1. criteria 및 priority 파일 로드
     with open(criteria_file, 'r', encoding='utf-8') as f:
@@ -258,48 +341,4 @@ def process_users_eligibility(criteria_file: str, user_ids: Optional[List[str]] 
                 "reasons": [f"처리 중 오류 발생: {str(e)}"]
             }
     
-    return results
-
-# 1~4. 전체 흐름을 담당하는 메인 함수
-def process_test_cases(test_cases_file: str, criteria_file: str) -> Dict[str, Dict[str, Any]]:
-    """
-    1. 각 공고문에 해당하는 criteria.json과 priority_score.json의 priority_criteria 항목을 가져옴
-    2. priority_criteria를 활용해서 우선순위 먼저 판단
-    3. 2번 단계에서 얻은 우선순위 정보를 신청가능여부 판단 프롬프트에 다시 활용해서, 신청자격 해당됨/해당안됨 여부 판단
-    4. 신청자격, 우선순위를 최종적으로 종합해서 json으로 출력
-
-    test_cases_file: 테스트할 사용자 정보가 담긴 json 파일 경로를 입력하세요. 예시: 'test_cases.json'
-    criteria_file: 신청자격 기준이 담긴 json 파일 경로를 입력하세요. 예시: '.../criteria/공고명_criteria.json'
-    (priority_score 파일은 criteria_file 경로를 기반으로 자동으로 찾습니다.)
-    """
-    # 파일 경로는 사용 환경에 맞게 직접 지정해서 사용하세요.
-    # 예시: test_cases_file = 'test_cases.json', criteria_file = '.../criteria/공고명_criteria.json'
-    # 아래 파일 로드 부분에 본인 환경에 맞는 경로를 입력하세요.
-    with open(test_cases_file, 'r', encoding='utf-8') as f:
-        test_cases = json.load(f)
-    with open(criteria_file, 'r', encoding='utf-8') as f:
-        criteria_data = json.load(f)
-        criteria_str = criteria_data.get('content', '')
-    priority_score_file = get_priority_score_path(criteria_file)
-    with open(priority_score_file, 'r', encoding='utf-8') as f:
-        priority_data = json.load(f)
-
-    results = {}
-    # 각 테스트 케이스에 대해 2→3번 순서로 판단, 결과를 합쳐서 저장
-    for case_id, case_data in test_cases.items():
-        # 2. 우선순위 먼저 판단
-        priority_result = check_priority_with_llm(case_data, priority_data)
-        # 3. 우선순위 결과를 참고하여 자격 판단
-        eligibility_result = check_eligibility_with_llm(case_data, criteria_str, priority_result)
-        # 4. 결과 종합 (판단 이유는 제외)
-        results[case_id] = {
-            "is_eligible": bool(eligibility_result.get("is_eligible", False)),
-            "priority": priority_result.get("priority", ""),
-            "reasons": eligibility_result.get("reasons", [])
-        }
-    return results
-
-# 아래는 테스트용 코드입니다. 실제 사용 시에는 파일 경로를 직접 지정해서 process_test_cases 함수를 호출하세요.
-# 예시:
-# results = process_test_cases('test_cases.json', 'data/extracted/criteria/공고명_criteria.json')
-# print(json.dumps(results, ensure_ascii=False, indent=2)) 
+    return results 

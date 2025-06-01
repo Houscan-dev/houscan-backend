@@ -89,7 +89,8 @@ class HousingEligibilityAnalysis(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='eligibility_analyses')
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='eligibility_analyses')
     is_eligible = models.BooleanField(default=False)
-    priority = models.CharField(max_length=50)
+    priority = models.CharField(max_length=100, default="")
+    reasons = models.JSONField(default=list)  # 자격 판단 사유 리스트를 저장
     analyzed_at = models.DateTimeField(auto_now=True)
 
     class Meta:

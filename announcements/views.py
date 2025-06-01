@@ -1,6 +1,6 @@
 from rest_framework import generics
 from django.shortcuts import get_object_or_404
-import json, os, glob
+import json, os
 from rest_framework.response import Response
 from rest_framework import status
 from pathlib import Path
@@ -9,11 +9,8 @@ from .models import Announcement
 from rest_framework.views import APIView
 from .models import Announcement, AnnouncementDocument, HousingEligibilityAnalysis
 from .models import HousingInfo
-from .serializers import HousingInfoSerializer, HousingAnalysisResponseSerializer
-from rest_framework.decorators import api_view
-from django.http import JsonResponse
+from .serializers import HousingInfoSerializer
 from .housing_eligibility_analyzer import process_users_eligibility
-from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 class AnnouncementListAPIView(generics.ListAPIView):
@@ -29,20 +26,32 @@ class AnnouncementListAPIView(generics.ListAPIView):
     def get(self, request):
         qs = Announcement.objects.order_by('-posted_date')
         result = []
+        
         for ann in qs:
             schedule_json = self.load_schedule(ann)
-            # JSON에서 announcement_date를 꺼내되, 없으면 모델의 posted_date로 대체
-            posted = schedule_json.get("announcement_date")
-            if not posted:
-                # DateField를 문자열로 바꿔 줄 때는 isoformat() 권장
-                posted = ann.posted_date.isoformat()
-            result.append({
-                "id":          ann.id,
-                "title":       ann.title,
-                "posted_date": posted,
-                "status":      ann.status,
-            })
+            posted = schedule_json.get("announcement_date") or ann.posted_date.isoformat()
+            
+            # 현재 로그인한 사용자의 자격 분석 정보 가져오기
+            analysis_info = None
+            if request.user.is_authenticated:
+                try:
+                    analysis = HousingEligibilityAnalysis.objects.get(
+                        user=request.user,
+                        announcement=ann
+                    )
+                    analysis_info = {
+                        'priority': analysis.priority
+                    }
+                except HousingEligibilityAnalysis.DoesNotExist:
+                    pass
 
+            result.append({
+                "id": ann.id,
+                "title": ann.title,
+                "posted_date": posted,
+                "status": ann.status,
+                "analysis": analysis_info
+            })
         return Response(result)
     
 class AnnouncementDetailAPIView(APIView):
@@ -68,6 +77,24 @@ class AnnouncementDetailAPIView(APIView):
         posted = schedule_json.get("announcement_date")
         if not posted:
             posted = ann.posted_date.isoformat()
+
+        # 현재 로그인한 사용자의 자격 분석 정보 가져오기
+        analysis_info = None
+        if request.user.is_authenticated:
+            try:
+                analysis = HousingEligibilityAnalysis.objects.get(
+                    user=request.user,
+                    announcement=ann
+                )
+                analysis_info = {
+                    'is_eligible': analysis.is_eligible,
+                    'priority': analysis.priority,
+                    'reasons': analysis.reasons if hasattr(analysis, 'reasons') else [],
+                    'analyzed_at': analysis.analyzed_at.isoformat() if analysis.analyzed_at else None
+                }
+            except HousingEligibilityAnalysis.DoesNotExist:
+                pass
+
         return Response({
             "id":               ann.id,
             "title":            ann.title,
@@ -77,12 +104,13 @@ class AnnouncementDetailAPIView(APIView):
             "schedule":         self.load_for(ann, "schedule"),
             "criteria":         self.load_for(ann, "criteria"),
             "housing_info": HousingInfoSerializer(
-            HousingInfo.objects.filter(announcement=ann),
-            many=True
+                HousingInfo.objects.filter(announcement=ann),
+                many=True
             ).data,
             "precautions":      self.load_for(ann, "precautions"),
             "priority_score":   self.load_for(ann, "priority_score"),
             "residence_period": self.load_for(ann, "residence_period"),
+            "analysis":         analysis_info,  # 자격 분석 정보 추가
             "ai_precaution": (
                 "본 정보는 AI를 활용하여 요약되었으며, 정확성이 보장되지 않을 수 있으므로 "
                 "참고용으로만 사용하시기 바랍니다. 더 자세한 정보는 아래의 첨부파일을 참고하세요."
