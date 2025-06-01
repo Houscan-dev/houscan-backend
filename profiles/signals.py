@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from announcements.housing_eligibility_analyzer import process_users_eligibility
+from announcements.housing_eligibility_analyzer import analyze_user_eligibility
 from announcements.models import Announcement, HousingEligibilityAnalysis
 from .models import Profile
 import os
@@ -22,7 +22,7 @@ def analyze_eligibility(sender, instance, created, **kwargs):
             
             if os.path.exists(criteria_file):
                 # 자격 분석 실행
-                results = process_users_eligibility(criteria_file, user_ids=[str(instance.user.id)])
+                results = analyze_user_eligibility(criteria_file, user_ids=[str(instance.user.id)])
                 user_result = results.get(f'user_{instance.user.id}')
                 
                 if user_result:

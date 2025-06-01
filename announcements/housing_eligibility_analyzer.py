@@ -24,18 +24,18 @@ def get_user_data_from_db(user_ids: Optional[List[str]] = None) -> Dict[str, Dic
     from profiles.models import Profile  # 여기서 import
     
     try:
-        print(f"조회할 사용자 ID: {user_ids}")  # 디버깅 로그
+        print(f"\n=== get_user_data_from_db 호출 (user_ids: {user_ids}) ===")
         if user_ids:
             profiles = Profile.objects.filter(user_id__in=user_ids)
         else:
             profiles = Profile.objects.all()
         
-        print(f"조회된 프로필 수: {profiles.count()}")  # 디버깅 로그
+        print(f"조회된 프로필 수: {profiles.count()}")
         
         # 데이터 형식을 기존 test_cases 형태로 변환
         user_data = {}
         for profile in profiles:
-            print(f"프로필 데이터 처리 중: user_{profile.user.id}")  # 디버깅 로그
+            print(f"프로필 데이터 처리 중: user_{profile.user.id}")
             user_data[f"user_{profile.user.id}"] = {
                 "id": profile.user.id,
                 "age": profile.age,
@@ -56,7 +56,8 @@ def get_user_data_from_db(user_ids: Optional[List[str]] = None) -> Dict[str, Dic
                 "user": profile.user.id
             }
         
-        print(f"반환할 사용자 데이터: {list(user_data.keys())}")  # 디버깅 로그
+        print(f"반환할 사용자 데이터: {list(user_data.keys())}")
+        print("=== get_user_data_from_db 완료 ===\n")
         return user_data
         
     except Exception as e:
@@ -139,7 +140,7 @@ def check_priority_with_llm(user_data: Dict[str, Any], priority_data: Dict) -> d
 """
     try:
         response = client.chat.completions.create(
-            model="gpt-4-turbo-preview",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "당신은 주택 신청 우선순위를 판단하는 전문가입니다. 주어진 우선순위 기준에 따라 정확하게 판단해주세요."},
                 {"role": "user", "content": priority_prompt}
@@ -210,29 +211,45 @@ def check_eligibility_with_llm(user_data: Dict[str, Any], criteria_str: str, pri
             "reasons": [f"처리 중 오류 발생: {str(e)}"]
         }
 
-def process_multiple_announcements(announcements: List[Announcement], user_id: str) -> Dict[int, Dict[str, Any]]:
+def analyze_user_eligibility(user_id: str) -> Dict[int, Dict[str, Any]]:
     """
-    여러 공고에 대해 한 번에 자격 분석을 수행
+    로그인한 사용자에 대해 모든 공고의 자격을 분석
+    Args:
+        user_id: 분석할 사용자 ID
+    Returns:
+        Dict[int, Dict[str, Any]]: 공고 ID를 키로 하는 분석 결과
     """
-    results = {}
+    print(f"\n=== analyze_user_eligibility 시작 (사용자 ID: {user_id}) ===")
     
-    # 사용자 데이터를 한 번만 조회
+    # 1. 사용자 데이터 조회 (한 번만)
+    print("\n[1] 사용자 데이터 조회")
     user_data = get_user_data_from_db([user_id])
     if not user_data:
-        return results
-
+        print("사용자 데이터가 없습니다.")
+        return {}
+        
     user_case = user_data.get(f'user_{user_id}')
     if not user_case:
-        return results
-
-    # 모든 공고의 criteria와 priority_score를 한 번에 로드
+        print("사용자 케이스가 없습니다.")
+        return {}
+    print("[1] 사용자 데이터 조회 완료")
+    
+    # 2. 모든 공고 조회
+    print("\n[2] 공고 목록 조회")
+    announcements = Announcement.objects.all()
+    print(f"조회된 공고 수: {announcements.count()}")
+    
+    # 3. 모든 공고의 criteria와 priority_score를 한 번에 로드
+    print("\n[3] 공고 파일 로드 시작")
     criteria_data = {}
     priority_data = {}
     
     for announcement in announcements:
         try:
+            print(f"\n공고 ID {announcement.id} 파일 로드 중...")
             criteria_doc = announcement.documents.get(doc_type="criteria")
             if not os.path.exists(criteria_doc.data_file.path):
+                print(f"공고 ID {announcement.id}: criteria 파일이 존재하지 않습니다.")
                 continue
                 
             with open(criteria_doc.data_file.path, 'r', encoding='utf-8') as f:
@@ -241,21 +258,29 @@ def process_multiple_announcements(announcements: List[Announcement], user_id: s
             priority_score_file = get_priority_score_path(criteria_doc.data_file.path)
             with open(priority_score_file, 'r', encoding='utf-8') as f:
                 priority_data[announcement.id] = json.load(f)
+            print(f"공고 ID {announcement.id}: 파일 로드 완료")
                 
         except Exception as e:
-            print(f"파일 로드 중 오류 발생 (공고 ID: {announcement.id}): {str(e)}")
+            print(f"공고 ID {announcement.id}: 파일 로드 중 오류 발생: {str(e)}")
             continue
+    print("[3] 공고 파일 로드 완료")
 
-    # 각 공고에 대해 분석 수행
+    # 4. 각 공고에 대해 분석 수행
+    print("\n[4] 공고별 분석 시작")
+    results = {}
     for announcement in announcements:
         try:
+            print(f"\n공고 ID {announcement.id} 분석 중...")
             if announcement.id not in criteria_data or announcement.id not in priority_data:
+                print(f"공고 ID {announcement.id}: 필요한 파일이 없어 분석을 건너뜁니다.")
                 continue
 
             # 자격 판단
+            print(f"공고 ID {announcement.id}: 자격 판단 시작")
             eligibility_result = check_eligibility_with_llm(user_case, criteria_data[announcement.id], {})
             
             if not eligibility_result.get("is_eligible", False):
+                print(f"공고 ID {announcement.id}: 자격 미달")
                 results[announcement.id] = {
                     "is_eligible": False,
                     "priority": "해당없음",
@@ -264,6 +289,7 @@ def process_multiple_announcements(announcements: List[Announcement], user_id: s
                 continue
             
             # 우선순위 판단
+            print(f"공고 ID {announcement.id}: 우선순위 판단 시작")
             priority_result = check_priority_with_llm(user_case, priority_data[announcement.id])
             
             results[announcement.id] = {
@@ -271,74 +297,15 @@ def process_multiple_announcements(announcements: List[Announcement], user_id: s
                 "priority": priority_result.get("priority", ""),
                 "reasons": ["자격 요건을 모두 충족함"]
             }
+            print(f"공고 ID {announcement.id}: 분석 완료")
             
         except Exception as e:
-            print(f"분석 중 오류 발생 (공고 ID: {announcement.id}): {str(e)}")
+            print(f"공고 ID {announcement.id}: 분석 중 오류 발생: {str(e)}")
             results[announcement.id] = {
                 "is_eligible": False,
                 "priority": "처리 오류",
                 "reasons": [f"처리 중 오류 발생: {str(e)}"]
             }
     
-    return results
-
-# 1~4. 전체 흐름을 담당하는 메인 함수 (MySQL 연동 버전)
-def process_users_eligibility(criteria_file: str, user_ids: Optional[List[str]] = None) -> Dict[str, Dict[str, Any]]:
-    """
-    MySQL 데이터베이스 연동 버전
-    1. 각 공고문에 해당하는 criteria.json과 priority_score.json의 priority_criteria 항목을 가져옴
-    2. MySQL에서 사용자 데이터를 조회
-    3. priority_criteria를 활용해서 우선순위 먼저 판단
-    4. 3번 단계에서 얻은 우선순위 정보를 신청가능여부 판단 프롬프트에 다시 활용해서, 신청자격 해당됨/해당안됨 여부 판단
-    5. 신청자격, 우선순위를 최종적으로 종합해서 json으로 출력
-    """
-    # 1. criteria 및 priority 파일 로드
-    with open(criteria_file, 'r', encoding='utf-8') as f:
-        criteria_data = json.load(f)
-        criteria_str = criteria_data.get('content', '')
-    
-    priority_score_file = get_priority_score_path(criteria_file)
-    with open(priority_score_file, 'r', encoding='utf-8') as f:
-        priority_data = json.load(f)
-
-    # 2. MySQL에서 사용자 데이터 조회
-    user_cases = get_user_data_from_db(user_ids)
-    
-    if not user_cases:
-        print("조회된 사용자 데이터가 없습니다.")
-        return {}
-
-    results = {}
-    # 각 사용자에 대해 3→4번 순서로 판단, 결과를 합쳐서 저장
-    for case_id, case_data in user_cases.items():
-        try:
-            # 4. 자격 판단 먼저 수행
-            eligibility_result = check_eligibility_with_llm(case_data, criteria_str, {})
-            
-            # 자격이 없는 경우 우선순위 판단 생략
-            if not eligibility_result.get("is_eligible", False):
-                results[case_id] = {
-                    "is_eligible": False,
-                    "priority": "해당없음",
-                    "reasons": eligibility_result.get("reasons", ["자격 요건을 충족하지 못함"])
-                }
-                continue
-                
-            # 3. 자격이 있는 경우에만 우선순위 판단
-            priority_result = check_priority_with_llm(case_data, priority_data)
-            
-            # 5. 결과 종합
-            results[case_id] = {
-                "is_eligible": True,
-                "priority": priority_result.get("priority", ""),
-                "reasons": ["자격 요건을 모두 충족함"]
-            }
-        except Exception as e:
-            print(f"{case_id} 처리 중 오류 발생: {e}")
-            results[case_id] = {
-                "is_eligible": False,
-                "priority": "처리 오류",
-                "reasons": [f"처리 중 오류 발생: {str(e)}"]
-            }
-    
+    print("\n=== analyze_user_eligibility 완료 ===")
     return results 

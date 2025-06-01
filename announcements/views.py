@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from .models import Announcement, AnnouncementDocument, HousingEligibilityAnalysis
 from .models import HousingInfo
 from .serializers import HousingInfoSerializer
-from .housing_eligibility_analyzer import process_users_eligibility
+from .housing_eligibility_analyzer import analyze_user_eligibility
 from django.utils import timezone
 
 class AnnouncementListAPIView(generics.ListAPIView):
@@ -147,104 +147,55 @@ class HousingEligibilityAnalyzeView(APIView):
             # 공고 정보 가져오기
             announcement = get_object_or_404(Announcement, id=announcement_id)
             
-            # criteria 파일 경로 가져오기
-            try:
-                criteria_doc = announcement.documents.get(doc_type="criteria")
-                criteria_file = criteria_doc.data_file.path
-                if not os.path.exists(criteria_file):
-                    return Response({
-                        'success': False,
-                        'error': f'자격 기준 파일을 찾을 수 없습니다: {criteria_file}'
-                    }, status=status.HTTP_404_NOT_FOUND)
-            except AnnouncementDocument.DoesNotExist:
-                return Response({
-                    'success': False,
-                    'error': '해당 공고의 자격 기준 파일이 등록되지 않았습니다.'
-                }, status=status.HTTP_404_NOT_FOUND)
-            
             # 현재 로그인된 사용자의 자격만 분석
             user_id = str(request.user.id)
             print(f"분석할 사용자 ID: {user_id}")  # 디버깅 로그
+            
             try:
-                results = process_users_eligibility(criteria_file, user_ids=[user_id])
+                # 자격 분석 실행
+                results = analyze_user_eligibility(user_id)
                 print(f"분석 결과: {results}")  # 디버깅 로그
+                
+                # 해당 공고의 결과만 추출
+                announcement_result = results.get(announcement_id)
+                if not announcement_result:
+                    return Response({
+                        'success': False,
+                        'error': f'공고 ID {announcement_id}에 대한 분석 결과가 없습니다.'
+                    }, status=status.HTTP_404_NOT_FOUND)
+                
+                # 분석 결과를 데이터베이스에 저장
+                HousingEligibilityAnalysis.objects.update_or_create(
+                    user=request.user,
+                    announcement=announcement,
+                    defaults={
+                        'is_eligible': announcement_result['is_eligible'],
+                        'priority': announcement_result['priority'],
+                        'reasons': announcement_result.get('reasons', []),
+                        'analyzed_at': timezone.now()
+                    }
+                )
+                
+                return Response({
+                    'success': True,
+                    'data': {
+                        'is_eligible': announcement_result['is_eligible'],
+                        'priority': announcement_result['priority'],
+                        'reasons': announcement_result.get('reasons', []),
+                        'user_id': user_id,
+                        'announcement_id': announcement_id
+                    },
+                    'message': '자격 분석이 완료되었습니다.'
+                }, status=status.HTTP_200_OK)
+                
             except Exception as e:
                 return Response({
                     'success': False,
                     'error': f'자격 분석 중 오류가 발생했습니다: {str(e)}'
                 }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
-            # 분석 결과를 데이터베이스에 저장
-            try:
-                user_result = results.get(f'user_{user_id}')
-                print(f"저장할 사용자 결과: {user_result}")  # 디버깅 로그
-                if not user_result:
-                    raise ValueError(f"사용자 {user_id}의 분석 결과를 찾을 수 없습니다.")
-                
-                HousingEligibilityAnalysis.objects.update_or_create(
-                    user=request.user,
-                    announcement=announcement,
-                    defaults={
-                        'is_eligible': user_result['is_eligible'],
-                        'priority': user_result['priority'],
-                        'analyzed_at': timezone.now()
-                    }
-                )
-            except Exception as e:
-                return Response({
-                    'success': False,
-                    'error': f'분석 결과 저장 중 오류가 발생했습니다: {str(e)}'
-                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
-            return Response({
-                'success': True,
-                'data': {
-                    'is_eligible': user_result['is_eligible'],
-                    'priority': user_result['priority'],
-                    'reasons': user_result.get('reasons', []),
-                    'user_id': user_id,
-                    'announcement_id': announcement_id
-                },
-                'message': '자격 분석이 완료되었습니다.'
-            }, status=status.HTTP_200_OK)
-            
         except Exception as e:
             return Response({
                 'success': False,
                 'error': f'처리 중 오류가 발생했습니다: {str(e)}'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-    def post(self, request, announcement_id):
-        """특정 사용자들의 자격을 분석"""
-        try:
-            # 공고 정보 가져오기
-            announcement = get_object_or_404(Announcement, id=announcement_id)
-            
-            # criteria 파일 경로 가져오기
-            criteria_doc = announcement.documents.get(doc_type="criteria")
-            criteria_file = criteria_doc.data_file.path
-            
-            # 요청에서 사용자 ID 목록 가져오기
-            user_ids = request.data.get('user_ids', None)
-            
-            # 자격 분석 실행
-            results = process_users_eligibility(criteria_file, user_ids)
-            
-            return Response({
-                'success': True,
-                'data': results,
-                'total_analyzed': len(results),
-                'announcement_id': announcement_id
-            }, status=status.HTTP_200_OK)
-            
-        except AnnouncementDocument.DoesNotExist:
-            return Response({
-                'success': False,
-                'error': '해당 공고의 자격 기준 파일을 찾을 수 없습니다.'
-            }, status=status.HTTP_404_NOT_FOUND)
-            
-        except Exception as e:
-            return Response({
-                'success': False,
-                'error': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
