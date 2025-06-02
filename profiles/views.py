@@ -13,6 +13,8 @@ from profiles.tasks import analyze_user_eligibility_task
 from django.utils import timezone
 
 class ProfileCreateView(generics.CreateAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
     def perform_create(self, serializer):
         if Profile.objects.filter(user=self.request.user).exists():
             raise ValidationError("이미 개인정보가 등록되어 있습니다.")
