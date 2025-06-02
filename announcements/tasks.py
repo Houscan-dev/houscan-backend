@@ -12,7 +12,7 @@ def parse_ymd(s: str) -> date:
     """
     return datetime.strptime(s.replace('-', '.'), '%Y.%m.%d').date()
 
-@shared_task
+@shared_task(queue='status')
 def update_announcements_status_from_json():
     from announcements.models import Announcement, AnnouncementDocument
     logger.info("▶▶▶ Task START: update_announcements_status_from_json")
