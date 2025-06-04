@@ -6,8 +6,6 @@ from rest_framework.exceptions import ValidationError
 from rest_framework import status
 from rest_framework.response import Response
 from django.core.cache import cache
-import threading
-from announcements.housing_eligibility_analyzer import analyze_user_eligibility
 from announcements.models import Announcement, HousingEligibilityAnalysis
 from profiles.tasks import analyze_user_eligibility_task
 from django.utils import timezone
