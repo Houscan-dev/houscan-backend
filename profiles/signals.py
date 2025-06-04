@@ -5,6 +5,7 @@ from django.core.cache import cache
 
 @receiver(post_save, sender=Profile)
 def analyze_eligibility(sender, instance, created, **kwargs):
+    print("[SIGNAL] analyze_eligibility fired!") 
     # 프로필이 생성되거나 수정될 때 Celery 비동기 자격 분석을 실행
     from .tasks import analyze_user_eligibility_task
     analyze_user_eligibility_task.delay(str(instance.user.id))
