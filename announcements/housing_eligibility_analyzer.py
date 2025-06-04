@@ -140,7 +140,7 @@ def check_priority_with_llm(user_data: Dict[str, Any], priority_data: Dict) -> d
 """
     try:
         response = client.chat.completions.create(
-            model="gpt-4-turbo-preview",
+            model="gpt-4-turbo",
             messages=[
                 {"role": "system", "content": "당신은 주택 신청 우선순위를 판단하는 전문가입니다. 주어진 우선순위 기준에 따라 정확하게 판단해주세요."},
                 {"role": "user", "content": priority_prompt}
@@ -192,7 +192,7 @@ def check_eligibility_with_llm(user_data: Dict[str, Any], criteria_str: str, pri
 """
     try:
         response = client.chat.completions.create(
-            model="gpt-4-turbo-preview",
+            model="gpt-4-turbo",
             messages=[
                 {"role": "system", "content": "당신은 주택 신청 자격을 판단하는 전문가입니다. 주어진 공고문의 기준에 따라 정확하게 판단해주세요."},
                 {"role": "user", "content": eligibility_prompt}
