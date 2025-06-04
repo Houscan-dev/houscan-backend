@@ -10,6 +10,6 @@ class AnnouncementAdmin(admin.ModelAdmin):
 admin.site.register(AnnouncementDocument)
 @admin.register(HousingInfo)
 class HousingInfoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'house_type', 'announcement')  # ✅ id 칼럼 표시
+    list_display = ('id', 'name', 'house_type', 'announcement')
     list_filter = ('announcement',)
     search_fields = ('name',)

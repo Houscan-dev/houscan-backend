@@ -78,7 +78,6 @@ class AnnouncementDetailAPIView(APIView):
         if not posted:
             posted = ann.posted_date.isoformat()
 
-        # 현재 로그인한 사용자의 자격 분석 정보 가져오기
         analysis_info = None
         if request.user.is_authenticated:
             try:
@@ -110,7 +109,7 @@ class AnnouncementDetailAPIView(APIView):
             "precautions":      self.load_for(ann, "precautions"),
             "priority_score":   self.load_for(ann, "priority_score"),
             "residence_period": self.load_for(ann, "residence_period"),
-            "analysis":         analysis_info,  # 자격 분석 정보 추가
+            "analysis":         analysis_info, 
             "ai_precaution": (
                 "본 정보는 AI를 활용하여 요약되었으며, 정확성이 보장되지 않을 수 있으므로 "
                 "참고용으로만 사용하시기 바랍니다. 더 자세한 정보는 아래의 첨부파일을 참고하세요."
@@ -142,19 +141,18 @@ class HousingEligibilityAnalyzeView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request, announcement_id):
-        """현재 로그인된 사용자의 자격을 분석"""
         try:
             # 공고 정보 가져오기
             announcement = get_object_or_404(Announcement, id=announcement_id)
             
             # 현재 로그인된 사용자의 자격만 분석
             user_id = str(request.user.id)
-            print(f"분석할 사용자 ID: {user_id}")  # 디버깅 로그
+            print(f"분석할 사용자 ID: {user_id}")
             
             try:
                 # 자격 분석 실행
                 results = analyze_user_eligibility(user_id)
-                print(f"분석 결과: {results}")  # 디버깅 로그
+                print(f"분석 결과: {results}") 
                 
                 # 해당 공고의 결과만 추출
                 announcement_result = results.get(announcement_id)

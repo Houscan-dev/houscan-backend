@@ -7,9 +7,7 @@ from django.utils import timezone
 logger = logging.getLogger(__name__)
 
 def parse_ymd(s: str) -> date:
-    """
-    "YYYY.MM.DD" or "YYYY-MM-DD" 형식 문자열을 date 객체로 변환
-    """
+    # YYYY.MM.DD or YYYY-MM-DD 형식 문자열을 date 객체로 변환
     return datetime.strptime(s.replace('-', '.'), '%Y.%m.%d').date()
 
 @shared_task(queue='status')

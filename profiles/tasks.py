@@ -6,7 +6,7 @@ import logging
 User = get_user_model()
 logger = logging.getLogger('celery.tasks')
 
-@shared_task
+@shared_task(queue='profile')
 def analyze_user_eligibility_task(user_id):
     """
     사용자 자격 분석 후 DB에 저장하는 Celery 작업

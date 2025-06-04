@@ -6,19 +6,12 @@ import re
 from django.utils.text import slugify
 
 def get_upload_path(instance, filename):
-    """파일 업로드 경로를 생성하는 함수"""
-    # 파일 확장자 추출
     ext = os.path.splitext(filename)[1]
-    
-    # 공고 제목에서 안전한 파일명 생성
-    # 1. 한글, 영문, 숫자만 남기고 제거
     safe_title = re.sub(r'[^\w\s가-힣]', '', instance.announcement.title)
-    # 2. 공백을 언더스코어로 변경
+    # 공백 언더스코어로 변경
     safe_title = safe_title.replace(' ', '_')
-    # 3. 파일명 길이 제한 (100자)
     safe_title = safe_title[:100]
-    
-    # 문서 타입을 영문으로 변환
+    # 문서 타입 영문변환
     doc_type_map = {
         'schedule': 'schedule',
         'criteria': 'criteria',
