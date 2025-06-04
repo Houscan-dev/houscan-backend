@@ -9,3 +9,22 @@ __pycache__/
 **/migrations/__pycache__/
 .venv/
 venv/
+
+# macOS
+.DS_Store
+
+# VSCode 설정
+.vscode/
+
+# DB나 캐시 관련
+celerybeat-schedule.db
+dump.rdb
+*.sqlite3
+*.sqlmysqldump
+
+# 백업 파일
+*.bak
+*.backup
+
+# 환경설정 파일
+*.config
