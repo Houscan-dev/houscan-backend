@@ -1,9 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from announcements.housing_eligibility_analyzer import analyze_user_eligibility
-from announcements.models import Announcement, HousingEligibilityAnalysis
 from .models import Profile
-import os
 from django.core.cache import cache
 
 @receiver(post_save, sender=Profile)
