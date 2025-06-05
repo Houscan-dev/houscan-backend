@@ -18,7 +18,7 @@ class ProfileCreateView(generics.CreateAPIView):
             raise ValidationError("이미 개인정보가 등록되어 있습니다.")
         profile = serializer.save(user=self.request.user)
         # 비동기 분석만 트리거
-        analyze_user_eligibility_task.apply_async(args=[str(isinstance.user.id)], queue='profile')
+        analyze_user_eligibility_task.apply_async(args=[str(profile.user.id)], queue='profile')
         return profile
 
 
