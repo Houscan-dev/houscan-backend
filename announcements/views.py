@@ -12,7 +12,7 @@ from .models import HousingInfo
 from .serializers import HousingInfoSerializer
 from .housing_eligibility_analyzer import analyze_user_eligibility
 from django.utils import timezone
-
+from profiles.tasks import analyze_user_eligibility_task
 class AnnouncementListAPIView(generics.ListAPIView):
     permission_classes=[AllowAny]
     def load_schedule(self, announcement):
@@ -78,6 +78,7 @@ class AnnouncementDetailAPIView(APIView):
         if not posted:
             posted = ann.posted_date.isoformat()
 
+        # 현재 로그인한 사용자의 자격 분석 정보 가져오기
         analysis_info = None
         if request.user.is_authenticated:
             try:
@@ -109,7 +110,7 @@ class AnnouncementDetailAPIView(APIView):
             "precautions":      self.load_for(ann, "precautions"),
             "priority_score":   self.load_for(ann, "priority_score"),
             "residence_period": self.load_for(ann, "residence_period"),
-            "analysis":         analysis_info, 
+            "analysis":         analysis_info,  # 자격 분석 정보 추가
             "ai_precaution": (
                 "본 정보는 AI를 활용하여 요약되었으며, 정확성이 보장되지 않을 수 있으므로 "
                 "참고용으로만 사용하시기 바랍니다. 더 자세한 정보는 아래의 첨부파일을 참고하세요."
@@ -136,64 +137,15 @@ class AnnouncementHouseAPIView(APIView):
             "housing_info": serializer.data,
         }, status=status.HTTP_200_OK)
  
-
 class HousingEligibilityAnalyzeView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request, announcement_id):
-        try:
-            # 공고 정보 가져오기
-            announcement = get_object_or_404(Announcement, id=announcement_id)
-            
-            # 현재 로그인된 사용자의 자격만 분석
-            user_id = str(request.user.id)
-            print(f"분석할 사용자 ID: {user_id}")
-            
-            try:
-                # 자격 분석 실행
-                results = analyze_user_eligibility(user_id)
-                print(f"분석 결과: {results}") 
-                
-                # 해당 공고의 결과만 추출
-                announcement_result = results.get(announcement_id)
-                if not announcement_result:
-                    return Response({
-                        'success': False,
-                        'error': f'공고 ID {announcement_id}에 대한 분석 결과가 없습니다.'
-                    }, status=status.HTTP_404_NOT_FOUND)
-                
-                # 분석 결과를 데이터베이스에 저장
-                HousingEligibilityAnalysis.objects.update_or_create(
-                    user=request.user,
-                    announcement=announcement,
-                    defaults={
-                        'is_eligible': announcement_result['is_eligible'],
-                        'priority': announcement_result['priority'],
-                        'reasons': announcement_result.get('reasons', []),
-                        'analyzed_at': timezone.now()
-                    }
-                )
-                
-                return Response({
-                    'success': True,
-                    'data': {
-                        'is_eligible': announcement_result['is_eligible'],
-                        'priority': announcement_result['priority'],
-                        'reasons': announcement_result.get('reasons', []),
-                        'user_id': user_id,
-                        'announcement_id': announcement_id
-                    },
-                    'message': '자격 분석이 완료되었습니다.'
-                }, status=status.HTTP_200_OK)
-                
-            except Exception as e:
-                return Response({
-                    'success': False,
-                    'error': f'자격 분석 중 오류가 발생했습니다: {str(e)}'
-                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
-        except Exception as e:
-            return Response({
-                'success': False,
-                'error': f'처리 중 오류가 발생했습니다: {str(e)}'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        user_id = str(request.user.id)
+        # 비동기 분석 트리거
+        analyze_user_eligibility_task.delay(user_id)
+        return Response({
+            'success': True,
+            'message': '분석 요청이 접수되었습니다. 잠시 후 결과를 확인하세요.'
+        }, status=status.HTTP_202_ACCEPTED)
+        

@@ -5,20 +5,16 @@ from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import ValidationError
 from rest_framework import status
 from rest_framework.response import Response
-from django.core.cache import cache
-from announcements.models import Announcement, HousingEligibilityAnalysis
-from profiles.tasks import analyze_user_eligibility_task
-from django.utils import timezone
 
 class ProfileCreateView(generics.CreateAPIView):
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
+
     def perform_create(self, serializer):
         if Profile.objects.filter(user=self.request.user).exists():
             raise ValidationError("이미 개인정보가 등록되어 있습니다.")
         profile = serializer.save(user=self.request.user)
-        # 비동기 분석만 트리거
-        analyze_user_eligibility_task.apply_async(args=[str(profile.user.id)], queue='profile')
+       
         return profile
 
 
@@ -35,14 +31,4 @@ class ProfileView(generics.RetrieveUpdateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
-        modified_fields = set(request.data.keys())
-        eligibility_fields = {
-            'birth_date', 'gender', 'university', 'graduate', 
-            'employed', 'job_seeker', 'welfare_receipient',
-            'parents_own_house', 'disability_in_family',
-            'subscription_account', 'total_assets', 'car_value',
-            'income_range'
-        }
-        if modified_fields & eligibility_fields:
-            analyze_user_eligibility_task.apply_async(args=[str(instance.user.id)], queue='profile')
         return Response(serializer.data)
