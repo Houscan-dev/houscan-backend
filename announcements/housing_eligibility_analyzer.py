@@ -91,24 +91,22 @@ def get_priority_score_path(criteria_file: str) -> str:
 
 # 입력 데이터 필드 설명 (프롬프트에 공통 포함)
 field_description = '''
-[입력 데이터 필드 설명]
-- id: 사용자 구별용 id
+[입력 데이터 필드]
+- id: 사용자 ID
 - age: 나이
 - birth_date: 생년월일 (YYMMDD)
-- gender: 성별 (M: 남성, F: 여성)
-- university: 대학생 재학중인지 여부 (true/false)
-- graduate: 대학 또는 고등학교를 졸업한지 2년 이내인지 여부 (true/false)
-- employed: 직장 재직중인지 여부 (true/false)
-- job_seeker: 취업준비생 여부 (true/false)
-- welfare_receipient: 생계, 의료, 주거급여 수급자 가구, 지원대상 한부모 가족, 차상위계층 가구 중 해당사항이 있는지 여부 (true/false)
-- parents_own_house: 부모가 무주택자인지 여부 (true/false)
-- disability_in_family: 자신이나 가구원 중에 본인 명의의 장애인 등록증을 소유하고 있는 사람이 있는지 여부 (true/false)
+- gender: 성별 (M/F)
+- university: 대학생 재학여부
+- graduate: 졸업 2년 이내 여부
+- employed: 재직여부
+- job_seeker: 취업준비생 여부
+- welfare_receipient: 수급자/한부모/차상위 여부
+- parents_own_house: 부모 무주택 여부
+- disability_in_family: 장애인 가구원 여부
 - subscription_account: 청약 납입 횟수
-- total_assets: 총 자산 (원 단위)
-- car_value: 소유하고 있는 자동차 가액 (원 단위)
-- income_range: 가구당 월평균 소득 구간 (예: "100% 이하")
-- create_at: 계정 생성 날짜 (ISO 8601 형식)
-- user: 사용자 구별 id (중복 가능)
+- total_assets: 총 자산 (원)
+- car_value: 자동차 가액 (원)
+- income_range: 가구당 월평균 소득 구간
 '''
 
 # 2. 우선순위 판단 (priority_criteria를 활용)
@@ -178,23 +176,20 @@ def check_eligibility_with_llm(user_data: Dict[str, Any], criteria_str: str, pri
 {json.dumps(priority_result, ensure_ascii=False, indent=2)}
 
 신청자격 요건의 모든 조건을 검토하여 true/false로 판단해주세요.
-자격이 없는 경우, 충족하지 못한 모든 조건과 그 이유를 리스트로 반환해주세요.
+자격이 없는 경우, 충족하지 못한 모든 조건과 사유를 한국어로 간단히 나열해주세요.
+계정 생성일(create_at)은 신청자격 판단에 사용하지 마세요.
 
 다음과 같은 JSON 형식으로, 반드시 JSON만 반환하세요. 다른 설명이나 텍스트는 절대 포함하지 마세요:
 {{
     "is_eligible": true/false,
-    "reasons": [
-        "자격이 없는 경우: 충족하지 못한 조건1과 그 이유",
-        "자격이 없는 경우: 충족하지 못한 조건2와 그 이유",
-        ...
-    ]
+    "reasons": ["미달 사유1", "미달 사유2"]
 }}
 """
     try:
         response = client.chat.completions.create(
             model="gpt-4-turbo",
             messages=[
-                {"role": "system", "content": "당신은 주택 신청 자격을 판단하는 전문가입니다. 주어진 공고문의 기준에 따라 정확하게 판단해주세요."},
+                {"role": "system", "content": "당신은 주택 신청 자격을 판단하는 전문가입니다. 계정 생성일은 판단 기준에서 제외해주세요. 주어진 공고문의 기준에 따라 정확하게 판단해주세요."},
                 {"role": "user", "content": eligibility_prompt}
             ],
             response_format={"type": "json_object"}
