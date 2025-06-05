@@ -18,7 +18,7 @@ class ProfileCreateView(generics.CreateAPIView):
             raise ValidationError("이미 개인정보가 등록되어 있습니다.")
         profile = serializer.save(user=self.request.user)
         # 비동기 분석만 트리거
-        analyze_user_eligibility_task.delay(str(self.request.user.id))
+        analyze_user_eligibility_task.apply_async(args=[str(isinstance.user.id)], queue='profile')
         return profile
 
 
@@ -44,5 +44,5 @@ class ProfileView(generics.RetrieveUpdateAPIView):
             'income_range'
         }
         if modified_fields & eligibility_fields:
-            analyze_user_eligibility_task.delay(str(request.user.id))
+            analyze_user_eligibility_task.apply_async(args=[str(instance.user.id)], queue='profile')
         return Response(serializer.data)

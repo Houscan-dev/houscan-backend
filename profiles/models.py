@@ -43,5 +43,5 @@ class Profile(models.Model):
 @receiver(post_save, sender=Profile)
 def analyze_eligibility(sender, instance, created, **kwargs):
     from profiles.tasks import analyze_user_eligibility_task
-    analyze_user_eligibility_task.delay(str(instance.user.id))
+    analyze_user_eligibility_task.apply_async(args=[str(instance.user.id)], queue='profile')
     
