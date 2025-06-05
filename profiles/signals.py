@@ -15,6 +15,7 @@ def analyze_eligibility(sender, instance, created, **kwargs):
     # 1분 지나기 전 중복 실행 방지
     if cache.get(lock_cache_key):
         return
+
     cache.set(lock_cache_key, True, timeout=60)
 
     # Celery 태스크 실행
