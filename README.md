@@ -64,41 +64,6 @@ AI를 통해 나의 정보를 분석하여 지원 자격에 해당하는지 알 
  ┃ ┗ 📜views.py
 
 ```
-### 실행 방법 (코드 동작 확인 용)
-```
-git clone
-https://github.com/Houscan-dev/houscan-backend.git
-```
-```
-디렉토리 이동
-cd Housman-backend
-```
-```
-가상환경 설치
-python -m venv venv 
-```
-```
-가상환경 실행
-source venv/Scripts/activate (window)
-source venv/bin/activate (Mac/linux)
-```
-```
-필요한 라이브러리 설치
-pip install -r requirements.txt
-```
-```
-.env 파일 생성 (발급받은 key값을 추가)
-cp .env.example .env
-```
-```
-마이그레이션
-python manage.py makemigrations
-python manage.py migrate
-```
-```
-런서버 실행
-python manage.py runserver
-```
 ### 📆 Development Period
 2025.03 - 2025.06
 <br/>
