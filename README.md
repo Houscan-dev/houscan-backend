@@ -6,20 +6,6 @@ AI를 통해 나의 정보를 분석하여 지원 자격에 해당하는지 알 
 자격이 충족된다면 몇 순위에 해당하는지, 충족되지 않는다면 그 이유를 함께 설명해드립니다.  <br />
 청약 공고에 관해 궁금한 점이 생긴다면 언제든 챗봇에게 질문해 보세요!
 
-### 🙌 Participants
-<table>
-  <tr>
-    <td>윤나경
-    </td>
-    <td>Leader, Design, Frontend</td>
-  </tr>
-    <td>김하정</td>
-    <td>Backend</td>
-  </tr>
-    <td>이연우</td>
-    <td>AI</td>
-  </tr>
-</table>
 
 ### 📸 Demo Video
 - <a href='https://youtu.be/jyJlv0aYP5U'>시연 영상</a>
