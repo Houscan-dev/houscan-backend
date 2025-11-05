@@ -40,7 +40,7 @@ DATABASES = {
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-13-209-7-122.ap-northeast-2.compute.amazonaws.com',
+ALLOWED_HOSTS = ['.ap-northeast-2.compute.amazonaws.com',
                  '.houscan.shop','127.0.0.1']
 
 
