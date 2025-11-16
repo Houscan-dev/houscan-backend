@@ -4,9 +4,7 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from announcements.models import Announcement, HousingEligibilityAnalysis
 import os
-from announcements.housing_eligibility_analyzer import analyze_user_eligibility
 from django.utils import timezone
 
 class Profile(models.Model):

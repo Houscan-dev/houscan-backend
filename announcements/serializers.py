@@ -4,7 +4,7 @@ from .models import Announcement, HousingInfo
 class AnnListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
-        fields = ['id', 'title', 'posted_date', 'status', 'updated_at','pdf_name']
+        fields = ['id', 'title', 'announcement_date', 'status', 'updated_at','pdf_name']
  
 class HousingInfoSerializer(serializers.ModelSerializer):
     class Meta:

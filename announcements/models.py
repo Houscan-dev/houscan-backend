@@ -30,7 +30,7 @@ def get_upload_path(instance, filename):
 
 class Announcement(models.Model):
     title       = models.CharField(max_length=255)
-    posted_date   = models.DateField()
+    announcement_date   = models.CharField(max_length=50, null=True, blank=True)
     status        = models.CharField(
         max_length=10,
         choices=[('upcoming','모집예정'),
@@ -39,10 +39,17 @@ class Announcement(models.Model):
     )
     updated_at    = models.DateTimeField(auto_now=True)
     pdf_name = models.CharField(max_length=255, null=True, blank=True)
+
+    ai_summary_json = models.JSONField(
+        null=True, 
+        blank=True, 
+        help_text="AI가 PDF에서 추출한 요약 JSON 데이터"
+    )
+
     def __str__(self):
         return f"{self.title} ({self.status})"
     
-class AnnouncementDocument(models.Model):
+'''class AnnouncementDocument(models.Model):
     ANNOUNCE_TYPES = [
         ('schedule','모집 일정'),
         ('criteria','지원 자격'),
@@ -61,7 +68,7 @@ class AnnouncementDocument(models.Model):
 
     def __str__(self):
         return f"{self.announcement_id} – {self.doc_type}"
-    
+'''
 
 class HousingInfo(models.Model):
     announcement = models.ForeignKey(Announcement, related_name='housing_info_list', on_delete=models.CASCADE)

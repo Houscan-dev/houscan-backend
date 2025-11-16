@@ -7,7 +7,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
-        read_only_fields = ['user', 'created_at','is_eligible', 'priority_info']
+        read_only_fields = ['user', 'created_at']
     
     def get_age(self, obj):
         return obj.age
