@@ -89,10 +89,6 @@ class AnnouncementDetailAPIView(APIView):
             "status":           ann.status,
             "pdf_name":         ann.pdf_name,
             "ai_summary_json":  ai_summary,
-            "housing_info": HousingInfoSerializer(
-                HousingInfo.objects.filter(announcement=ann),
-                many=True
-            ).data,
             "analysis":         analysis_info,  # 자격 분석 결과
             "ai_precaution": (
                 "본 정보는 AI를 활용하여 요약되었으며, 정확성이 보장되지 않을 수 있으므로 "
