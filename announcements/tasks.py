@@ -24,10 +24,6 @@ def parse_ymd_safe(s: str) -> date | None:
 
 @shared_task(queue='status')
 def update_announcements_status_from_ai_json():
-    """
-    [신규] ai_summary_json 필드(새로운 RAG 스키마)를 기준으로
-    공고 상태(status)와 게시일(posted_date)을 매일 업데이트합니다.
-    """
     logger.info("▶▶▶ Task START: update_announcements_status_from_ai_json")
     today = timezone.localdate()
     

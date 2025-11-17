@@ -88,11 +88,7 @@ class AnnouncementDetailAPIView(APIView):
             "announcement_date":      posted,
             "status":           ann.status,
             "pdf_name":         ann.pdf_name,
-            "schedule":         ai_summary.get("application_schedule"),
-            "criteria":         ai_summary.get("application_eligibility"),
-            "residence_period": ai_summary.get("residence_period"),
-            "priority_score":   ai_summary.get("priority_and_bonus"),
-            "precautions":      ai_summary.get("precautions"),
+            "ai_summary_json":  ai_summary,
             "housing_info": HousingInfoSerializer(
                 HousingInfo.objects.filter(announcement=ann),
                 many=True
