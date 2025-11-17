@@ -45,7 +45,7 @@ except Exception as e:
     qwen_pipe = None 
 
 # JSON 파일 폴더 경로
-ANNOUNCEMENT_JSON_DIR = './test2/extracted_json'
+ANNOUNCEMENT_JSON_DIR = './extracted_json'
 # 예시 파일 제외를 위한 리스트 (이전 요구사항 유지)
 EXCLUDE_FILENAMES = ['example_announcement_qwen']
 
