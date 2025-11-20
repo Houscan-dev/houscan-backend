@@ -6,7 +6,7 @@ from django.db import transaction
 from announcements.models import Announcement, HousingInfo
 
 class Command(BaseCommand):
-    help = 'AI가 생성한 JSON 파일을 ai_summary_json 필드에 저장'
+    help = 'AI가 생성한 JSON 파일을 ai_summary_json 필드에 저장하고, HousingInfo는 DB에 생성'
 
     def add_arguments(self, parser):
         parser.add_argument('path', type=str, help="JSON 파일 또는 JSON 폴더 경로")
@@ -56,13 +56,11 @@ class Command(BaseCommand):
                 self.stdout.write(f"새 Announcement({announcement_id}) 생성...")
 
             with transaction.atomic():
+                # ai_summary_json에 housing_info 제외하고 저장
                 ai_summary_copy = dict(data)
-    
-                # housing_info 제거
                 ai_summary_copy.pop("housing_info", None)
-                
-                # ai_summary_json에 저장
                 announcement.ai_summary_json = ai_summary_copy
+
                 # 기본 필드들
                 schedule = data.get("application_schedule", {})
                 announcement.announcement_date = schedule.get("announcement_date", "")
@@ -70,6 +68,23 @@ class Command(BaseCommand):
                 announcement.status = data.get("status", "open")
                 
                 announcement.save()
+
+                # HousingInfo 생성 (중복 방지)
+                housing_list = data.get("housing_info_list", [])
+                for hi in housing_list:
+                    if not HousingInfo.objects.filter(announcement=announcement, name=hi.get("name")).exists():
+                        HousingInfo.objects.create(
+                            announcement=announcement,
+                            name=hi.get("name", ""),
+                            address=hi.get("address", ""),
+                            district=hi.get("district", ""),
+                            total_households=hi.get("total_households"),
+                            supply_households=hi.get("supply_households"),
+                            type=hi.get("type", ""),
+                            house_type=hi.get("house_type"),
+                            elevator=hi.get("elevator"),
+                            parking=hi.get("parking")
+                        )
 
             success_count += 1
 
