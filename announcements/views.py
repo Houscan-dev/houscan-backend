@@ -8,7 +8,7 @@ from .models import Announcement
 from rest_framework.views import APIView
 from .models import Announcement, HousingEligibilityAnalysis
 from .models import HousingInfo
-from .serializers import HousingInfoSerializer
+from .serializers import HousingInfoSerializer, AnnouncementDetailSerializer
 from profiles.tasks import analyze_user_eligibility_task
 from profiles.models import Profile
 from .services.eligibility_service import analyze_user_eligibility
@@ -57,14 +57,17 @@ class AnnouncementDetailAPIView(APIView):
     
     def get(self, request, id):
         ann = get_object_or_404(Announcement, id=id)
-        ai_summary = ann.ai_summary_json or {}
+        serializer = AnnouncementDetailSerializer(ann)
+        data = serializer.data
+        ai_summary = data.get("ai_summary_json", {})
         posted = ann.announcement_date or ""
         schedule_data = ai_summary.get("application_schedule", {})
         if schedule_data:
             posted_date_raw = schedule_data.get("announcement_date")
             if posted_date_raw and '미정' not in posted_date_raw:
                 posted = posted_date_raw.replace('-', '.')
-        
+        data["announcement_date"] = posted
+
         # 현재 로그인한 사용자의 자격 분석 정보 가져오기
         analysis_info = None
         if request.user.is_authenticated:
@@ -81,20 +84,12 @@ class AnnouncementDetailAPIView(APIView):
                 }
             except HousingEligibilityAnalysis.DoesNotExist:
                 pass
-
-        return Response({
-            "id":               ann.id,
-            "title":            ann.title,
-            "announcement_date":      posted,
-            "status":           ann.status,
-            "pdf_name":         ann.pdf_name,
-            "ai_summary_json":  ai_summary,
-            "analysis":         analysis_info,  # 자격 분석 결과
-            "ai_precaution": (
-                "본 정보는 AI를 활용하여 요약되었으며, 정확성이 보장되지 않을 수 있으므로 "
-                "참고용으로만 사용하시기 바랍니다. 더 자세한 정보는 아래의 첨부파일을 참고하세요."
-            ),
-        })
+        data["analysis"] = analysis_info
+        data["ai_precaution"] = (
+            "본 정보는 AI를 활용하여 요약되었으며, 정확성이 보장되지 않을 수 있으므로 "
+            "참고용으로만 사용하시기 바랍니다. 더 자세한 정보는 아래의 첨부파일을 참고하세요."
+        )
+        return Response(data)
     
 class AnnouncementHouseAPIView(APIView):
     permission_classes=[AllowAny]

@@ -56,9 +56,13 @@ class Command(BaseCommand):
                 self.stdout.write(f"새 Announcement({announcement_id}) 생성...")
 
             with transaction.atomic():
-                # ai_summary_json에 전체 데이터 저장
-                announcement.ai_summary_json = data
+                ai_summary_copy = dict(data)
+    
+                # housing_info 제거
+                ai_summary_copy.pop("housing_info", None)
                 
+                # ai_summary_json에 저장
+                announcement.ai_summary_json = ai_summary_copy
                 # 기본 필드들
                 schedule = data.get("application_schedule", {})
                 announcement.announcement_date = schedule.get("announcement_date", "")
@@ -66,23 +70,6 @@ class Command(BaseCommand):
                 announcement.status = data.get("status", "open")
                 
                 announcement.save()
-
-                # HousingInfo 업데이트
-                HousingInfo.objects.filter(announcement=announcement).delete()
-
-                for h in data.get("housing_info", []):
-                    HousingInfo.objects.create(
-                        announcement=announcement,
-                        name=h.get("name"),
-                        address=h.get("address"),
-                        district=h.get("district"),
-                        type=h.get("type"),
-                        total_households=h.get("total_households"),
-                        supply_households=h.get("supply_households"),
-                        house_type=h.get("house_type"),
-                        parking=h.get("parking"),
-                        elevator=h.get("elevator"),
-                    )
 
             success_count += 1
 

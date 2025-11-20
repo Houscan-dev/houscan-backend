@@ -29,11 +29,6 @@ class AnnouncementDetailSerializer(serializers.ModelSerializer):
         model = Announcement
         fields = '__all__'
 
-class HousingInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = HousingInfo
-        fields = '__all__'
-        
 class HousingAnalysisResponseSerializer(serializers.Serializer):
     success = serializers.BooleanField()
     data = serializers.DictField()

@@ -71,6 +71,7 @@ class Announcement(models.Model):
 '''
 
 class HousingInfo(models.Model):
+    id = models.AutoField(primary_key=True)
     announcement = models.ForeignKey(Announcement, related_name='housing_info_list', on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
