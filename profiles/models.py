@@ -15,6 +15,8 @@ class Profile(models.Model):
     graduate = models.BooleanField()
     employed = models.BooleanField()
     job_seeker = models.BooleanField()
+    is_married = models.BooleanField(null=True, blank=True)
+    residence = models.CharField(max_length=4, null=True, blank=True)
     welfare_receipient = models.BooleanField()
     parents_own_house = models.BooleanField()
     disability_in_family = models.BooleanField()
