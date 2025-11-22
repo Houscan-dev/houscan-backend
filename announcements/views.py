@@ -91,10 +91,19 @@ class AnnouncementDetailAPIView(APIView):
 class AnnouncementHouseAPIView(APIView):
     permission_classes=[AllowAny]
     def get(self, request, house_id):
-        house = get_object_or_404(HousingInfo, id=house_id)
-        serializer = HousingInfoSerializer(house)
-        
-        return Response({
-            "housing_info": serializer.data,
-        }, status=status.HTTP_200_OK)
+        try:
+            house = get_object_or_404(HousingInfo, id=house_id)
+            serializer = HousingInfoSerializer(house)
+            
+            return Response({
+                    "success": True,
+                    "housing_info": serializer.data,
+                }, status=status.HTTP_200_OK)
+                
+        except HousingInfo.DoesNotExist:
+            return Response({
+                "success": False,
+                "error": f"ID {house_id}에 해당하는 주택 정보가 없습니다.",
+                "available_ids": list(HousingInfo.objects.values_list('id', flat=True)[:10])
+            }, status=status.HTTP_404_NOT_FOUND)
  
