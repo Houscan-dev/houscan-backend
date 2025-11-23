@@ -9,7 +9,7 @@ load_dotenv()
 
 # --- Groq API ---
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_MODEL_NAME = "llama-3.1-8b-instant"
+GROQ_MODEL_NAME = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 def extract_json(text: str):
     try:
@@ -66,13 +66,11 @@ def analyze_eligibility_with_ai(user_data: Dict[str, Any], notice_data: Dict[str
 
 6. 'is_eligible'은 '우선 선발'에 해당하지 않으면 false가 아니라 서울에 사는지 여부로 판단한다.
 
-7. '무주택'은 parents_own_house == False
+7. '무주택'은 parents_own_house == False일 때 해당
 
-8. 모든 값은 이미 정규화된 상태.
+8. total_assets와 car_value는 이미 원 단위 숫자로 주어지므로 별도 변환 불필요.
 
-9. reasons에는 모든 부적격 사유 또는 판단 불가 사유를 배열로 담아야 한다.
-
-10. total_assets와 car_value는 이미 원 단위 숫자로 주어지므로 별도 변환 불필요.
+9. reasons에는 모든 부적격 사유를 배열로 담아야 하며, 적격 사유는 담지 않는다.
 
 ### 📌 사용자 정보(JSON)
 {json.dumps(user_data, ensure_ascii=False)}

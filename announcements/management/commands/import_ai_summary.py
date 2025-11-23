@@ -65,7 +65,7 @@ class Command(BaseCommand):
                 schedule = data.get("application_schedule", {})
                 announcement.announcement_date = schedule.get("announcement_date", "")
                 announcement.title = data.get("title", "")
-                announcement.status = data.get("status", "open")
+                announcement.status = data.get("status", "closed")
                 
                 announcement.save()
 

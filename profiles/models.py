@@ -4,8 +4,6 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import os
-from django.utils import timezone
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -39,9 +37,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.email}'s profile"
-
-@receiver(post_save, sender=Profile)
-def analyze_eligibility(sender, instance, created, **kwargs):
-    from profiles.tasks import analyze_user_eligibility_task
-    analyze_user_eligibility_task.apply_async(args=[str(instance.user.id)], queue='profile')
-    

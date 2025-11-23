@@ -2,13 +2,14 @@
 
 import logging
 from datetime import date
+from typing import Optional
 from django.utils import timezone
 from celery import shared_task
 from .models import Announcement
 
 logger = logging.getLogger(__name__)
 
-def parse_ymd_safe(s: str) -> date | None:
+def parse_ymd_safe(s: str) -> Optional[date]:
     """
     YYYY.MM.DD 또는 YYYY-MM-DD 형식의 문자열을 date 객체로 변환합니다.
     (날짜 정보가 없거나 '미정'일 경우 None 반환)
