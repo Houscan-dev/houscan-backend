@@ -9,9 +9,6 @@ logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=Profile, dispatch_uid="profile_post_save_unique")
 def analyze_eligibility(sender, instance, created, **kwargs):
-    if created:
-        return
-    
     user_id = instance.user.id
     lock_cache_key = f'processing_eligibility_{user_id}'
     
@@ -26,3 +23,4 @@ def analyze_eligibility(sender, instance, created, **kwargs):
         queue='profile',
         countdown=1
     )
+    logger.info(f"Profile {'created' if created else 'updated'} for user {user_id}: Eligibility analysis task queued.")
