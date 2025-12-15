@@ -6,10 +6,13 @@ from django.db import transaction
 from announcements.models import Announcement, HousingInfo
 import ast
 
+import json
+
 def normalize_list(value):
     if value is None:
         return []
 
+    # 정상
     if isinstance(value, list):
         return value
 
@@ -17,9 +20,22 @@ def normalize_list(value):
         value = value.strip()
         if not value:
             return []
+
+        # JSON 문자열이면 파싱
+        if (value.startswith('[') and value.endswith(']')) or \
+           (value.startswith('{') and value.endswith('}')):
+            try:
+                parsed = json.loads(value)
+                if isinstance(parsed, list):
+                    return parsed
+            except json.JSONDecodeError:
+                pass
+
+        # 그냥 단일 문자열
         return [value]
 
     return []
+
 
 def normalize_bool(value):
     if value is None:
@@ -29,7 +45,11 @@ def normalize_bool(value):
     if isinstance(value, int):
         return bool(value)
     if isinstance(value, str):
-        return value.strip().lower() in ("1", "true", "yes", "y")
+        v = value.strip().lower()
+        if v in ("1", "true", "yes", "y"):
+            return True
+        if v in ("0", "false", "no", "n"):
+            return False
     return False
 
 class Command(BaseCommand):
