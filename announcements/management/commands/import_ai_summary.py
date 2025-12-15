@@ -68,9 +68,9 @@ class Command(BaseCommand):
                 announcement.status = data.get("status", "closed")
                 
                 announcement.save()
-
+                HousingInfo.objects.filter(announcement=announcement).delete()
                 # HousingInfo 생성 (중복 방지)
-                housing_list = data.get("housing_info_list", [])
+                housing_list = data.get("housing_info", [])
                 for hi in housing_list:
                     if not HousingInfo.objects.filter(announcement=announcement, name=hi.get("name")).exists():
                         HousingInfo.objects.create(
