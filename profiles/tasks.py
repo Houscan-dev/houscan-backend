@@ -117,7 +117,8 @@ def analyze_user_eligibility_task(user_id: int):
     # 전체 요약 저장
     profile.is_eligible = any(r.get('is_eligible', False) for r in results.values())
     profile.priority_info = results
-    profile.save()
+    profile.save(update_fields=['is_eligible', 'priority_info'])
 
     cache.delete(lock_cache_key)
+    logger.info(f"[CELERY] 사용자 {user_id} {done_count}/{total_count} 공고 분석 완료")
     return f"[CELERY] 사용자 {user_id} {done_count}/{total_count} 공고 분석 완료"

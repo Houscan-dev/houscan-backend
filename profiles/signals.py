@@ -12,6 +12,17 @@ def analyze_eligibility(sender, instance, created, **kwargs):
     user_id = instance.user.id
     lock_cache_key = f'processing_eligibility_{user_id}'
     
+    # 태스크 내부에서의 저장인지 확인
+    update_fields = kwargs.get('update_fields')
+    if update_fields is not None:
+        # update_fields가 지정된 경우 (태스크 내부 저장)
+        # is_eligible, priority_info만 업데이트하는 경우 스킵
+        if set(update_fields) == {'is_eligible', 'priority_info'}:
+            logger.info(f"Profile save signal for user {user_id}: Internal task update. Skipping.")
+            return
+    
+    lock_cache_key = f'processing_eligibility_{user_id}'
+    
     # 중복 실행 방지
     if not cache.add(lock_cache_key, True, timeout=60):
         logger.info(f"Profile save signal for user {user_id}: Task already running or recently run. Skipping.")
