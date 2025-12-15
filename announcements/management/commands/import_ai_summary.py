@@ -8,36 +8,18 @@ import ast
 
 def normalize_list(value):
     if value is None:
-        return None
+        return []
 
-    # 이미 리스트면 OK
     if isinstance(value, list):
         return value
 
-    # JSON 문자열인 경우
     if isinstance(value, str):
         value = value.strip()
-
-        # JSON 문자열 시도
-        try:
-            parsed = json.loads(value)
-            if isinstance(parsed, list):
-                return parsed
-        except Exception:
-            pass
-
-        # Python 리스트 문자열 시도: "['a','b']"
-        try:
-            parsed = ast.literal_eval(value)
-            if isinstance(parsed, list):
-                return parsed
-        except Exception:
-            pass
-
-        # 최후: 단일 문자열 → 리스트로
+        if not value:
+            return []
         return [value]
 
-    return [value]
+    return []
 
 def normalize_bool(value):
     if value is None:
@@ -134,3 +116,5 @@ class Command(BaseCommand):
             success_count += 1
 
         self.stdout.write(self.style.SUCCESS(f"총 {success_count}개의 공고가 생성/업데이트되었습니다."))
+
+
