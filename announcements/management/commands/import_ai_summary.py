@@ -4,23 +4,57 @@ import os
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from announcements.models import Announcement, HousingInfo
+import ast
+
+def normalize_list(value):
+    if value is None:
+        return None
+
+    # 이미 리스트면 OK
+    if isinstance(value, list):
+        return value
+
+    # JSON 문자열인 경우
+    if isinstance(value, str):
+        value = value.strip()
+
+        # JSON 문자열 시도
+        try:
+            parsed = json.loads(value)
+            if isinstance(parsed, list):
+                return parsed
+        except Exception:
+            pass
+
+        # Python 리스트 문자열 시도: "['a','b']"
+        try:
+            parsed = ast.literal_eval(value)
+            if isinstance(parsed, list):
+                return parsed
+        except Exception:
+            pass
+
+        # 최후: 단일 문자열 → 리스트로
+        return [value]
+
+    return [value]
+
+def normalize_bool(value):
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int):
+        return bool(value)
+    if isinstance(value, str):
+        return value.strip().lower() in ("1", "true", "yes", "y")
+    return False
 
 class Command(BaseCommand):
     help = 'AI가 생성한 JSON 파일을 ai_summary_json 필드에 저장하고, HousingInfo는 DB에 생성'
 
     def add_arguments(self, parser):
         parser.add_argument('path', type=str, help="JSON 파일 또는 JSON 폴더 경로")
-
-    def parse_bool(value):
-        if value is None:
-            return None
-        if isinstance(value, bool):
-            return value
-        if isinstance(value, int):
-            return bool(value)
-        if isinstance(value, str):
-            return value.lower() in ["1", "true", "yes", "y"]
-        return False
 
     def handle(self, *args, **options):
         path = options['path']
@@ -90,10 +124,10 @@ class Command(BaseCommand):
                             address=hi.get("address", ""),
                             district=hi.get("district", ""),
                             total_households=hi.get("total_households"),
-                            supply_households=hi.get("supply_households"),
-                            type=hi.get("type", ""),
-                            house_type=hi.get("house_type"),
-                            eelevator=parse_bool(hi.get("elevator")),   
+                            supply_households=normalize_list(hi.get("supply_households")),
+                            type=normalize_list(hi.get("type")),
+                            house_type=normalize_list(hi.get("house_type")),
+                            elevator=normalize_bool(hi.get("elevator")),   
                             parking=hi.get("parking")
                         )
 
