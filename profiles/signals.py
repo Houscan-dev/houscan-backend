@@ -22,16 +22,18 @@ def analyze_eligibility(sender, instance, created, **kwargs):
             return
     
     lock_cache_key = f'processing_eligibility_{user_id}'
-    
+
     # 중복 실행 방지
-    if not cache.add(lock_cache_key, True, timeout=60):
-        logger.info(f"Profile save signal for user {user_id}: Task already running or recently run. Skipping.")
+    lock_set = cache.add(lock_cache_key, True, timeout=60)
+    
+    if not lock_set:
+        logger.info(f"Profile save signal for user {user_id}: Task already running or recently run. Skipping. (Lock Acquire Failed)")
         return
     
-    # 비동기 태스크 실행
+    logger.info(f"Profile save signal for user {user_id}: Lock successfully acquired. Queuing task.")
+    
     analyze_user_eligibility_task.apply_async(
         args=[str(user_id)],
         queue='profile',
-        countdown=1
     )
     logger.info(f"Profile {'created' if created else 'updated'} for user {user_id}: Eligibility analysis task queued.")
