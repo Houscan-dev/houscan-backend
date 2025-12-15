@@ -4,53 +4,6 @@ import os
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from announcements.models import Announcement, HousingInfo
-import ast
-
-import json
-
-def normalize_list(value):
-    if value is None:
-        return []
-
-    # 정상
-    if isinstance(value, list):
-        return value
-
-    if isinstance(value, str):
-        value = value.strip()
-        if not value:
-            return []
-
-        # JSON 문자열이면 파싱
-        if (value.startswith('[') and value.endswith(']')) or \
-           (value.startswith('{') and value.endswith('}')):
-            try:
-                parsed = json.loads(value)
-                if isinstance(parsed, list):
-                    return parsed
-            except json.JSONDecodeError:
-                pass
-
-        # 그냥 단일 문자열
-        return [value]
-
-    return []
-
-
-def normalize_bool(value):
-    if value is None:
-        return None
-    if isinstance(value, bool):
-        return value
-    if isinstance(value, int):
-        return bool(value)
-    if isinstance(value, str):
-        v = value.strip().lower()
-        if v in ("1", "true", "yes", "y"):
-            return True
-        if v in ("0", "false", "no", "n"):
-            return False
-    return False
 
 class Command(BaseCommand):
     help = 'AI가 생성한 JSON 파일을 ai_summary_json 필드에 저장하고, HousingInfo는 DB에 생성'
@@ -126,10 +79,10 @@ class Command(BaseCommand):
                             address=hi.get("address", ""),
                             district=hi.get("district", ""),
                             total_households=hi.get("total_households"),
-                            supply_households=normalize_list(hi.get("supply_households")),
-                            type=normalize_list(hi.get("type")),
-                            house_type=normalize_list(hi.get("house_type")),
-                            elevator=normalize_bool(hi.get("elevator")),   
+                            supply_households=hi.get("supply_households"),
+                            type=hi.get("type"),
+                            house_type=hi.get("house_type"),
+                            elevator=hi.get("elevator"),   
                             parking=hi.get("parking")
                         )
 
