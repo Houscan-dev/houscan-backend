@@ -123,8 +123,6 @@ def analyze_user_eligibility_task(user_id: int):
             eligible_count += 1
 
         done_count += 1
-
-        time.sleep(2.5)
         
         # 로그 (10개마다)
         if done_count % 10 == 0:
