@@ -11,6 +11,17 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('path', type=str, help="JSON 파일 또는 JSON 폴더 경로")
 
+    def parse_bool(value):
+        if value is None:
+            return None
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, int):
+            return bool(value)
+        if isinstance(value, str):
+            return value.lower() in ["1", "true", "yes", "y"]
+        return False
+
     def handle(self, *args, **options):
         path = options['path']
 
@@ -82,7 +93,7 @@ class Command(BaseCommand):
                             supply_households=hi.get("supply_households"),
                             type=hi.get("type", ""),
                             house_type=hi.get("house_type"),
-                            elevator=hi.get("elevator"),
+                            eelevator=parse_bool(hi.get("elevator")),   
                             parking=hi.get("parking")
                         )
 
