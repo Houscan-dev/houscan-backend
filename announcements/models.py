@@ -77,10 +77,10 @@ class HousingInfo(models.Model):
     address = models.TextField(null=True, blank=True)
     district = models.CharField(max_length=100, null=True, blank=True)
     total_households = models.TextField(null=True, blank=True)
-    supply_households = models.TextField(null=True, blank=True)
+    supply_households = models.JSONField(null=True, blank=True)
     type = models.TextField( null=True, blank=True)
-    house_type = models.TextField( null=True, blank=True)
-    elevator = models.CharField(max_length=100, null=True, blank=True)
+    house_type = models.JSONField(null=True, blank=True)
+    elevator = models.BooleanField(default=False)
     parking = models.TextField(null=True, blank=True)
 
     def __str__(self):

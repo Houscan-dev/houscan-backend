@@ -58,7 +58,7 @@ def analyze_user_eligibility_task(user_id: int):
     user_data = profile_to_user_data(profile)
     results = {}
 
-    announcements = Announcement.objects.filter(status__in=['open', 'upcoming'])
+    announcements = Announcement.objects.filter(status__in=['open', 'upcoming','closed'])
     total_count = announcements.count()
     done_count = 0
 
