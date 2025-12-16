@@ -133,5 +133,13 @@ def analyze_user_eligibility_task(user_id: int):
     profile.priority_info = results
     profile.save(update_fields=['is_eligible', 'priority_info'])
 
-    comments=logger.info(f"[CELERY] 사용자 {user_id} 분석 완료")
-    return comments
+    logger.info(f"[CELERY] 사용자 {user_id} 분석 완료")
+    return {
+        'success': True,
+        'total': total_count,
+        'analyzed': done_count,
+        'eligible': eligible_count,
+        'skipped_429': skipped_429_count,
+        'errors': error_count
+    }
+

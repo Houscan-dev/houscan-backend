@@ -6,7 +6,7 @@
             "name": "천호예가",
             "address": "상암로27길 28-7",
             "district": "강동구",
-            "type": "공동체주택",
+            "type": ["공동체주택"],
             "total_households": 16,
             "supply_households": [16],
             "house_type": ["23~29m²"],
@@ -53,5 +53,6 @@
         "contract_period": "2017.12월 중",
         "move_in_period": "2017.12월 중 (입주기간 60일)"
     },
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20170913084836942_479b07eca1bf43cb865572f4e808849f&rs=/app/upload/bbs/GS0401/html/",
     "precautions": ["본 공고문에 명시하지 못한 사항이 있을 수 있으므로 신청 전 반드시 현장을 방문하여 외부 환경(생활여건)을 사전확인 후 신청하십시오.", "본 공고문에 명시되지 아니한 사항은 “주택공급에 관한 규칙” 및 “공공주택특별법” 등 관계법령, 강동구청 홈페이지 공고내용 등에 의합니다."]
 }

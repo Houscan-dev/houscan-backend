@@ -6,7 +6,7 @@
             "name": "은행나무",
             "address": "서울특별시 금천구 독산로22길 65, 은행나무 (시흥동 824-16)",
             "district": "금천구",
-            "type": "도시형생활주택",
+            "type": ["도시형생활주택"],
             "total_households": 1,
             "supply_households": [1],
             "house_type": ["60.00m²"],
@@ -28,5 +28,6 @@
         "contract_period": "개별 안내",
         "move_in_period": "2025.07.01."
     },
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20250321095744951_269fedc9ea11477d93d2dd7cd5f31adc&rs=/app/upload/bbs/GS0401/html/",
     "precautions": ["거짓이나 부정한 방법으로 임대주택을 임대받거나 임대받게 한 경우 3년 이하 징역 또는 3천만원 이하 벌금", "특화형 매입임대주택은 시중은행 대출이 어려움."]
 }

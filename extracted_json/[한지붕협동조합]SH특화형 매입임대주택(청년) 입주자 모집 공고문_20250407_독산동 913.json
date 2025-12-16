@@ -6,7 +6,7 @@
             "name": "스마트웰",
             "address": "서울특별시 금천구 독산로72길 64, 스마트웰 (독산동 913)",
             "district": "금천구",
-            "type": "청년 1인 단독거주",
+            "type": ["청년 1인 단독거주"],
             "total_households": 1,
             "supply_households": [1],
             "house_type": ["29.33m²"],
@@ -28,5 +28,6 @@
         "contract_period": "개별 안내",
         "move_in_period": "2025.06.30."
     },
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20250321094304269_b772d695042541d9a1ff40f7c8d88abf&rs=/app/upload/bbs/GS0401/html/",
     "precautions": ["거짓이나 부정한 방법으로 임대주택을 임대받거나 임대받게 한 경우 3년 이하 징역 또는 3천만원 이하 벌금", "특화형 매입임대주택은 시중은행 대출이 어려움."]
 }
