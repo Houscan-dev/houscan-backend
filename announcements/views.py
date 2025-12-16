@@ -37,7 +37,8 @@ class AnnouncementListAPIView(generics.ListAPIView):
 
             analysis = analysis_map.get(ann.id)
             analysis_info = {
-                'is_eligible': analysis.is_eligible
+                'is_eligible': analysis.is_eligible,
+                'priority': analysis.priority
             } if analysis else None
 
             result.append({
