@@ -4,7 +4,6 @@
 하우스캔은 **청년을 위한 개인 맞춤형 청약 정보**를 쉽고 빠르게 제공합니다. <br />
 AI를 통해 나의 정보를 분석하여 지원 자격에 해당하는지 알 수 있습니다.  <br />
 자격이 충족된다면 몇 순위에 해당하는지, 충족되지 않는다면 그 이유를 함께 설명해드립니다.  <br />
-청약 공고에 관해 궁금한 점이 생긴다면 언제든 챗봇에게 질문해 보세요!
 
 ### 📸 Demo Video
 - <a href='https://youtu.be/jyJlv0aYP5U'>시연 영상</a>
@@ -45,6 +44,22 @@ AI를 통해 나의 정보를 분석하여 지원 자격에 해당하는지 알 
  ┃ 📂users
  ┣ 📜analyzer.py | 자격, 우선순위 판단 코드
  ┣ 📜titles.json | 공고 제목
+```
+
+### 로컬 실행 방법
+```python
+git clone (code)
+cd folder
+source venv/bin/activate
+cd houscan
+pip install requirements.txt
+python manage.py runserver
+-----
+how to update db
+python manage.py import_ai_summary ./extracted_json (import json to db)
+python manage.py update_titles_from_json titles.json (update titles)
+-----
+you can test in https://houscan.kr
 ```
 
 ### 📆 Development Period
