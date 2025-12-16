@@ -10,19 +10,13 @@ from .models import Announcement, HousingEligibilityAnalysis
 from .models import HousingInfo
 from .serializers import HousingInfoSerializer, AnnouncementDetailSerializer
 
-
 class AnnouncementListAPIView(generics.ListAPIView):
     permission_classes=[AllowAny]
 
     def get(self, request):
         qs = Announcement.objects.order_by('-announcement_date')
         result = []
-        # 로그인한 경우, 분석 결과를 미리 한 번에 가져옴
-        analysis_map = {}
-        if request.user.is_authenticated:
-            analyses = HousingEligibilityAnalysis.objects.filter(user=request.user)
-            analysis_map = {analysis.announcement_id: analysis for analysis in analyses}
-
+        
         for ann in qs:
             posted = ann.announcement_date or ""
             # 현재 로그인한 사용자의 자격 분석 정보 가져오기
@@ -35,11 +29,19 @@ class AnnouncementListAPIView(generics.ListAPIView):
                 if posted_date_raw and '미정' not in posted_date_raw:
                      posted = posted_date_raw.replace('-', '.')
 
-            analysis = analysis_map.get(ann.id)
-            analysis_info = {
-                'is_eligible': analysis.is_eligible,
-                'priority': analysis.priority
-            } if analysis else None
+            # DB에서 직접 가져오기 (디테일과 동일)
+            if request.user.is_authenticated:
+                try:
+                    analysis = HousingEligibilityAnalysis.objects.get(
+                        user=request.user,
+                        announcement=ann
+                    )
+                    analysis_info = {
+                        'is_eligible': analysis.is_eligible,
+                        'priority': analysis.priority
+                    }
+                except HousingEligibilityAnalysis.DoesNotExist:
+                    pass
 
             result.append({
                 "id": ann.id,
