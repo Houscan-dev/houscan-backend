@@ -263,7 +263,7 @@ def analyze_eligibility_with_ai(user_data: Dict[str, Any], notice_data: Dict[str
     final_priority = ai_result.get("priority", "")
     
     if final_is_eligible and not final_reasons_raw and not final_priority:
-        final_priority = "3순위"
+        final_priority = ""
 
     final_reasons = []
     if final_reasons_raw:
