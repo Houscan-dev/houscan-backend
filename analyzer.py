@@ -9,7 +9,7 @@ import time
 
 load_dotenv()
 
-GROQ_API_KEY = "GROQ_API_KEY"
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
     print("❌ 오류: GROQ_API_KEY 환경 변수가 설정되지 않았습니다. .env 파일을 확인해 주세요.")
     exit(1)
