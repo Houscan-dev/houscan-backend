@@ -52,7 +52,7 @@ git clone (code)
 cd folder
 source venv/bin/activate
 cd houscan
-pip install requirements.py
+pip install requirements.txt
 python manage.py runserver
 -----
 how to update db
