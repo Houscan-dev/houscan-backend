@@ -6,7 +6,7 @@ AI를 통해 나의 정보를 분석하여 지원 자격에 해당하는지 알 
 자격이 충족된다면 몇 순위에 해당하는지, 충족되지 않는다면 그 이유를 함께 설명해드립니다.  <br />
 
 ### 📸 Demo Video
-- <a href='https://youtu.be/jyJlv0aYP5U'>시연 영상</a>
+- <a href='https://youtu.be/sXYb3mKDirA'>시연 영상</a>
 
 ### 🔥 Commit Convention
 "태그:제목"의 형태이며, : 뒤에만 space가 있음에 유의합니다. ex) Feat: 메인페이지 추가
