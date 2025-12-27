@@ -24,8 +24,21 @@ class Profile(models.Model):
     income_range = models.CharField(max_length=20, choices=[('100% 이하', '100% 이하'),('50% 이하', '50% 이하')])
     is_eligible = models.BooleanField(null=True, blank=True)
     priority_info = models.JSONField(null=True, blank=True)
-    create_at = models.DateTimeField(auto_now_add=True)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    eligibility_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('idle', '대기'),
+            ('running', '분석중'),
+            ('done', '완료'),
+            ('error', '실패'),
+        ],
+        default='idle'
+    )
+    eligibility_result = models.JSONField(
+        null=True,
+        blank=True
+    )
     @property
     def age(self):
         try:
