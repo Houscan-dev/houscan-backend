@@ -34,3 +34,16 @@ class HousingAnalysisResponseSerializer(serializers.Serializer):
     data = serializers.DictField()
     total_analyzed = serializers.IntegerField()
     criteria_file = serializers.CharField()
+    
+class OpenAnnouncementSerializer(serializers.ModelSerializer):
+    housing_info_list = HousingInfoSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Announcement
+        fields = [
+            'id',
+            'title',
+            'status',
+            'announcement_date',
+            'housing_info_list',
+        ]

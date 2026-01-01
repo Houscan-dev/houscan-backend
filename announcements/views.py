@@ -8,7 +8,7 @@ from .models import Announcement
 from rest_framework.views import APIView
 from .models import Announcement, HousingEligibilityAnalysis
 from .models import HousingInfo
-from .serializers import HousingInfoSerializer, AnnouncementDetailSerializer
+from .serializers import HousingInfoSerializer, AnnouncementDetailSerializer, OpenAnnouncementSerializer
 
 class AnnouncementListAPIView(generics.ListAPIView):
     permission_classes=[AllowAny]
@@ -110,3 +110,16 @@ class AnnouncementHouseAPIView(APIView):
                 "available_ids": list(HousingInfo.objects.values_list('id', flat=True)[:10])
             }, status=status.HTTP_404_NOT_FOUND)
  
+class OpenAnnouncementAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        qs = (
+            Announcement.objects
+            .filter(status='open')
+            .order_by('-announcement_date')
+            .prefetch_related('housing_info_list')
+        )
+
+        serializer = OpenAnnouncementSerializer(qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
