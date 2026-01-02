@@ -10,6 +10,13 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from .serializers import *
 from django.conf import settings
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from .serializers import (
+    PasswordResetRequestSerializer,
+    PasswordResetConfirmSerializer
+)
 SECRET_KEY = settings.SECRET_KEY
 
 
@@ -135,3 +142,33 @@ class PwChangeAPIView(APIView):
         first_key = next(iter(serializer.errors))
         first_err = serializer.errors[first_key][0]
         raise ValidationError(first_err)
+
+class PasswordResetRequestAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = PasswordResetRequestSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "비밀번호 재설정 메일을 발송했습니다."},
+                status=status.HTTP_200_OK
+            )
+
+        first_key = next(iter(serializer.errors))
+        raise ValidationError(serializer.errors[first_key][0])
+    
+class PasswordResetConfirmAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = PasswordResetConfirmSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "비밀번호가 성공적으로 변경되었습니다."},
+                status=status.HTTP_200_OK
+            )
+
+        first_key = next(iter(serializer.errors))
+        raise ValidationError(serializer.errors[first_key][0])

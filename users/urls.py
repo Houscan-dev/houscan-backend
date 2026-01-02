@@ -11,7 +11,8 @@ urlpatterns = [
     # 토큰 재발급
     path("signup/",SignupAPIView.as_view()),
     path("auth/", AuthAPIView.as_view()),
-    # post - 로그인, get - 유저정보, delete - 로그아웃
+    path("password-reset/", PasswordResetRequestAPIView.as_view()),
+    path("password-reset/confirm/", PasswordResetConfirmAPIView.as_view()),
     path("delete/", DeleteAPIView.as_view()),
     # 회원 탈퇴
     path('my/', MyAPIView.as_view()),
