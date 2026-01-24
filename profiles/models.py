@@ -13,7 +13,16 @@ class Profile(models.Model):
     graduate = models.BooleanField()
     employed = models.BooleanField()
     job_seeker = models.BooleanField()
-    is_married = models.BooleanField(null=True, blank=True)
+    is_married = models.CharField(
+        max_length=10,
+        choices=[
+            ('single', '미혼'),
+            ('new', '신혼부부'),
+            ('married', '기혼')
+        ],
+        null=True,
+        blank=True
+    )
     residence = models.CharField(max_length=4, null=True, blank=True)
     welfare_receipient = models.BooleanField()
     parents_own_house = models.BooleanField()
