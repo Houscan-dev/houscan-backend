@@ -34,10 +34,16 @@
         "contract_period": "개별 안내",
         "move_in_period": "2025.08.29."
     },
-    "pre_url":null,
+    "pre_url": null,
     "precautions": [
         "최초 임대차기간은 2년이며, 재계약 시 자격요건 충족 여부를 검증",
         "임대차계약서상 임대보증금 및 월임대료 인상 시, 최대 5%",
         "상호전환 가능하며, 기본보증금 아래로 감액 불가"
+    ],
+    "category_user": [
+        "청년"
+    ],
+    "category_type": [
+        "행복주택"
     ]
 }

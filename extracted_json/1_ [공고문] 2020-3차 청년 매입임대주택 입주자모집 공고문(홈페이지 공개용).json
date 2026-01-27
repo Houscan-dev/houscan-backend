@@ -6,9 +6,13 @@
             "name": "백년빌",
             "address": "서울특별시 강남구 개포로24길 13",
             "district": "강남구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 7,
-            "supply_households": [7],
+            "supply_households": [
+                7
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -17,10 +21,18 @@
             "name": "위시희망",
             "address": "서울특별시 강동구 천호옛8길 3",
             "district": "강동구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 12,
-            "supply_households": [3, 9],
-            "house_type": ["30A", "40A"],
+            "supply_households": [
+                3,
+                9
+            ],
+            "house_type": [
+                "30A",
+                "40A"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -28,10 +40,16 @@
             "name": "아름빌",
             "address": "서울특별시 강북구 삼양로131길 68",
             "district": "강북구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["9m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "9m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -39,10 +57,16 @@
             "name": "성신하우스",
             "address": "서울특별시 강북구 인수봉로38길 10",
             "district": "강북구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 3,
-            "supply_households": [3],
-            "house_type": ["14m²"],
+            "supply_households": [
+                3
+            ],
+            "house_type": [
+                "14m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -50,10 +74,16 @@
             "name": "하임",
             "address": "서울특별시 관악구 난곡로30길 23",
             "district": "관악구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["42m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "42m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -61,10 +91,18 @@
             "name": "더리치",
             "address": "서울특별시 광진구 긴고랑로1길 45",
             "district": "광진구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 13,
-            "supply_households": [5, 8],
-            "house_type": ["27A", "39A"],
+            "supply_households": [
+                5,
+                8
+            ],
+            "house_type": [
+                "27A",
+                "39A"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -72,10 +110,16 @@
             "name": "지오빌",
             "address": "서울특별시 광진구 자양번영로3나길 31",
             "district": "광진구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 3,
-            "supply_households": [3],
-            "house_type": ["40m²"],
+            "supply_households": [
+                3
+            ],
+            "house_type": [
+                "40m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -83,10 +127,16 @@
             "name": "자양에스하임4",
             "address": "서울특별시 광진구 뚝섬로49길 60",
             "district": "광진구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["27m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "27m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -94,10 +144,16 @@
             "name": "스톤빌",
             "address": "서울특별시 구로구 개봉로17바길 39",
             "district": "구로구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 2,
-            "supply_households": [2],
-            "house_type": ["20m²"],
+            "supply_households": [
+                2
+            ],
+            "house_type": [
+                "20m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -105,10 +161,16 @@
             "name": "A단지",
             "address": "서울특별시 금천구 독산로33길 34",
             "district": "금천구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 2,
-            "supply_households": [2],
-            "house_type": ["30m²"],
+            "supply_households": [
+                2
+            ],
+            "house_type": [
+                "30m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -116,10 +178,16 @@
             "name": "초안산로2라길 3-5",
             "address": "서울특별시 노원구 초안산로2라길 3-5",
             "district": "노원구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["18m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "18m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -127,10 +195,16 @@
             "name": "동원힐하우스",
             "address": "서울특별시 노원구 공릉로26길 28",
             "district": "노원구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 3,
-            "supply_households": [3],
-            "house_type": ["16m²"],
+            "supply_households": [
+                3
+            ],
+            "house_type": [
+                "16m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -138,10 +212,16 @@
             "name": "혜성빌라",
             "address": "서울특별시 도봉구 우이천로42가길 12",
             "district": "도봉구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 3,
-            "supply_households": [3],
-            "house_type": ["11m²"],
+            "supply_households": [
+                3
+            ],
+            "house_type": [
+                "11m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -149,10 +229,16 @@
             "name": "현인그린빌",
             "address": "서울특별시 서대문구 홍은중앙로8길 9",
             "district": "서대문구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 2,
-            "supply_households": [2],
-            "house_type": ["17m²"],
+            "supply_households": [
+                2
+            ],
+            "house_type": [
+                "17m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -160,10 +246,16 @@
             "name": "더스페이스빌",
             "address": "서울특별시 서대문구 증가로8길 68-24",
             "district": "서대문구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 2,
-            "supply_households": [2],
-            "house_type": ["17m²"],
+            "supply_households": [
+                2
+            ],
+            "house_type": [
+                "17m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -171,10 +263,16 @@
             "name": "제이씨아트빌 2차",
             "address": "서울특별시 서대문구 명지대5길 13, 제이씨아트빌 2차",
             "district": "서대문구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 3,
-            "supply_households": [3],
-            "house_type": ["25m²"],
+            "supply_households": [
+                3
+            ],
+            "house_type": [
+                "25m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -182,10 +280,16 @@
             "name": "르비앙휴",
             "address": "서울특별시 서대문구 포방터2다길 7",
             "district": "서대문구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["16m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "16m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -193,10 +297,16 @@
             "name": "다움파크빌",
             "address": "서울특별시 서대문구 증가로24가길 11",
             "district": "서대문구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["19m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "19m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -204,10 +314,16 @@
             "name": "반포대로5길 64",
             "address": "서울특별시 서초구 반포대로5길 64",
             "district": "서초구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 9,
-            "supply_households": [9],
-            "house_type": ["27m²"],
+            "supply_households": [
+                9
+            ],
+            "house_type": [
+                "27m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -215,10 +331,16 @@
             "name": "백년빌",
             "address": "서울특별시 서초구 논현로5길 15-20",
             "district": "서초구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 16,
-            "supply_households": [16],
-            "house_type": ["27m²"],
+            "supply_households": [
+                16
+            ],
+            "house_type": [
+                "27m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -226,10 +348,16 @@
             "name": "백년빌",
             "address": "서울특별시 서초구 논현로7길 36",
             "district": "서초구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 17,
-            "supply_households": [17],
-            "house_type": ["30m²"],
+            "supply_households": [
+                17
+            ],
+            "house_type": [
+                "30m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -237,10 +365,16 @@
             "name": "세명빌라",
             "address": "서울특별시 성북구 장위로31길 26",
             "district": "성북구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["15m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "15m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -248,10 +382,16 @@
             "name": "동소문로 25-16, B동",
             "address": "서울특별시 성북구 동소문로 25-16, B동",
             "district": "성북구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 2,
-            "supply_households": [2],
-            "house_type": ["17m²"],
+            "supply_households": [
+                2
+            ],
+            "house_type": [
+                "17m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -259,10 +399,16 @@
             "name": "광진홈",
             "address": "서울특별시 성북구 솔샘로6가길 42, 광진홈",
             "district": "성북구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["18m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "18m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -270,10 +416,16 @@
             "name": "백제고분로40길 16-15",
             "address": "서울특별시 송파구 백제고분로40길 16-15",
             "district": "송파구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["24m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "24m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -281,10 +433,18 @@
             "name": "송파누리빌",
             "address": "서울특별시 송파구 백제고분로46길 41-7",
             "district": "송파구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 12,
-            "supply_households": [2, 10],
-            "house_type": ["25A", "36A"],
+            "supply_households": [
+                2,
+                10
+            ],
+            "house_type": [
+                "25A",
+                "36A"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -292,10 +452,16 @@
             "name": "동일케슬",
             "address": "서울특별시 중랑구 동일로148길 43 동일케슬",
             "district": "중랑구",
-            "type": ["원룸 및 다가구(원룸형 1인실)"],
+            "type": [
+                "원룸 및 다가구(원룸형 1인실)"
+            ],
             "total_households": 4,
-            "supply_households": [4],
-            "house_type": ["29m²"],
+            "supply_households": [
+                4
+            ],
+            "house_type": [
+                "29m²"
+            ],
             "parking": null,
             "elevator": null
         }
@@ -386,5 +552,16 @@
         "move_in_period": "2021.05.31. ~ 2021.07.30."
     },
     "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20201231113218446_cecb2c89c0de42b9a601cd484288192e&rs=/app/upload/bbs/GS0401/html/",
-    "precautions": ["1인 1주택만 신청 가능하며, 중복 신청 시 전부 무효 처리됩니다.", "신청 후에는 수정이 불가능합니다.", " 주소지 단위로 신청가능하며 호실은 전산 무작위 추첨하여 배정합니다."]
+    "precautions": [
+        "1인 1주택만 신청 가능하며, 중복 신청 시 전부 무효 처리됩니다.",
+        "신청 후에는 수정이 불가능합니다.",
+        " 주소지 단위로 신청가능하며 호실은 전산 무작위 추첨하여 배정합니다."
+    ],
+    "category_user": [
+        "청년",
+        "기타"
+    ],
+    "category_type": [
+        "기타"
+    ]
 }

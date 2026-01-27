@@ -8,8 +8,30 @@
             "district": "송파구",
             "type": null,
             "total_households": 153,
-            "supply_households": [86,8,1,8,5,6,7,6,17,9],
-            "house_type": ["16m²"," 20m²", "26A", "26B", "29m²", "30m²","31m²","33m²","34m²","35m²"],
+            "supply_households": [
+                86,
+                8,
+                1,
+                8,
+                5,
+                6,
+                7,
+                6,
+                17,
+                9
+            ],
+            "house_type": [
+                "16m²",
+                " 20m²",
+                "26A",
+                "26B",
+                "29m²",
+                "30m²",
+                "31m²",
+                "33m²",
+                "34m²",
+                "35m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -19,8 +41,14 @@
             "district": "은평구",
             "type": null,
             "total_households": 74,
-            "supply_households": [64,10],
-            "house_type": ["17m²","35m²"],
+            "supply_households": [
+                64,
+                10
+            ],
+            "house_type": [
+                "17m²",
+                "35m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -30,8 +58,23 @@
             "district": "동작구",
             "type": null,
             "total_households": 22,
-            "supply_households": [8,3,3,1,3,1,3],
-            "house_type": ["18A","18B","18C","21m²","36m²","37m²"],
+            "supply_households": [
+                8,
+                3,
+                3,
+                1,
+                3,
+                1,
+                3
+            ],
+            "house_type": [
+                "18A",
+                "18B",
+                "18C",
+                "21m²",
+                "36m²",
+                "37m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -41,8 +84,12 @@
             "district": "동작구",
             "type": null,
             "total_households": 17,
-            "supply_households": [17],
-            "house_type": ["18m²"],
+            "supply_households": [
+                17
+            ],
+            "house_type": [
+                "18m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -52,8 +99,12 @@
             "district": "서대문구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["16m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "16m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -63,8 +114,14 @@
             "district": "마포구",
             "type": null,
             "total_households": 6,
-            "supply_households": [1,5],
-            "house_type": ["37A","37B(셰어형)"],
+            "supply_households": [
+                1,
+                5
+            ],
+            "house_type": [
+                "37A",
+                "37B(셰어형)"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -74,8 +131,12 @@
             "district": "동작구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["16m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "16m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -85,8 +146,12 @@
             "district": "강서구",
             "type": null,
             "total_households": 4,
-            "supply_households": [4],
-            "house_type": ["18m²"],
+            "supply_households": [
+                4
+            ],
+            "house_type": [
+                "18m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -96,8 +161,12 @@
             "district": "서초구",
             "type": null,
             "total_households": 2,
-            "supply_households": [2],
-            "house_type": ["16m²"],
+            "supply_households": [
+                2
+            ],
+            "house_type": [
+                "16m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -107,8 +176,14 @@
             "district": "용산구",
             "type": null,
             "total_households": 11,
-            "supply_households": [2,9],
-            "house_type": ["19m²","39B(셰어형)"],
+            "supply_households": [
+                2,
+                9
+            ],
+            "house_type": [
+                "19m²",
+                "39B(셰어형)"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -118,8 +193,12 @@
             "district": "강서구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["23m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "23m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -129,8 +208,12 @@
             "district": "강서구",
             "type": null,
             "total_households": 3,
-            "supply_households": [3],
-            "house_type": ["30m²"],
+            "supply_households": [
+                3
+            ],
+            "house_type": [
+                "30m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -140,8 +223,12 @@
             "district": "광진구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["32m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "32m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -151,7 +238,9 @@
             "district": "도봉구",
             "type": null,
             "total_households": 3,
-            "supply_households": [3],
+            "supply_households": [
+                3
+            ],
             "house_type": "19m²",
             "parking": null,
             "elevator": null
@@ -162,7 +251,9 @@
             "district": "노원구",
             "type": null,
             "total_households": 2,
-            "supply_households": [2],
+            "supply_households": [
+                2
+            ],
             "house_type": "16m²",
             "parking": null,
             "elevator": null
@@ -173,8 +264,14 @@
             "district": "강남구",
             "type": null,
             "total_households": 2,
-            "supply_households": [1,1],
-            "house_type": ["14m²","14m²"],
+            "supply_households": [
+                1,
+                1
+            ],
+            "house_type": [
+                "14m²",
+                "14m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -184,8 +281,12 @@
             "district": "강남구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["20m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "20m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -195,8 +296,12 @@
             "district": "동대문구",
             "type": null,
             "total_households": 3,
-            "supply_households": [3],
-            "house_type": ["15m²"],
+            "supply_households": [
+                3
+            ],
+            "house_type": [
+                "15m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -206,8 +311,12 @@
             "district": "강남구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["30m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "30m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -217,8 +326,12 @@
             "district": "관악구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["18m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "18m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -228,8 +341,12 @@
             "district": "송파구",
             "type": null,
             "total_households": 2,
-            "supply_households": [2],
-            "house_type": ["43m²"],
+            "supply_households": [
+                2
+            ],
+            "house_type": [
+                "43m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -239,8 +356,16 @@
             "district": "강동구",
             "type": null,
             "total_households": 73,
-            "supply_households": [54,14,5],
-            "house_type": ["16m²","33m²","35A"],
+            "supply_households": [
+                54,
+                14,
+                5
+            ],
+            "house_type": [
+                "16m²",
+                "33m²",
+                "35A"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -250,8 +375,20 @@
             "district": "종로구",
             "type": null,
             "total_households": 9,
-            "supply_households": [1,5,1,1,1],
-            "house_type": ["29m²","30m²","34m²","35m²","39A"],
+            "supply_households": [
+                1,
+                5,
+                1,
+                1,
+                1
+            ],
+            "house_type": [
+                "29m²",
+                "30m²",
+                "34m²",
+                "35m²",
+                "39A"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -261,8 +398,12 @@
             "district": "중구",
             "type": null,
             "total_households": 1,
-            "supply_households": [1],
-            "house_type": ["15m²"],
+            "supply_households": [
+                1
+            ],
+            "house_type": [
+                "15m²"
+            ],
             "parking": null,
             "elevator": null
         },
@@ -272,8 +413,14 @@
             "district": "은평구",
             "type": null,
             "total_households": 134,
-            "supply_households": [67,67],
-            "house_type": ["36A","36B"],
+            "supply_households": [
+                67,
+                67
+            ],
+            "house_type": [
+                "36A",
+                "36B"
+            ],
             "parking": null,
             "elevator": null
         }
@@ -360,5 +507,11 @@
         "move_in_period": "2024.03.18. ~ 2024.04.17."
     },
     "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20231107094036917_92531210f83344ff8fdef0be6cff4a6c&rs=/app/upload/bbs/GS0401/html/",
-    "precautions": "문자전송이 안되는 경우 반드시 홈페이지를 통해 확인. 전산 무작위추첨에 따라 배정된 호실 이외 변경 불가. 당첨자로 선정되었더라도 입주부적격사유가 있을 시 계약체결 불가. 당첨사실을 확인하지 못해 계약하지 못한 경우의 책임은 신청자 본인에게 있습니다."
+    "precautions": "문자전송이 안되는 경우 반드시 홈페이지를 통해 확인. 전산 무작위추첨에 따라 배정된 호실 이외 변경 불가. 당첨자로 선정되었더라도 입주부적격사유가 있을 시 계약체결 불가. 당첨사실을 확인하지 못해 계약하지 못한 경우의 책임은 신청자 본인에게 있습니다.",
+    "category_user": [
+        "청년"
+    ],
+    "category_type": [
+        "기타"
+    ]
 }

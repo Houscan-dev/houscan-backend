@@ -34,9 +34,15 @@
         "contract_period": "개별 안내",
         "move_in_period": "2025.12.10."
     },
-    "pre_url":"https://www.i-sh.co.kr/app/skin/doc.html?fn=20251023034319003_ccafb03b07e843b6adea6a0b24cd7c88&rs=/app/upload/bbs/GS0401/html/",
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20251023034319003_ccafb03b07e843b6adea6a0b24cd7c88&rs=/app/upload/bbs/GS0401/html/",
     "precautions": [
         "최초 임대차기간은 2년이며, 재계약 시 자격요건 충족 여부를 검증",
         "자동차 이용문화 변화 및 주차난 해소로 주차장 일부를 나눔카 사업 등에 제공 가능"
+    ],
+    "category_user": [
+        "청년"
+    ],
+    "category_type": [
+        "행복주택"
     ]
 }

@@ -218,10 +218,16 @@
         "contract_period": "2025.09.15. ~ 2025.09.17.",
         "move_in_period": "2025.10.13. ~ 2025.11.12."
     },
-    "pre_url":"https://www.i-sh.co.kr/app/skin/doc.html?fn=20250421031646600_28ec515386334f899ab001a0b44d95e9&rs=/app/upload/bbs/GS0401/html/",
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20250421031646600_28ec515386334f899ab001a0b44d95e9&rs=/app/upload/bbs/GS0401/html/",
     "precautions": [
         "문자는 청약 시 작성한 휴대전화 번호로 발송되며, 통신사 오류 등으로 인하여 문자전송이 불가한 경우가 있으니 반드시 홈페이지를 통해 확인하시기 바랍니다.",
         "전산 무작위추첨에 따라 배정된 호실 이외(공실여부 관계없음)의 호실로 변경은 불가합니다.",
         "당첨자로 선정되었더라도 입주부적격사유가 있을 시 추가 소명절차를 거치지 않고서는 계약체결이 불가하며 탈락 처리합니다."
+    ],
+    "category_user": [
+        "청년"
+    ],
+    "category_type": [
+        "임대주택"
     ]
 }

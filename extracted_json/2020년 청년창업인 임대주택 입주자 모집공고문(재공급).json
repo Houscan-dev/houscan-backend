@@ -6,10 +6,19 @@
             "name": "청년창업인 임대주택",
             "address": "서울특별시 도봉구 마들로13길84(창동)",
             "district": "도봉구",
-            "type": ["창업지원(청년창업인)","창업지원(청년음악인)"],
+            "type": [
+                "창업지원(청년창업인)",
+                "창업지원(청년음악인)"
+            ],
             "total_households": 23,
-            "supply_households": [10,13],
-            "house_type": ["15m²", "15m²"],
+            "supply_households": [
+                10,
+                13
+            ],
+            "house_type": [
+                "15m²",
+                "15m²"
+            ],
             "parking": "있음",
             "elevator": null
         }
@@ -50,5 +59,11 @@
         "move_in_period": "2020.10월 중"
     },
     "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20200612110920214_695a7e93669b4b50a305687e7f43f517&rs=/app/upload/bbs/GS0401/html/",
-    "precautions": "이 주택의 입주자는 입주자모집공고일 현재부터 임대차계약 종료일까지 무주택자이어야 하며, 제출 서류는 공고일 이후 발급된 서류로 제출해야합니다."
+    "precautions": "이 주택의 입주자는 입주자모집공고일 현재부터 임대차계약 종료일까지 무주택자이어야 하며, 제출 서류는 공고일 이후 발급된 서류로 제출해야합니다.",
+    "category_user": [
+        "청년"
+    ],
+    "category_type": [
+        "임대주택"
+    ]
 }

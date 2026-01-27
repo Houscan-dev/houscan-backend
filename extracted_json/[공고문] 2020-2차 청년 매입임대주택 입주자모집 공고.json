@@ -6,9 +6,13 @@
             "name": "백년빌",
             "address": "서울특별시 강남구 개포로24길 13 (개포동 1216-7, 백년빌)",
             "district": "강남구",
-            "type": ["다가구(1인 거주 원룸형)"],
+            "type": [
+                "다가구(1인 거주 원룸형)"
+            ],
             "total_households": 15,
-            "supply_households": [15],
+            "supply_households": [
+                15
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -17,9 +21,13 @@
             "name": "서초동 1478-9",
             "address": "서울특별시 서초구 반포대로5길 64 (서초동 1478-9)",
             "district": "서초구",
-            "type": ["다가구(1인 거주 원룸형)"],
+            "type": [
+                "다가구(1인 거주 원룸형)"
+            ],
             "total_households": 19,
-            "supply_households": [19],
+            "supply_households": [
+                19
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -28,9 +36,13 @@
             "name": "서초동 1478-16",
             "address": "서울특별시 서초구 반포대로5길 62 (서초동 1478-16)",
             "district": "서초구",
-            "type": ["다가구(1인 거주 원룸형)"],
+            "type": [
+                "다가구(1인 거주 원룸형)"
+            ],
             "total_households": 15,
-            "supply_households": [15],
+            "supply_households": [
+                15
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -39,9 +51,13 @@
             "name": "백년빌",
             "address": "서울특별시 서초구 논현로5길 24-10 (양재동 395-10, 백년빌)",
             "district": "서초구",
-            "type": ["다가구(1인 거주 원룸형)"],
+            "type": [
+                "다가구(1인 거주 원룸형)"
+            ],
             "total_households": 16,
-            "supply_households": [16],
+            "supply_households": [
+                16
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -50,9 +66,13 @@
             "name": "양평에스하임2 가동",
             "address": "서울특별시 영등포구 양평로 28마길 24 (양평동6가 65, 양평에스하임2 가동)",
             "district": "영등포구",
-            "type": ["다가구(1인 거주 원룸형)"],
+            "type": [
+                "다가구(1인 거주 원룸형)"
+            ],
             "total_households": 12,
-            "supply_households": [12],
+            "supply_households": [
+                12
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -61,9 +81,13 @@
             "name": "양평에스하임2 나동",
             "address": "서울특별시 영등포구 양평로 28마길 24 (양평동6가 65, 양평에스하임2 나동)",
             "district": "영등포구",
-            "type": ["다가구(1인 거주 원룸형)"],
+            "type": [
+                "다가구(1인 거주 원룸형)"
+            ],
             "total_households": 14,
-            "supply_households": [14],
+            "supply_households": [
+                14
+            ],
             "house_type": [],
             "parking": null,
             "elevator": null
@@ -72,9 +96,13 @@
             "name": "해담빌",
             "address": "서울특별시 강동구 구천면로40길 7 해담빌 (천호동 237-27)",
             "district": "강동구",
-            "type": ["원룸형(1인 거주)"],
+            "type": [
+                "원룸형(1인 거주)"
+            ],
             "total_households": 5,
-            "supply_households": [5],
+            "supply_households": [
+                5
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -83,9 +111,13 @@
             "name": "휴먼에코빌4차 A동",
             "address": "서울특별시 금천구 독산로96길 27-6 휴먼에코빌4차 A동 (독산동 234-22)",
             "district": "금천구",
-            "type": ["원룸형(1인 거주)"],
+            "type": [
+                "원룸형(1인 거주)"
+            ],
             "total_households": 12,
-            "supply_households": [12],
+            "supply_households": [
+                12
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -94,9 +126,13 @@
             "name": "휴먼에코빌4차 B동",
             "address": "서울특별시 금천구 독산로96길 27-6 휴먼에코빌4차 B동 (독산동 234-22)",
             "district": "금천구",
-            "type": ["원룸형(1인 거주)"],
+            "type": [
+                "원룸형(1인 거주)"
+            ],
             "total_households": 5,
-            "supply_households": [5],
+            "supply_households": [
+                5
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -105,9 +141,13 @@
             "name": "시흥동 849-33, A단지",
             "address": "서울특별시 금천구 독산로33길 34 시흥동 849-33, A단지",
             "district": "금천구",
-            "type": ["원룸형(1인 거주)"],
+            "type": [
+                "원룸형(1인 거주)"
+            ],
             "total_households": 8,
-            "supply_households": [8],
+            "supply_households": [
+                8
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -116,9 +156,13 @@
             "name": "시흥동 849-32, B단지",
             "address": "서울특별시 금천구 독산로33길 32 시흥동 849-32, B단지",
             "district": "금천구",
-            "type": ["원룸형(1인 거주)"],
+            "type": [
+                "원룸형(1인 거주)"
+            ],
             "total_households": 4,
-            "supply_households": [4],
+            "supply_households": [
+                4
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -127,9 +171,13 @@
             "name": "삼화에코빌2차 A동",
             "address": "서울특별시 동대문구 답십리로65길 114 삼화에코빌2차 A동 (장안동 287-7,9)",
             "district": "동대문구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 7,
-            "supply_households": [7],
+            "supply_households": [
+                7
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -138,9 +186,13 @@
             "name": "삼화에코빌2차 B동",
             "address": "서울특별시 동대문구 답십리로65길 114 삼화에코빌2차 B동 (장안동 287-7,9)",
             "district": "동대문구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 4,
-            "supply_households": [4],
+            "supply_households": [
+                4
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -149,9 +201,13 @@
             "name": "더존에이스빌 가동",
             "address": "서울특별시 동대문구 천호대로89길 51 더존에이스빌 가동 (장안동445-3)",
             "district": "동대문구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 14,
-            "supply_households": [14],
+            "supply_households": [
+                14
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -160,9 +216,13 @@
             "name": "더존에이스빌 나동",
             "address": "서울특별시 동대문구 천호대로89길 51 더존에이스빌 나동 (장안동445-3)",
             "district": "동대문구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 5,
-            "supply_households": [5],
+            "supply_households": [
+                5
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -171,9 +231,13 @@
             "name": "서도휴빌 101동",
             "address": "서울특별시 성북구 장월로1마길 23 서도휴빌 101동 (하월곡동 231)",
             "district": "성북구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 7,
-            "supply_households": [7],
+            "supply_households": [
+                7
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -182,9 +246,13 @@
             "name": "서도휴빌 102동",
             "address": "서울특별시 성북구 장월로1마길 23 서도휴빌 102동 (하월곡동 231)",
             "district": "성북구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 13,
-            "supply_households": [13],
+            "supply_households": [
+                13
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -193,9 +261,13 @@
             "name": "서도휴빌 103동",
             "address": "서울특별시 성북구 장월로1마길 23 서도휴빌 103동 (하월곡동 231)",
             "district": "성북구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 11,
-            "supply_households": [11],
+            "supply_households": [
+                11
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -204,9 +276,13 @@
             "name": "서도휴빌 104동",
             "address": "서울특별시 성북구 장월로1마길 23 서도휴빌 104동 (하월곡동 231)",
             "district": "성북구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 5,
-            "supply_households": [5],
+            "supply_households": [
+                5
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -215,9 +291,13 @@
             "name": "서도휴빌 105동",
             "address": "서울특별시 성북구 장월로1마길 23 서도휴빌 105동 (하월곡동 231)",
             "district": "성북구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 11,
-            "supply_households": [11],
+            "supply_households": [
+                11
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -226,9 +306,13 @@
             "name": "서도휴빌 106동",
             "address": "서울특별시 성북구 장월로1마길 23 서도휴빌 106동 (하월곡동 231)",
             "district": "성북구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 9,
-            "supply_households": [9],
+            "supply_households": [
+                9
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -237,9 +321,13 @@
             "name": "서도휴빌 107동",
             "address": "서울특별시 성북구 장월로1마길 23 서도휴빌 107동 (하월곡동 231)",
             "district": "성북구",
-            "type": ["쉐어형(2인 거주)"],
+            "type": [
+                "쉐어형(2인 거주)"
+            ],
             "total_households": 13,
-            "supply_households": [13],
+            "supply_households": [
+                13
+            ],
             "house_type": null,
             "parking": null,
             "elevator": null
@@ -330,6 +418,17 @@
         "contract_period": "2020.10.12.~2020.10.14.",
         "move_in_period": "2020.10.19. ~ 2020.12.18."
     },
-    "pre_url":"https://www.i-sh.co.kr/app/skin/doc.html?fn=20200622091948385_77322826843441fe9972f91a5bb22e90&rs=/app/upload/bbs/GS0401/html/",
-    "precautions": ["1인 1주택만 신청 가능하며, 중복 신청 시 무효 처리.", "주소지 단위로 신청 가능하며 호실은 무작위 배정.", "주택 미확인으로 인한 이의제기는 불가능."]
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20200622091948385_77322826843441fe9972f91a5bb22e90&rs=/app/upload/bbs/GS0401/html/",
+    "precautions": [
+        "1인 1주택만 신청 가능하며, 중복 신청 시 무효 처리.",
+        "주소지 단위로 신청 가능하며 호실은 무작위 배정.",
+        "주택 미확인으로 인한 이의제기는 불가능."
+    ],
+    "category_user": [
+        "청년",
+        "대학생"
+    ],
+    "category_type": [
+        "임대주택"
+    ]
 }

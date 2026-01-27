@@ -490,10 +490,17 @@
         "contract_period": "2026.01.02. ~ 2026.01.06.",
         "move_in_period": "2026.01.30. ~ 2026.03.03."
     },
-    "pre_url":"https://www.i-sh.co.kr/app/skin/doc.html?fn=20250730044732373_0e63c31a5c204fd580f055d4bcbddbfb&rs=/app/upload/bbs/GS0401/html/",
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20250730044732373_0e63c31a5c204fd580f055d4bcbddbfb&rs=/app/upload/bbs/GS0401/html/",
     "precautions": [
         "심사서류는 입주자모집공고일 이후 발행된 것이어야 하며, 다른 기관에서 발급한 서류는 직인이 날인된 원본을 제출해야 합니다.",
         "신청 마감 이후에는 취소나 정정이 불가능하며, 신청서류는 일체 반환하지 않습니다.",
         "당첨 이후 연락처(주소, 전화번호)가 변경될 경우, 즉시 그 내용을 우리공사에 통보해야 합니다."
+    ],
+    "category_user": [
+        "청년",
+        "신혼부부"
+    ],
+    "category_type": [
+        "기타"
     ]
 }

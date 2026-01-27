@@ -6,10 +6,22 @@
             "name": "희망",
             "address": "풍성로42길12, 성내동521-3",
             "district": "강동구",
-            "type": ["도시형생활주택(개방형원룸)", "도시형생활주택(분리형원룸)", "도시형생활주택(투룸)"],
+            "type": [
+                "도시형생활주택(개방형원룸)",
+                "도시형생활주택(분리형원룸)",
+                "도시형생활주택(투룸)"
+            ],
             "total_households": 15,
-            "supply_households": [9, 5, 1],
-            "house_type": ["29B", "40A", "50C"],
+            "supply_households": [
+                9,
+                5,
+                1
+            ],
+            "house_type": [
+                "29B",
+                "40A",
+                "50C"
+            ],
             "parking": "자주식(지상)",
             "elevator": true
         }
@@ -103,10 +115,17 @@
         "contract_period": "2025.12.08. ~ 2025.12.11.",
         "move_in_period": "2025.12.29. ~ 2026.02.26."
     },
-    "pre_url":"https://www.i-sh.co.kr/app/skin/doc.html?fn=20250715104052550_5dd17b1227e6484cb3a4b15ff35318f8&rs=/app/upload/bbs/GS0401/html/",
+    "pre_url": "https://www.i-sh.co.kr/app/skin/doc.html?fn=20250715104052550_5dd17b1227e6484cb3a4b15ff35318f8&rs=/app/upload/bbs/GS0401/html/",
     "precautions": [
         "서류심사 대상자 발표는 공사 홈페이지를 통해 이루어집니다.",
         "입주자 선정 후 연락처 변경 시 즉시 공사에 통보해야 합니다.",
         "계약 시 반드시 구비서류를 지참해야 합니다."
+    ],
+    "category_user": [
+        "청년",
+        "대학생"
+    ],
+    "category_type": [
+        "임대주택"
     ]
 }
