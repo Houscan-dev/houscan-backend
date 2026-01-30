@@ -29,6 +29,9 @@ class AnnouncementListAPIView(generics.ListAPIView):
                 if posted_date_raw and '미정' not in posted_date_raw:
                      posted = posted_date_raw.replace('-', '.')
 
+                category_user = ann.ai_summary_json.get('category_user', [])
+                category_type = ann.ai_summary_json.get('category_type', [])
+
             # DB에서 직접 가져오기 (디테일과 동일)
             if request.user.is_authenticated:
                 try:
@@ -48,7 +51,9 @@ class AnnouncementListAPIView(generics.ListAPIView):
                 "title": ann.title,
                 "announcement_date": posted,
                 "status": ann.status,
-                "analysis": analysis_info # 자격 O/X 여부 
+                "category_user": category_user,
+                "category_type": category_type,
+                "analysis": analysis_info # 자격 O/X 여부
             })
         return Response(result)
     
