@@ -121,7 +121,7 @@ class OpenAnnouncementAPIView(APIView):
     def get(self, request):
         qs = (
             Announcement.objects
-            .filter(status='open')
+            .filter(status__in=['open','upcoming'])
             .order_by('-announcement_date')
             .prefetch_related('housing_info_list')
         )
