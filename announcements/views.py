@@ -10,11 +10,22 @@ from .models import Announcement, HousingEligibilityAnalysis
 from .models import HousingInfo
 from .serializers import HousingInfoSerializer, AnnouncementDetailSerializer, OpenAnnouncementSerializer
 
+from django.db.models import Case, When, IntegerField
+
 class AnnouncementListAPIView(generics.ListAPIView):
     permission_classes=[AllowAny]
 
     def get(self, request):
-        qs = Announcement.objects.order_by('-announcement_date')
+        qs = Announcement.objects.annotate(
+            status_order=Case(
+                When(status='upcoming', then=1),
+                When(status='open', then=2),
+                When(status='closed', then=3),
+                default=4,
+                output_field=IntegerField()
+            )
+        ).order_by('status_order', '-announcement_date')
+        
         result = []
         
         for ann in qs:
@@ -32,7 +43,7 @@ class AnnouncementListAPIView(generics.ListAPIView):
                 category_user = ann.ai_summary_json.get('category_user', [])
                 category_type = ann.ai_summary_json.get('category_type', [])
 
-            # DB에서 직접 가져오기 (디테일과 동일)
+            # DB에서 직접 가져오기 
             if request.user.is_authenticated:
                 try:
                     analysis = HousingEligibilityAnalysis.objects.get(
