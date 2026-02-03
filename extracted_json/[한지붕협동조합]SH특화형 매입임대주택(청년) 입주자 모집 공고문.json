@@ -26,9 +26,9 @@
         "score_items": []
     },
     "application_schedule": {
-        "announcement_date": "2026.01.16",
-        "online_application_period": "2026.01.16",
-        "document_submission_period": "2026.01.16",
+        "announcement_date": "2026.01.16.",
+        "online_application_period": "2026.01.16.",
+        "document_submission_period": "2026.01.16.",
         "document_announce_date": null,
         "winner_announcement": "개별 안내",
         "contract_period": "개별 안내",
