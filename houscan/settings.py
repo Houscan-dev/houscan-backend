@@ -229,7 +229,7 @@ CACHES = {
 }
 
 # Cache timeout settings
-CACHE_TTL = 3600  # 1 hour
+CACHE_TTL = 60  # 1 hour
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
