@@ -37,13 +37,13 @@
         "score_items": []
     },
     "application_schedule": {
-        "announcement_date": "2026.1.30.",
-        "online_application_period": "2026.2.9. 10:00 ~ 2026.2.11. 17:00",
-        "document_submission_period": "2026.2.25. ~ 2026.3.3.",
-        "document_announce_date": "2026.2.23.",
-        "winner_announcement": "2026.5.6.",
-        "contract_period": "2026.5.13. ~ 2026.5.15.",
-        "move_in_period": "2026.5.29. ~ 2026.7.31."
+        "announcement_date": "2026.01.30.",
+        "online_application_period": "2026.02.09. 10:00 ~ 2026.02.11. 17:00",
+        "document_submission_period": "2026.02.25. ~ 2026.03.03.",
+        "document_announce_date": "2026.02.23.",
+        "winner_announcement": "2026.05.06.",
+        "contract_period": "2026.05.13. ~ 2026.05.15.",
+        "move_in_period": "2026.05.29. ~ 2026.07.31."
     },
     "precautions": [
         "서류심사대상자 전원에게 문자(SMS)로 안내하며, 최종 당첨자에게는 계약안내문 및 계약금고지서를 등기우편으로 발송",
