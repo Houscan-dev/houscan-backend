@@ -7,11 +7,11 @@
             "address": "서울시 강북구 솔매로 7다길 15",
             "district": "강북구",
             "type": [
-                "원룸형"
+                "청년","청년","청년","청년"
             ],
-            "total_households": null,
+            "total_households": 4,
             "supply_households": [
-                null
+                1,1,1,1
             ],
             "house_type": [
                 "31.56m²",

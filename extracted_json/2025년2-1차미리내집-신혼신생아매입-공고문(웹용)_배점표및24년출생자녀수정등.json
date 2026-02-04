@@ -7,14 +7,14 @@
             "address": "금천구 가산로 75",
             "district": "금천구",
             "type": [
-                "1A"
+                "신혼 / 신생아 가구"
             ],
             "total_households": 40,
             "supply_households": [
                 40
             ],
             "house_type": [
-                "43m²,46m²"
+                "1A"
             ],
             "parking": "자주식기계식혼재",
             "elevator": true
@@ -24,14 +24,14 @@
             "address": "금천구 가산디지털1로 52",
             "district": "금천구",
             "type": [
-                "2A"
+                "신혼 / 신생아 가구"
             ],
             "total_households": 209,
             "supply_households": [
                 209
             ],
             "house_type": [
-                "46m²"
+                "2A"
             ],
             "parking": "자주식",
             "elevator": true
@@ -41,14 +41,14 @@
             "address": "금천구 두산로9길 18",
             "district": "금천구",
             "type": [
-                "3A"
+                "신혼 / 신생아 가구"
             ],
             "total_households": 31,
             "supply_households": [
                 31
             ],
             "house_type": [
-                "62m²"
+                "3A"
             ],
             "parking": "자주식기계식혼재",
             "elevator": true
@@ -58,14 +58,14 @@
             "address": "금천구 두산로9길 18",
             "district": "금천구",
             "type": [
-                "3A"
+                "신혼 / 신생아 가구"
             ],
             "total_households": 25,
             "supply_households": [
                 25
             ],
             "house_type": [
-                "62m²"
+                "3A"
             ],
             "parking": "자주식기계식혼재",
             "elevator": true
@@ -75,8 +75,8 @@
             "address": "구로구 구로동로 205",
             "district": "구로구",
             "type": [
-                "4A",
-                "4B"
+                "신혼 / 신생아 가구",
+                "신혼 / 신생아 가구"
             ],
             "total_households": 18,
             "supply_households": [
@@ -84,8 +84,8 @@
                 1
             ],
             "house_type": [
-                "52m²~59m²",
-                "74m²"
+                "4A",
+                "4B"
             ],
             "parking": "자주식",
             "elevator": true
@@ -95,14 +95,14 @@
             "address": "강북구 인수봉로 80 17-9",
             "district": "강북구",
             "type": [
-                "5A"
+                "신혼 / 신생아 가구"
             ],
             "total_households": 10,
             "supply_households": [
                 10
             ],
             "house_type": [
-                "57m²~60m²"
+                "5A"
             ],
             "parking": "자주식기계식혼재",
             "elevator": true

@@ -7,9 +7,9 @@
             "address": "서울특별시 중랑구 신내로 16길 33",
             "district": "중랑구",
             "type": [
-                "18m²",
-                "18m²",
-                "29m²"
+                "중랑구 거주자",
+                "그외 구 거주자",
+                "중랑구 거주자"
             ],
             "total_households": 26,
             "supply_households": [
@@ -18,9 +18,9 @@
                 16
             ],
             "house_type": [
-                "중랑구",
-                "그외구",
-                "중랑구"
+                "18m²",
+                "18m²",
+                "29m²"
             ],
             "parking": null,
             "elevator": null
