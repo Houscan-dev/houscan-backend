@@ -65,13 +65,24 @@ def parse_ymd_safe(s: str) -> Optional[date]:
 def parse_period_safe(s: str) -> Tuple[Optional[date], Optional[date]]:
     """
     "YYYY.MM.DD. ~ YYYY.MM.DD." 형태의 문자열을 (start, end)로 변환
+    단일 날짜인 경우 시작일과 종료일을 동일하게 설정
     연도가 생략된 경우 시작 날짜의 연도 사용
     """
-    if not s or '미정' in s:
+    if not s or '미정' in s or '상시' in s:
         return None, None
 
     try:
         parts = s.split('~')
+        
+        # 단일 날짜인 경우
+        if len(parts) == 1:
+            single_date = parse_ymd_safe(parts[0].strip())
+            if single_date:
+                # 시작일과 종료일을 동일하게 설정
+                return single_date, single_date
+            return None, None
+        
+        # 기간인 경우 (기존 로직)
         if len(parts) != 2:
             return None, None
 
@@ -82,9 +93,7 @@ def parse_period_safe(s: str) -> Tuple[Optional[date], Optional[date]]:
         
         # 종료일에 연도가 없는 경우 처리
         if start and end_raw and not re.match(r'\d{4}', end_raw):
-            # 시작 날짜의 연도 사용
             year = start.year
-            # 월.일 형식 추출
             end_raw_cleaned = re.sub(r'\([^)]*\)', '', end_raw)
             end_raw_cleaned = re.sub(r'\s*\d{1,2}:\d{2}.*$', '', end_raw_cleaned)
             end_raw_cleaned = end_raw_cleaned.strip().rstrip('.')
